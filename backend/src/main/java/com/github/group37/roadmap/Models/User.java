@@ -10,6 +10,7 @@ import java.util.UUID;
 public class User {
     @Id
     private UUID id;
+
     @Column(name="name", nullable=false, unique=false)
     private String name;
 

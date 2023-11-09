@@ -5,10 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
-public interface UserRepositiory extends JpaRepository<User, Integer> {
+public interface UserRepositiory extends JpaRepository<User, UUID> {
 
-    // custom query to search to blog post by title or content
-    List<User> findByTitleContainingOrContentContaining(String text, String textAgain);
 }
