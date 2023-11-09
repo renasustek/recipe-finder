@@ -25,7 +25,11 @@ public class User {
 
     @Override
     public String toString() {
-        return "Name: "+ name + " Password: " + password;
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 
     public UUID getId() {

@@ -22,7 +22,7 @@ public class UserService {
     public User createUser(User user){
         return userRepositiory.save(user);
     }
-    public List<User> readUser(){
+    public List<User> readAllUsers(){
         return userRepositiory.findAll();
     }
 
