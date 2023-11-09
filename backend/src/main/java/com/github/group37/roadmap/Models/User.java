@@ -1,25 +1,37 @@
 package com.github.group37.roadmap.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.UUID;
 
 @Entity
+@Table(name="users", schema="roadmapProject")
+
 public class User {
-    private @Id @GeneratedValue Long id;
+    @Id
+    private UUID id;
+    @Column(name="name", nullable=false, unique=false)
     private String name;
+
+    @Column(name="password", nullable=false, unique=false)
     private String password;
 
-    public User(String name, String password){
+    public User(UUID id, String name, String password){
+        this.id = id;
         this.name = name;
         this.password = password;
     }
 
-    public Long getId() {
+    @Override
+    public String toString() {
+        return "Name: "+ name + " Password: " + password;
+    }
+
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
