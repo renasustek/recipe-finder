@@ -13,22 +13,20 @@ import java.util.UUID;
 public class UserService {
 
     private final UserRepositiory userRepositiory;
-
-
-
+    
     public UserService(UserRepositiory userRepositiory) {
         this.userRepositiory = userRepositiory;
     }
 
-    public User createUser(UserRequest userRequest){
+    public User create(UserRequest userRequest){
         User user = new User(UUID.randomUUID(), userRequest.name(), userRequest.password());
         return userRepositiory.save(user);
     }
-    public List<User> readAllUsers(){
+    public List<User> readAll(){
         return userRepositiory.findAll();
     }
 
-    public Optional<User> updateUser(UUID userID, String updatedName, String updatedPassword){
+    public Optional<User> update(UUID userID, String updatedName, String updatedPassword){
           return userRepositiory.findById(userID).map(user->{
               user.setName(updatedName);
               user.setPassword(updatedPassword);
@@ -37,11 +35,11 @@ public class UserService {
 
     }
 
-    public Optional<User> findUserById(UUID id){
+    public Optional<User> findById(UUID id){
          return userRepositiory.findById(id);
     }
 
-    public void deleteUser(UUID userId){
+    public void delete(UUID userId){
         userRepositiory.deleteById(userId);
     }
 }

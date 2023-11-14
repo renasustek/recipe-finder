@@ -41,7 +41,7 @@ class UserControllerTest {
     private UserRequest shortUserRequest = new UserRequest("he","he");
     @Test
     void ShouldGetListOfUsersSuccessfully() throws Exception {
-        when(service.readAllUsers()).thenReturn(List.of(user1));
+        when(service.readAll()).thenReturn(List.of(user1));
         this.mockMvc.perform(get("/users"))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(content().contentType("application/json"))
@@ -52,7 +52,7 @@ class UserControllerTest {
 
     @Test
     void ShouldCreateAndReturnUserSuccsesfully() throws Exception{
-        when(service.createUser(userRequest1)).thenReturn(user1);
+        when(service.create(userRequest1)).thenReturn(user1);
         this.mockMvc.perform(post("/users")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(userRequest1))
@@ -66,7 +66,7 @@ class UserControllerTest {
 
     @Test
     void WhenGivenIdAndUserIsFound() throws Exception{
-        when(service.findUserById(user1.getId())).thenReturn(Optional.of(user1));
+        when(service.findById(user1.getId())).thenReturn(Optional.of(user1));
         this.mockMvc.perform(get("/users/"+user1.getId())
                         .accept(MediaType.APPLICATION_JSON)
                 )
@@ -78,7 +78,7 @@ class UserControllerTest {
 
     @Test
     void WhenGivenIdAndUserIsNotFound() throws Exception {
-        when(service.findUserById(user1.getId())).thenReturn(Optional.empty());
+        when(service.findById(user1.getId())).thenReturn(Optional.empty());
         this.mockMvc.perform(get("/users/"+user1.getId())
                         .accept(MediaType.APPLICATION_JSON)
                 )
@@ -89,7 +89,7 @@ class UserControllerTest {
     @Test
     void shouldUpdateUser() throws Exception {
         User updatedUser = new User(user1.getId(), userRequestValidUnameAndPw.name(), userRequestValidUnameAndPw.password());
-        when(service.updateUser(user1.getId(), userRequestValidUnameAndPw.name(), userRequestValidUnameAndPw.password())).thenReturn(Optional.of(updatedUser));
+        when(service.update(user1.getId(), userRequestValidUnameAndPw.name(), userRequestValidUnameAndPw.password())).thenReturn(Optional.of(updatedUser));
         this.mockMvc.perform(put("/users/"+updatedUser.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(userRequestValidUnameAndPw))
@@ -101,7 +101,7 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.password").value(updatedUser.getPassword()));
     }@Test
     void shouldNotUpdateNonExistingUser() throws Exception {
-        when(service.updateUser(user1.getId(), userRequestValidUnameAndPw.name(), userRequestValidUnameAndPw.password())).thenReturn(Optional.empty());
+        when(service.update(user1.getId(), userRequestValidUnameAndPw.name(), userRequestValidUnameAndPw.password())).thenReturn(Optional.empty());
         this.mockMvc.perform(put("/users/"+user1.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(user1))
@@ -112,7 +112,7 @@ class UserControllerTest {
     @Test
     void shouldNotUpdateUserWhenChosenNameAndPasswordIsTooLong() throws Exception {
         User updatedUser = new User(user1.getId(), longUserRequest.name(), longUserRequest.password());
-        when(service.updateUser(user1.getId(), longUserRequest.name(), longUserRequest.password())).thenThrow(new TransactionSystemException("500"));
+        when(service.update(user1.getId(), longUserRequest.name(), longUserRequest.password())).thenThrow(new TransactionSystemException("500"));
         this.mockMvc.perform(put("/users/"+updatedUser.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(longUserRequest))
@@ -124,7 +124,7 @@ class UserControllerTest {
     @Test
     void shouldNotUpdateUserWhenNameAndPasswordIsTooShort() throws Exception {
         User updatedUser = new User(user1.getId(), shortUserRequest.name(), shortUserRequest.password());
-        when(service.updateUser(user1.getId(), shortUserRequest.name(), shortUserRequest.password())).thenThrow(new TransactionSystemException("500"));
+        when(service.update(user1.getId(), shortUserRequest.name(), shortUserRequest.password())).thenThrow(new TransactionSystemException("500"));
         this.mockMvc.perform(put("/users/"+updatedUser.getId())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(shortUserRequest))

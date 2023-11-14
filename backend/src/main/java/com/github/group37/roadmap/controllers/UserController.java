@@ -23,31 +23,31 @@ public class UserController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> postUser(@RequestBody UserRequest userRequest){
-        User createdUser = userService.createUser(userRequest);
+    public ResponseEntity<User> create(@RequestBody UserRequest userRequest){
+        User createdUser = userService.create(userRequest);
         return ResponseEntity.created(URI.create("/users/"+createdUser.getId())).body(createdUser);
 
     }
 
     @GetMapping
-    public List<User> getAllUsers(){
-        return userService.readAllUsers();
+    public List<User> getAll(){
+        return userService.readAll();
     }
 
    @GetMapping("/{id}")
-    public User getUser(@PathVariable UUID id){
-        return userService.findUserById(id).orElseThrow(()->new UserNotFoundException(id));
+    public User get(@PathVariable UUID id){
+        return userService.findById(id).orElseThrow(()->new UserNotFoundException(id));
     }
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public User updateUser(@PathVariable UUID id, @RequestBody UserRequest updatedUserDetails){
-        return userService.updateUser(id, updatedUserDetails.name(),updatedUserDetails.password()).orElseThrow(()-> new UserNotFoundException(id));
+    public User update(@PathVariable UUID id, @RequestBody UserRequest updatedUserDetails){
+        return userService.update(id, updatedUserDetails.name(),updatedUserDetails.password()).orElseThrow(()-> new UserNotFoundException(id));
     }
 
 
     @DeleteMapping
-    public void deleteUser(UUID id){
-        userService.deleteUser(id);
+    public void delete(UUID id){
+        userService.delete(id);
     }
-
+//TODO test delete
 }
