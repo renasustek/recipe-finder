@@ -1,14 +1,19 @@
 package com.github.group37.roadmap.controllers;
 
-import com.github.group37.roadmap.Models.User;
-import com.github.group37.roadmap.Models.UserRequest;
+import com.github.group37.roadmap.models.User;
+import com.github.group37.roadmap.models.UserRequest;
+import com.github.group37.roadmap.errors.UserNotFoundException;
 import com.github.group37.roadmap.service.UserService;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
 @RestController
+@RequestMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
 
     public final UserService userService;
@@ -17,23 +22,30 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/")
-    public User postUser(@RequestBody UserRequest userRequest){
-        User user = new User(UUID.randomUUID(), userRequest.getName(), userRequest.getPassword());
-        return userService.createUser(user);
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> postUser(@RequestBody UserRequest userRequest){
+        User createdUser = userService.createUser(userRequest);
+        return ResponseEntity.created(URI.create("/users/"+createdUser.getId())).body(createdUser);
+
     }
 
-    @GetMapping("/")
+    @GetMapping
     public List<User> getAllUsers(){
         return userService.readAllUsers();
     }
 
-    @PutMapping("/")
-    public User updateUser(UUID id, @RequestBody UserRequest updatedUserDetails){
-        return userService.updateUser(id, updatedUserDetails.getName(),updatedUserDetails.getPassword());
+   @GetMapping("/{id}")
+    public User getUser(@PathVariable UUID id){
+        return userService.findUserById(id).orElseThrow(()->new UserNotFoundException(id));
     }
 
-    @DeleteMapping("/")
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public User updateUser(@PathVariable UUID id, @RequestBody UserRequest updatedUserDetails){
+        return userService.updateUser(id, updatedUserDetails.name(),updatedUserDetails.password()).orElseThrow(()-> new UserNotFoundException(id));
+    }
+
+
+    @DeleteMapping
     public void deleteUser(UUID id){
         userService.deleteUser(id);
     }
