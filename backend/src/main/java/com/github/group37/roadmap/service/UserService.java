@@ -32,7 +32,6 @@ public class UserService {
               user.setPassword(updatedPassword);
               return userRepositiory.save(user);
           });
-
     }
 
     public Optional<User> findById(UUID id){
