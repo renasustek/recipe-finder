@@ -45,8 +45,8 @@ public class UserController {
     }
 
 
-    @DeleteMapping
-    public void delete(UUID id){
+    @DeleteMapping(value = "/{id}")
+    public void delete(@PathVariable UUID id){
         userService.delete(id);
     }
 //TODO test delete

@@ -14,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.transaction.TransactionSystemException;
 
 import java.util.List;
@@ -132,6 +133,13 @@ class UserControllerTest {
                 )
                 .andExpect(status().isBadRequest());
 
+    }
+
+    @Test
+    void givenUserId_whenDeleteCalled_returnNothing{
+//       when(service.delete(user1.getId())).thenReturn(no)
+    mockMvc.perform(MockMvcRequestBuilders.delete("/users/{id}", user1.getId()))
+            .andExpect(status().isAccepted());
     }
 }
 
