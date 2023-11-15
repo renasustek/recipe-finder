@@ -39,11 +39,6 @@ public class UserService {
     }
 
     public void delete(UUID userId){
-        try {
             userRepositiory.deleteById(userId);
-        } catch (Exception ex){
-
-        }
-
     }
 }

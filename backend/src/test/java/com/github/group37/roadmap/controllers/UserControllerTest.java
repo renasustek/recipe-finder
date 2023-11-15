@@ -136,10 +136,9 @@ class UserControllerTest {
     }
 
     @Test
-    void givenUserId_whenDeleteCalled_returnNothing{
-//       when(service.delete(user1.getId())).thenReturn(no)
+    void givenUserId_whenDeleteCalled_returnNothing() throws Exception{
     mockMvc.perform(MockMvcRequestBuilders.delete("/users/{id}", user1.getId()))
-            .andExpect(status().isAccepted());
+            .andExpect(status().isOk());
     }
 }
 
