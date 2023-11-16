@@ -2,14 +2,13 @@ package com.github.group37.roadmap.service;
 //https://www.javaguides.net/2022/03/spring-boot-unit-testing-service-layer.html#:~:text=In%20order%20to%20test%20Service,a%20database%20for%20Unit%20testing.&text=The%20Spring%20Boot%20Starter%20Test,testing%20the%20Spring%20Boot%20Applications.
 import com.github.group37.roadmap.models.User;
 import com.github.group37.roadmap.models.UserRequest;
-import com.github.group37.roadmap.percistance.UserRepositiory;
+import com.github.group37.roadmap.percistance.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +24,7 @@ import static org.mockito.Mockito.*;
 public class UserServiceTest {
 
     @Mock
-    private UserRepositiory userRepositiory;
+    private UserRepository userRepositiory;
 
     @InjectMocks
     private UserService userService;

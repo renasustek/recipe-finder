@@ -2,7 +2,7 @@ package com.github.group37.roadmap.service;
 
 import com.github.group37.roadmap.models.User;
 import com.github.group37.roadmap.models.UserRequest;
-import com.github.group37.roadmap.percistance.UserRepositiory;
+import com.github.group37.roadmap.percistance.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,9 +12,9 @@ import java.util.UUID;
 @Service
 public class UserService {
 
-    private final UserRepositiory userRepositiory;
+    private final UserRepository userRepositiory;
     
-    public UserService(UserRepositiory userRepositiory) {
+    public UserService(UserRepository userRepositiory) {
         this.userRepositiory = userRepositiory;
     }
 
