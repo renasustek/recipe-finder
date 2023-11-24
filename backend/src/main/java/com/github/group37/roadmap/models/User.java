@@ -16,7 +16,7 @@ public class User {
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID id;
 
-    @Column(name="username", nullable=false, unique=false,length = 36)
+    @Column(name="username", nullable=false, unique=true,length = 36)
     @Size(min = 3, max = 36)
     private String username;
 
