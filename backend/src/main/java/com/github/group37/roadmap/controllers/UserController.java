@@ -22,12 +22,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> create(@RequestBody UserRequest userRequest){
-        User createdUser = userService.create(userRequest);
-        return ResponseEntity.created(URI.create("/users/"+createdUser.getId())).body(createdUser);
-
-    }
+//    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+//    public ResponseEntity<User> create(@RequestBody UserRequest userRequest){
+//        User createdUser = userService.create(userRequest);
+//        return ResponseEntity.created(URI.create("/users/"+createdUser.getId())).body(createdUser);
+//
+//    }
 
     @GetMapping
     public List<User> getAll(){
