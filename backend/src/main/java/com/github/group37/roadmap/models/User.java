@@ -34,10 +34,6 @@ public class User {
     }
 
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = true;
-    }
-
     @Override
     public String toString() {
         return "User{" +
