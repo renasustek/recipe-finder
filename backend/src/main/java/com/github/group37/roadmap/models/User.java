@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-import jakarta.validation.*;
+
 import java.util.UUID;
 
 @Entity
@@ -14,32 +14,35 @@ public class User {
     @Id
     @Column(name="id",nullable = false,unique = true,length = 36,columnDefinition = "VARCHAR(36)")
     @JdbcTypeCode(SqlTypes.VARCHAR)
-
     private UUID id;
 
-    @Column(name="name", nullable=false, unique=false,length = 36)
+    @Column(name="username", nullable=false, unique=false,length = 36)
     @Size(min = 3, max = 36)
-    private String name;
+    private String username;
 
-    @Column(name="password", nullable=false, unique=false,length = 36)
-    @Size(min = 6, max = 36)
+    @Column(name="password", nullable=false, unique=false,length = 100)
+    @Size(min = 6, max = 100)
     private String password;
 
-    public User(UUID id, String name, String password){
+    @Column(name = "enabled", nullable = false,unique = false)
+    private boolean enabled;
+
+    public User(UUID id, String username, String password){
         this.id = id;
-        this.name = name;
+        this.username = username;
         this.password = password;
     }
 
-    public User(){
 
+    public void setEnabled(boolean enabled) {
+        this.enabled = true;
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }
@@ -52,12 +55,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

@@ -37,7 +37,8 @@ public class UserController {
    @GetMapping("/{id}")
     public User get(@PathVariable UUID id){
         return userService.findById(id).orElseThrow(()->new UserNotFoundException(id));
-    }
+    }//TODO test delete
+
 
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public User update(@PathVariable UUID id, @RequestBody UserRequest updatedUserDetails){
@@ -49,5 +50,4 @@ public class UserController {
     public void delete(@PathVariable UUID id){
         userService.delete(id);
     }
-//TODO test delete
 }

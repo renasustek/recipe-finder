@@ -12,33 +12,33 @@ import java.util.UUID;
 @Service
 public class UserService {
 
-    private final UserRepository userRepositiory;
+    private final UserRepository userRepository;
     
-    public UserService(UserRepository userRepositiory) {
-        this.userRepositiory = userRepositiory;
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     public User create(UserRequest userRequest){
-        User user = new User(UUID.randomUUID(), userRequest.name(), userRequest.password());
-        return userRepositiory.save(user);
+        User user = new User(UUID.randomUUID(),userRequest.name(), userRequest.password());
+        return userRepository.save(user);
     }
     public List<User> readAll(){
-        return userRepositiory.findAll();
+        return userRepository.findAll();
     }
 
     public Optional<User> update(UUID userID, String updatedName, String updatedPassword){
-          return userRepositiory.findById(userID).map(user->{
-              user.setName(updatedName);
+          return userRepository.findById(userID).map(user->{
+              user.setUsername(updatedName);
               user.setPassword(updatedPassword);
-              return userRepositiory.save(user);
+              return userRepository.save(user);
           });
     }
 
     public Optional<User> findById(UUID id){
-         return userRepositiory.findById(id);
+         return userRepository.findById(id);
     }
 
     public void delete(UUID userId){
-            userRepositiory.deleteById(userId);
+            userRepository.deleteById(userId);
     }
 }

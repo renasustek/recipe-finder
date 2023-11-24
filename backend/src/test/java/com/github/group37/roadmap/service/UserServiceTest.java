@@ -43,7 +43,7 @@ public class UserServiceTest {
         User savedUser = userService.create(userRequest);
 
         assertThat(savedUser.getId()).isNotNull();
-        assertThat(savedUser.getName()).isEqualTo(userRequest.name());
+        assertThat(savedUser.getUsername()).isEqualTo(userRequest.name());
         assertThat(savedUser.getPassword()).isEqualTo(userRequest.password());
     }
 
@@ -55,7 +55,7 @@ public class UserServiceTest {
         List<User> users = userService.readAll();
 
         assertThat(users.get(0).getId()).isNotNull();
-        assertThat(users.get(0).getName()).isEqualTo(user.getName());
+        assertThat(users.get(0).getUsername()).isEqualTo(user.getUsername());
         assertThat(users.get(0).getPassword()).isEqualTo(user.getPassword());
     }
     @DisplayName("should update user details")
@@ -66,7 +66,7 @@ public class UserServiceTest {
         Optional<User> users = userService.update(user.getId(), updateUserRequest.name(), updateUserRequest.password());
         if (users.isPresent()){
             assertThat(users.get().getId()).isNotNull();
-            assertThat(users.get().getName()).isEqualTo(user.getName());
+            assertThat(users.get().getUsername()).isEqualTo(user.getUsername());
             assertThat(users.get().getPassword()).isEqualTo(user.getPassword());
         }
     }
@@ -85,7 +85,7 @@ public class UserServiceTest {
         Optional<User> findUser = userService.findById(user.getId());
 
             assertThat(findUser.get().getId()).isNotNull();
-            assertThat(findUser.get().getName()).isEqualTo(user.getName());
+            assertThat(findUser.get().getUsername()).isEqualTo(user.getUsername());
             assertThat(findUser.get().getPassword()).isEqualTo(user.getPassword());
 
     }

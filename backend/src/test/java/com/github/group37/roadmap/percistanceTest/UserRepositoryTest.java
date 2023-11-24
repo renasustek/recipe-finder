@@ -2,26 +2,17 @@ package com.github.group37.roadmap.percistanceTest;
 
 import com.github.group37.roadmap.models.User;
 import com.github.group37.roadmap.percistance.UserRepository;
-import jakarta.activation.DataSource;
-import jakarta.persistence.EntityManager;
-import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static java.util.function.Predicate.not;
 import static net.bytebuddy.matcher.ElementMatchers.is;
-import static org.assertj.core.api.FactoryBasedNavigableListAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 //@ExtendWith(SpringExtension.class)
@@ -58,7 +49,7 @@ public class UserRepositoryTest {
       User getUser = userRepository.findById(user.getId()).get();
 
       assertEquals(getUser.getId(), UUID.fromString("6598bb36-1de4-4e06-99fa-555c80f12781"));
-      assertEquals(getUser.getName(), "user1");
+      assertEquals(getUser.getUsername(), "user1");
       assertEquals(getUser.getPassword(), "user1");
    }
 
@@ -72,14 +63,14 @@ public class UserRepositoryTest {
       Optional<User> userToUpdateOptional = userRepository.findById(createdUser.getId());
       User userToUpdate = userToUpdateOptional.get();
 
-      userToUpdate.setName("David");
+      userToUpdate.setUsername("David");
       userToUpdate.setPassword("Goggins");
       userRepository.save(userToUpdate);
 
       //update complete, now check if update worked properly
 
       Optional<User> checkUser = userRepository.findById(createdUser.getId());
-      assertEquals(checkUser.get().getName(), "David");
+      assertEquals(checkUser.get().getUsername(), "David");
       assertEquals(checkUser.get().getPassword(), "Goggins");
    }
 
