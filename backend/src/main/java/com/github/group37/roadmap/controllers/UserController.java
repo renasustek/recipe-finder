@@ -1,7 +1,7 @@
 package com.github.group37.roadmap.controllers;
 
-import com.github.group37.roadmap.models.User;
-import com.github.group37.roadmap.models.UserRequest;
+import com.github.group37.roadmap.percistance.models.User;
+import com.github.group37.roadmap.other.UserRequest;
 import com.github.group37.roadmap.errors.UserNotFoundException;
 import com.github.group37.roadmap.service.UserService;
 import org.springframework.http.MediaType;
@@ -22,12 +22,12 @@ public class UserController {
         this.userService = userService;
     }
 
-//    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<User> create(@RequestBody UserRequest userRequest){
-//        User createdUser = userService.create(userRequest);
-//        return ResponseEntity.created(URI.create("/users/"+createdUser.getId())).body(createdUser);
-//
-//    }
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> create(@RequestBody UserRequest userRequest){
+        User createdUser = userService.create(userRequest);
+        return ResponseEntity.created(URI.create("/users/"+createdUser.getId())).body(createdUser);
+
+    }
 
     @GetMapping
     public List<User> getAll(){

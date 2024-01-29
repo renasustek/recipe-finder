@@ -5,11 +5,12 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.group37.roadmap.models.User;
-import com.github.group37.roadmap.models.UserRequest;
+import com.github.group37.roadmap.percistance.models.User;
+import com.github.group37.roadmap.other.UserRequest;
 import com.github.group37.roadmap.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
@@ -22,7 +23,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 
-@WebMvcTest(UserController.class)
+@WebMvcTest(controllers = UserController.class, excludeAutoConfiguration = SecurityAutoConfiguration.class)
 class UserControllerTest {
 
     @Autowired
@@ -47,7 +48,7 @@ class UserControllerTest {
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(jsonPath("$[0].id").value(user1.getId().toString()))
-                .andExpect(jsonPath("$[0].name").value(user1.getUsername()))
+                .andExpect(jsonPath("$[0].username").value(user1.getUsername()))
                 .andExpect(jsonPath("$[0].password").value(user1.getPassword()));
     }
 
@@ -60,9 +61,9 @@ class UserControllerTest {
                         .characterEncoding("utf-8"))
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").value(user1.getId().toString()))
-                .andExpect(jsonPath("$.name").value(user1.getUsername()))
-                .andExpect(jsonPath("$.password").value(user1.getPassword()))
-        ;
+                .andExpect(jsonPath("$.username").value(user1.getUsername()))
+                .andExpect(jsonPath("$.password").value(user1.getPassword()));
+
     }
 
     @Test
@@ -73,7 +74,7 @@ class UserControllerTest {
                 )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(user1.getId().toString()))
-                .andExpect(jsonPath("$.name").value(user1.getUsername()))
+                .andExpect(jsonPath("$.username").value(user1.getUsername()))
                 .andExpect(jsonPath("$.password").value(user1.getPassword()));
     }
 
@@ -98,7 +99,7 @@ class UserControllerTest {
                 )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(updatedUser.getId().toString()))
-                .andExpect(jsonPath("$.name").value(updatedUser.getUsername()))
+                .andExpect(jsonPath("$.username").value(updatedUser.getUsername()))
                 .andExpect(jsonPath("$.password").value(updatedUser.getPassword()));
     }@Test
     void shouldNotUpdateNonExistingUser() throws Exception {

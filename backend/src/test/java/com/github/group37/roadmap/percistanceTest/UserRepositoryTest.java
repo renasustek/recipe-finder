@@ -1,6 +1,6 @@
 package com.github.group37.roadmap.percistanceTest;
 
-import com.github.group37.roadmap.models.User;
+import com.github.group37.roadmap.percistance.models.User;
 import com.github.group37.roadmap.percistance.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

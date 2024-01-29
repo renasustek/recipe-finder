@@ -1,7 +1,7 @@
 package com.github.group37.roadmap.service;
 //https://www.javaguides.net/2022/03/spring-boot-unit-testing-service-layer.html#:~:text=In%20order%20to%20test%20Service,a%20database%20for%20Unit%20testing.&text=The%20Spring%20Boot%20Starter%20Test,testing%20the%20Spring%20Boot%20Applications.
-import com.github.group37.roadmap.models.User;
-import com.github.group37.roadmap.models.UserRequest;
+import com.github.group37.roadmap.percistance.models.User;
+import com.github.group37.roadmap.other.UserRequest;
 import com.github.group37.roadmap.percistance.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

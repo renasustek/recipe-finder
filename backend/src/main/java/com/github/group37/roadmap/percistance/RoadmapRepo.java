@@ -1,6 +1,6 @@
 package com.github.group37.roadmap.percistance;
 
-import com.github.group37.roadmap.percistance.models.User;
+import com.github.group37.roadmap.percistance.models.RoadmapDao;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, UUID> {
-    Optional<User> findByUUID(UUID uuid);
+public interface RoadmapRepo extends JpaRepository<RoadmapDao, UUID> {
+    Optional<RoadmapDao> findByUUID(UUID uuid);
 
 }

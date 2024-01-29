@@ -1,21 +1,20 @@
-package com.github.group37.roadmap.models;
+package com.github.group37.roadmap.percistance.models;
 
+import com.github.group37.roadmap.percistance.models.RoadmapDao;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
-import java.util.Random;
 import java.util.UUID;
 
 @Entity
 @Table(name="users", schema="roadmapProject")
 
 public class User {
-//    @Id
-//    @Column(name="id",nullable = false,unique = true,length = 36,columnDefinition = "VARCHAR(36)")
-//    @JdbcTypeCode(SqlTypes.VARCHAR)
-//    private UUID id;
+    @Column(name="id",nullable = false,unique = true,length = 36,columnDefinition = "VARCHAR(36)")
+    @JdbcTypeCode(SqlTypes.VARCHAR)
+    private UUID id;
 
     @Id
     @Column(name="username", nullable=false, unique=true,length = 36)
@@ -29,9 +28,11 @@ public class User {
     @Column(name = "enabled", nullable = false,unique = false)
     private boolean enabled;
 
-    private UUID id;
+    @OneToOne(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private RoadmapDao roadmapDao;//todo add this to the schemal.sql
 
     public User(UUID id, String username, String password){
+        this.id = id;
         this.username = username;
         this.password = password;
         this.enabled = true;
@@ -43,7 +44,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-
+                "id=" + id +
                 ", name='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';

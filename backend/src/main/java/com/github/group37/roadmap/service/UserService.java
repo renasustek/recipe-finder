@@ -1,7 +1,7 @@
 package com.github.group37.roadmap.service;
 
-import com.github.group37.roadmap.models.User;
-import com.github.group37.roadmap.models.UserRequest;
+import com.github.group37.roadmap.percistance.models.User;
+import com.github.group37.roadmap.other.UserRequest;
 import com.github.group37.roadmap.percistance.UserRepository;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +35,7 @@ public class UserService {
     }
 
     public Optional<User> findById(UUID id){
-         return userRepository.findById(id);
+         return userRepository.findByUUID(id);
     }
 
     public void delete(UUID userId){
