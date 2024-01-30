@@ -20,10 +20,10 @@ public class RoadmapDao {
 
     @Column(name="username", nullable=false, unique=true,length = 36)
     @Size(min = 3, max = 36)
-    private String userId;
+    private UUID userId;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "artist_id")
+    @JoinColumn(name = "id")
     private User user;
 
     @OneToMany(mappedBy = "roadmap")
@@ -37,11 +37,11 @@ public class RoadmapDao {
         this.id = id;
     }
 
-    public String getUserId() {
+    public UUID getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(UUID userId) {
         this.userId = userId;
     }
 

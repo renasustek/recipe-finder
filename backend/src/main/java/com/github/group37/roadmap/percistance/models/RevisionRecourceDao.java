@@ -21,9 +21,9 @@ public class RevisionRecourceDao {
     @Size(min = 3, max = 20)
     private String topic;
 
-    @Column(name="name", nullable=false, unique=false,length = 100)
+    @Column(name="recourceName", nullable=false, unique=false,length = 100)
     @Size(min = 3, max = 20)
-    private String name;
+    private String recourceName;
 
     @Column(name="description", nullable=false, unique=false,length = 100)
     @Size(min = 10, max = 100)
@@ -53,12 +53,12 @@ public class RevisionRecourceDao {
         this.topic = topic;
     }
 
-    public String getName() {
-        return name;
+    public String getRecourceName() {
+        return recourceName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRecourceName(String recourceName) {
+        this.recourceName = recourceName;
     }
 
     public String getDescription() {

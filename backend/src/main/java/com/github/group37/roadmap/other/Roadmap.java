@@ -9,4 +9,23 @@ public class Roadmap {
 
     private ArrayList<RevisionRecourceDao> revisionRecourceDaos;
 
+    public String getName() {
+        return name;
+    }
+
+    public ArrayList<RevisionRecourceDao> getRevisionRecourceDaos() {
+        return revisionRecourceDaos;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setRevisionRecourceDaos(ArrayList<RevisionRecourceDao> revisionRecourceDaos) {
+        this.revisionRecourceDaos = revisionRecourceDaos;
+    }
+
+    public void addToList (RevisionRecourceDao revisionRecourceDao){
+        revisionRecourceDaos.add(revisionRecourceDao);
+    }
 }

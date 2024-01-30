@@ -17,10 +17,12 @@ public class RoadmapRecources {
 
     @ManyToOne
     @JoinColumn(name = "id")
+    @Column(name = "roadmapId")
     private RoadmapDao roadmapDao;
 
     @ManyToOne
     @JoinColumn(name = "id")
+    @Column(name = "revisionRecourceId")
     private RevisionRecourceDao revisionRecourceDao;
 
 }

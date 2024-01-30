@@ -12,7 +12,7 @@ import java.util.UUID;
 @Table(name="users", schema="roadmapProject")
 
 public class User {
-    @Column(name="id",nullable = false,unique = true,length = 36,columnDefinition = "VARCHAR(36)")
+    @Column(name="uuid",nullable = false,unique = true,length = 36,columnDefinition = "VARCHAR(36)")
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID id;
 

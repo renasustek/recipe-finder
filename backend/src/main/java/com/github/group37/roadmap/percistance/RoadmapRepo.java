@@ -9,6 +9,8 @@ import java.util.UUID;
 
 @Repository
 public interface RoadmapRepo extends JpaRepository<RoadmapDao, UUID> {
-    Optional<RoadmapDao> findByUUID(UUID uuid);
+    Optional<RoadmapDao> findByUsername(String username);
+
+
 
 }

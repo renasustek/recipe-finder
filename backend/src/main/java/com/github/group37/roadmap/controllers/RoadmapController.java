@@ -2,6 +2,7 @@ package com.github.group37.roadmap.controllers;
 
 
 import com.github.group37.roadmap.errors.RoadMapNotFoundException;
+import com.github.group37.roadmap.other.Roadmap;
 import com.github.group37.roadmap.percistance.models.RoadmapDao;
 import com.github.group37.roadmap.service.RoadmapService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,9 +22,9 @@ public class RoadmapController {
     }
 
 
-    @GetMapping("/{id}")
-    public RoadmapDao getRoadmap(@PathVariable UUID userId){
-        return roadmapService.getRoadmap(userId).orElseThrow(() -> new RoadMapNotFoundException());
+    @GetMapping("/{username}")
+    public Roadmap getRoadmap(@PathVariable String username){
+        return roadmapService.getRoadmap(username).orElseThrow(() -> new RoadMapNotFoundException());
     }
 
 }
