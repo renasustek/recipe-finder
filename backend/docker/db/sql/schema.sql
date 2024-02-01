@@ -15,3 +15,11 @@ insert into authorities values  ('admin','ROLE_ADMIN');
 create table roadmap(id varchar(36) not null primary key, username varchar(50) not null, foreign key (username) references users(username));
 create table revisionRecource(id varchar(36) not null primary key, topic varchar(20) not null, recourceName varchar(20) not null, description varchar(100) not null, whereToAcces varchar(100) not null);
 create table roadmapRecources(id varchar(36) not null primary key, roadmapId varchar(36) not null, revisionRecourceId varchar(36) not null, foreign key (roadmapId) references roadmap(id),foreign key (revisionRecourceId) references revisionRecource(id));
+
+insert into roadmap values ('774c5dee-e6af-4184-aae5-400f94ea9823','renas');
+
+insert into revisionRecource values ('774c5dee-e6af-4284-aae5-400f94ea9823','algebra','book','read this book and become good at algebra :)', 'MathsBook101 page 10');
+insert into revisionRecource values ('214c5dee-e6af-4184-aae5-400f94ea9823','addition','website','complete the tasks on this website and you will be an expert adder', 'https://www.coolmathgames.com/');
+
+insert into roadmapRecources values ('2asc5dee-e6af-4184-aae5-400f94ea9823','774c5dee-e6af-4184-aae5-400f94ea9823', '774c5dee-e6af-4284-aae5-400f94ea9823');
+insert into roadmapRecources values ('2wdc5dee-e6af-4184-aae5-400f94ea9823','774c5dee-e6af-4184-aae5-400f94ea9823', '214c5dee-e6af-4184-aae5-400f94ea9823');

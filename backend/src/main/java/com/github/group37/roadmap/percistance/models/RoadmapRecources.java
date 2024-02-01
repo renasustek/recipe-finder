@@ -10,19 +10,18 @@ import java.util.UUID;
 @Table(name = "roadmapRecources", schema = "roadmapProject")
 public class RoadmapRecources {
 
+    @Id
     @Column(name="id",nullable = false,unique = true,length = 36,columnDefinition = "VARCHAR(36)")
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID id;
 
 
     @ManyToOne
-    @JoinColumn(name = "id")
-    @Column(name = "roadmapId")
+    @JoinColumn(name = "roadmapId", referencedColumnName = "id")
     private RoadmapDao roadmapDao;
 
     @ManyToOne
-    @JoinColumn(name = "id")
-    @Column(name = "revisionRecourceId")
+    @JoinColumn(name = "revisionRecourceId", referencedColumnName = "id")
     private RevisionRecourceDao revisionRecourceDao;
 
 }

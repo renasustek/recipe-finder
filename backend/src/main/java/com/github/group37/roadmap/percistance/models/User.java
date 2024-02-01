@@ -1,6 +1,5 @@
 package com.github.group37.roadmap.percistance.models;
 
-import com.github.group37.roadmap.percistance.models.RoadmapDao;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.JdbcTypeCode;
