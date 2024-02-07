@@ -8,7 +8,7 @@ import org.hibernate.type.SqlTypes;
 import java.util.UUID;
 
 @Entity
-@Table(name="users", schema="roadmapProject")
+@Table(name="users", schema="roadmap_project")
 
 public class User {
     @Column(name="uuid",nullable = false,unique = true,length = 36,columnDefinition = "VARCHAR(36)")

@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Table(name = "roadmap", schema = "roadmapProject")
+@Table(name = "roadmap", schema = "roadmap_project")
 public class RoadmapDao {
 
     @Id

@@ -7,8 +7,8 @@ import org.hibernate.type.SqlTypes;
 import java.util.UUID;
 
 @Entity
-@Table(name = "roadmapRecources", schema = "roadmapProject")
-public class RoadmapRecources {
+@Table(name = "roadmap_resources", schema = "roadmap_project")
+public class RoadmapResources {
 
     @Id
     @Column(name="id",nullable = false,unique = true,length = 36,columnDefinition = "VARCHAR(36)")
@@ -16,11 +16,11 @@ public class RoadmapRecources {
     private UUID id;
 
 
-    @Column(name = "roadmapId")
+    @Column(name = "roadmap_id", nullable=false,length = 36)
     private UUID roadmapId;
 
-    @Column(name = "revisionRecourceId")
-    private UUID revisionRecourceId;
+    @Column(name = "revision_resource_id", nullable=false,length = 36)
+    private UUID revisionResourceId;
 
 
     public UUID getId() {
@@ -39,11 +39,11 @@ public class RoadmapRecources {
         this.roadmapId = roadmapId;
     }
 
-    public UUID getRevisionRecourceId() {
-        return revisionRecourceId;
+    public UUID getRevisionResourceId() {
+        return revisionResourceId;
     }
 
-    public void setRevisionRecourceId(UUID revisionRecourceId) {
-        this.revisionRecourceId = revisionRecourceId;
+    public void setRevisionResourceId(UUID revisionResourceId) {
+        this.revisionResourceId = revisionResourceId;
     }
 }
