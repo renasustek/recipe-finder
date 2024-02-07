@@ -12,14 +12,14 @@ insert into users values ('5b918af2-5507-407f-bfb9-1fe0781582d0','admin','admin'
 insert into authorities values ('admin','ROLE_USER');
 insert into authorities values  ('admin','ROLE_ADMIN');
 
-create table roadmap(id varchar(36) not null primary key, username varchar(50) not null, foreign key (username) references users(username));
-create table revision_resource(id varchar(36) not null primary key, topic varchar(20) not null, resource_name varchar(20) not null, description varchar(100) not null, where_to_access varchar(100) not null);
-create table roadmap_resources(id varchar(36) not null primary key, roadmap_id varchar(36) not null, revision_resource_id varchar(36) not null, foreign key (roadmap_id) references roadmap(id),foreign key (revision_resource_id) references revision_resource(id));
+create table roadmap(id VARBINARY(36) not null primary key, username varchar(50) not null);
+create table revision_resource(id VARBINARY(36) not null primary key, topic varchar(20) not null, resource_name varchar(20) not null, description varchar(100) not null, where_to_access varchar(100) not null);
+create table roadmap_resources(id VARBINARY(36) not null primary key, roadmap_id VARBINARY(36) not null, revision_resource_id VARBINARY(36) not null);
 
-insert into roadmap values ('8894517b-539a-4b89-b0a0-849e84329181','renas');
+insert into roadmap values (UUID_TO_BIN('8894517b-539a-4b89-b0a0-849e84329181'),'renas');
 
-insert into revision_resource values ('4c059778-5c0e-40f0-ae0b-85bf0ce8b6cc','algebra','book','read this book and become good at algebra :)', 'MathsBook101 page 10');
-insert into revision_resource values ('2d927d0a-d2a1-46d7-826d-e6783da22169','addition','website','complete the tasks on this website and you will be an expert adder', 'https://www.coolmathgames.com/');
+insert into revision_resource values (UUID_TO_BIN('4c059778-5c0e-40f0-ae0b-85bf0ce8b6cc'),'algebra','book','read this book and become good at algebra :)', 'MathsBook101 page 10');
+insert into revision_resource values (UUID_TO_BIN('2d927d0a-d2a1-46d7-826d-e6783da22169'),'addition','website','complete the tasks on this website and you will be an expert adder', 'https://www.coolmathgames.com/');
 
-insert into roadmap_resources values ('0dbabf29-a60f-459c-8419-3628a56c2e68 ','8894517b-539a-4b89-b0a0-849e84329181', '4c059778-5c0e-40f0-ae0b-85bf0ce8b6cc');
-insert into roadmap_resources values ('6033160c-c5f5-4459-96c5-5c21f4d34048','8894517b-539a-4b89-b0a0-849e84329181', '2d927d0a-d2a1-46d7-826d-e6783da22169');
+insert into roadmap_resources values (UUID_TO_BIN('0dbabf29-a60f-459c-8419-3628a56c2e68'),UUID_TO_BIN('8894517b-539a-4b89-b0a0-849e84329181'), UUID_TO_BIN('4c059778-5c0e-40f0-ae0b-85bf0ce8b6cc'));
+insert into roadmap_resources values (UUID_TO_BIN('6033160c-c5f5-4459-96c5-5c21f4d34048'),UUID_TO_BIN('8894517b-539a-4b89-b0a0-849e84329181'), UUID_TO_BIN('2d927d0a-d2a1-46d7-826d-e6783da22169'));

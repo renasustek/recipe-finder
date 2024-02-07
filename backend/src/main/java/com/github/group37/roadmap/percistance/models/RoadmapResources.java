@@ -11,8 +11,7 @@ import java.util.UUID;
 public class RoadmapResources {
 
     @Id
-    @Column(name="id",nullable = false,unique = true,length = 36,columnDefinition = "VARCHAR(36)")
-    @JdbcTypeCode(SqlTypes.VARCHAR)
+    @Column(name="id",nullable = false,unique = true,length = 36,columnDefinition = "VARBINARY(36)")
     private UUID id;
 
 

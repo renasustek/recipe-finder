@@ -11,8 +11,7 @@ import java.util.UUID;
 @Table(name = "revision_resource", schema = "roadmap_project")
 public class RevisionResourceDao {
     @Id
-    @Column(name="id",nullable = false,unique = true,length = 36,columnDefinition = "VARCHAR(36)")
-    @JdbcTypeCode(SqlTypes.VARCHAR)
+    @Column(name="id",nullable = false,unique = true,length = 36,columnDefinition = "VARBINARY(36)")
     private UUID id;
 
     @Column(name="topic", nullable=false, unique=false,length = 100)
