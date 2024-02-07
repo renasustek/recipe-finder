@@ -33,10 +33,6 @@ public class RevisionRecourceDao {
     @Size(min = 10, max = 100)
     private String whereToAccess;//could be a link if a website, could be a book name and a page number, could be
     // whatever you want, as long as it has instructions on how to access a specific revision recource
-
-    @OneToMany(mappedBy = "revisionRecource")
-    private Set<RoadmapRecources> roadmapRecources = new HashSet<>();
-
     public UUID getId() {
         return id;
     }

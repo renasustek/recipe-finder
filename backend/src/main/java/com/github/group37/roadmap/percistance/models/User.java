@@ -27,9 +27,6 @@ public class User {
     @Column(name = "enabled", nullable = false,unique = false)
     private boolean enabled;
 
-    @OneToOne(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private RoadmapDao roadmapDao;//todo add this to the schemal.sql
-
     public User(UUID id, String username, String password){
         this.id = id;
         this.username = username;

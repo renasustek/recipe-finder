@@ -16,12 +16,34 @@ public class RoadmapRecources {
     private UUID id;
 
 
-    @ManyToOne
-    @JoinColumn(name = "roadmapId", referencedColumnName = "id")
-    private RoadmapDao roadmapDao;
+    @Column(name = "roadmapId")
+    private UUID roadmapId;
 
-    @ManyToOne
-    @JoinColumn(name = "revisionRecourceId", referencedColumnName = "id")
-    private RevisionRecourceDao revisionRecourceDao;
+    @Column(name = "revisionRecourceId")
+    private UUID revisionRecourceId;
 
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public UUID getRoadmapId() {
+        return roadmapId;
+    }
+
+    public void setRoadmapId(UUID roadmapId) {
+        this.roadmapId = roadmapId;
+    }
+
+    public UUID getRevisionRecourceId() {
+        return revisionRecourceId;
+    }
+
+    public void setRevisionRecourceId(UUID revisionRecourceId) {
+        this.revisionRecourceId = revisionRecourceId;
+    }
 }

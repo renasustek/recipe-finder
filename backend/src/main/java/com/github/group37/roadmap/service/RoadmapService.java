@@ -27,11 +27,10 @@ public class RoadmapService {
     public Optional<Roadmap> getRoadmap(String username){
         Roadmap roadmap = new Roadmap();
         UUID roadmapId = roadmapRepo.findByUsername(username).orElseThrow(() -> new RuntimeException("not stored in db")).getId();
-       roadmapRecourcesRepo.findAllRecourcesUsingRoadmapid(roadmapId).forEach((uuid -> {
-           roadmap.addToList(revisionRecourcesRepo.findById(uuid).orElseThrow(() -> new RuntimeException("not stored in db")));
-       }));
+        roadmapRecourcesRepo.findAllRecourcesUsingRoadmapid(roadmapId).forEach((uuid -> roadmap.addToList(revisionRecourcesRepo.findById(uuid).orElseThrow(() -> new RuntimeException("not stored in db")))));
 
        return Optional.of(roadmap);
+
     }
 
 
