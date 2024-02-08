@@ -9,6 +9,7 @@ import com.github.group37.roadmap.percistance.RoadmapRepo;
 import com.github.group37.roadmap.percistance.models.RoadmapResources;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -26,21 +27,20 @@ public class RoadmapService {
     }
 
     public Optional<Roadmap> getRoadmap(String username){
-        Roadmap roadmap = new Roadmap();
+        ArrayList<Optional<RevisionResourceDao>> revisionRecources = new ArrayList<>();
+
 
         UUID roadmapId = roadmapRepo.findByUsername(username).orElseThrow(() -> new RuntimeException("not stored in db")).getId();
 
-       // List<RoadmapResources> something  = roadmapResourcesRepo.findAllResourcesUsingRoadmapId(UUID.fromString(""));
+        List<UUID> usersResourcesIds  = roadmapResourcesRepo.findAllResourcesUsingRoadmapId(roadmapId);
+        for (UUID eachuuid: usersResourcesIds){
+            revisionRecources.add(revisionResourcesRepo.findById(eachuuid));
+        }
 
-        List<RoadmapDao> allRoadmapDao = roadmapRepo.findAll();
-        List<RoadmapResources> allRoadmapResources = roadmapResourcesRepo.findAll();
-        List<RevisionResourceDao> allRevisionResourceDao = revisionResourcesRepo.findAll();
-       // roadmapResourcesRepo.findAllResourcesUsingRoadmapId(roadmapId).forEach((uuid -> roadmap.addToList(revisionResourcesRepo.findById(uuid).orElseThrow(() -> new RuntimeException("not stored in db")))));
-        System.out.println("shush");
+        Roadmap roadmap = new Roadmap(username, revisionRecources);
+//        roadmapResourcesRepo.findAllResourcesUsingRoadmapId(roadmapId).forEach((uuid -> roadmap.addToList(revisionResourcesRepo.findById(uuid))));
        return Optional.of(roadmap);
 
     }
-
-
 
 }

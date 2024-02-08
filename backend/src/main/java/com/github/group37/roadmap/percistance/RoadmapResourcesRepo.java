@@ -11,6 +11,6 @@ import java.util.UUID;
 @Repository
 public interface RoadmapResourcesRepo extends JpaRepository<RoadmapResources, UUID> {
 
-    @Query("SELECT u FROM RoadmapResources u WHERE u.roadmapId = ?1")
-    List<RoadmapResources> findAllResourcesUsingRoadmapId(UUID roadmapId);
+    @Query("SELECT u.revisionResourceId FROM RoadmapResources u WHERE u.roadmapId = ?1")
+    List<UUID> findAllResourcesUsingRoadmapId(UUID roadmapId);
 }
