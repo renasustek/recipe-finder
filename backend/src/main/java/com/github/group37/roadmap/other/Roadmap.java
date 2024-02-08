@@ -1,31 +1,33 @@
 package com.github.group37.roadmap.other;
 
-import com.github.group37.roadmap.percistance.models.RevisionRecourceDao;
+import com.github.group37.roadmap.percistance.models.RevisionResourceDao;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class Roadmap {
     private String name;
 
-    private ArrayList<RevisionRecourceDao> revisionRecourceDaos;
+    private ArrayList<Optional<RevisionResourceDao>> revisionResourceDaos;
+
+    public Roadmap(String name, ArrayList<Optional<RevisionResourceDao>> revisionResourceDaos) {
+        this.name = name;
+        this.revisionResourceDaos = revisionResourceDaos;
+    }
 
     public String getName() {
         return name;
-    }
-
-    public ArrayList<RevisionRecourceDao> getRevisionRecourceDaos() {
-        return revisionRecourceDaos;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setRevisionRecourceDaos(ArrayList<RevisionRecourceDao> revisionRecourceDaos) {
-        this.revisionRecourceDaos = revisionRecourceDaos;
+    public ArrayList<Optional<RevisionResourceDao>> getRevisionResourceDaos() {
+        return revisionResourceDaos;
     }
 
-    public void addToList (RevisionRecourceDao revisionRecourceDao){
-        revisionRecourceDaos.add(revisionRecourceDao);
+    public void setRevisionResourceDaos(ArrayList<Optional<RevisionResourceDao>> revisionResourceDaos) {
+        this.revisionResourceDaos = revisionResourceDaos;
     }
 }

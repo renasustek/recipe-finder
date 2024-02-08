@@ -8,7 +8,7 @@ import org.hibernate.type.SqlTypes;
 import java.util.UUID;
 
 @Entity
-@Table(name="users", schema="roadmapProject")
+@Table(name="users", schema="roadmap_project")
 
 public class User {
     @Column(name="uuid",nullable = false,unique = true,length = 36,columnDefinition = "VARCHAR(36)")
@@ -26,9 +26,6 @@ public class User {
 
     @Column(name = "enabled", nullable = false,unique = false)
     private boolean enabled;
-
-    @OneToOne(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private RoadmapDao roadmapDao;//todo add this to the schemal.sql
 
     public User(UUID id, String username, String password){
         this.id = id;
