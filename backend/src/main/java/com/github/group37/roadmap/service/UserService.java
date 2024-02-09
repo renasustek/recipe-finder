@@ -19,7 +19,7 @@ public class UserService {
     }
 
     public User create(UserRequest userRequest){
-        User user = new User(UUID.randomUUID(),userRequest.name(), userRequest.password());
+        User user = new User(UUID.randomUUID(),userRequest.name(), userRequest.password(),true);
         return userRepository.save(user);
     }
     public List<User> readAll(){

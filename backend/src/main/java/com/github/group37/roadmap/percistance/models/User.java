@@ -37,6 +37,10 @@ public class User {
     public User(){
      //ignore, created to keep spring auth happy
     }
+
+    public User(UUID uuid, String abdi, String smith, boolean b) {
+    }
+
     @Override
     public String toString() {
         return "User{" +

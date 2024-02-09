@@ -4,24 +4,27 @@ import com.github.group37.roadmap.percistance.models.User;
 import com.github.group37.roadmap.percistance.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static net.bytebuddy.matcher.ElementMatchers.is;
 import static org.junit.jupiter.api.Assertions.*;
 
 //@ExtendWith(SpringExtension.class)
+
 @DataJpaTest
 public class UserRepositoryTest {
-
-
-   @Autowired private TestEntityManager entityManager;
-   @Autowired private UserRepository userRepository;
+   @Autowired
+   private TestEntityManager entityManager;
+   @Autowired
+   private UserRepository userRepository;
 
    User user = new User(UUID.fromString("6598bb36-1de4-4e06-99fa-555c80f12781"),"user1","user1");
 

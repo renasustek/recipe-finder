@@ -26,7 +26,6 @@ public class UserController {
     public ResponseEntity<User> create(@RequestBody UserRequest userRequest){
         User createdUser = userService.create(userRequest);
         return ResponseEntity.created(URI.create("/users/"+createdUser.getId())).body(createdUser);
-
     }
 
     @GetMapping

@@ -36,7 +36,7 @@ class UserControllerTest {
     private ObjectMapper objectMapper;
 
 
-    private User user1 = new User(UUID.randomUUID(),"abdi","smith");
+    private User user1 = new User(UUID.randomUUID(),"abdi","smith", true);
     private UserRequest userRequest1 = new UserRequest("abdi","smith");
     private UserRequest userRequestValidUnameAndPw = new UserRequest("changed","changed");
     private UserRequest longUserRequest = new UserRequest("aaaaaaaaaaaaaaaaaaaaLongerThan36Charsaaaaaaaaaaaaaaaaaaaa","aaaaaaaaaaaaaaaaaaaaLongerThan36Charsaaaaaaaaaaaaaaaaaaaa");
@@ -133,9 +133,7 @@ class UserControllerTest {
                         .characterEncoding("utf-8")
                 )
                 .andExpect(status().isBadRequest());
-
     }
-
     @Test
     void givenUserId_whenDeleteCalled_returnNothing() throws Exception{
     mockMvc.perform(MockMvcRequestBuilders.delete("/users/{id}", user1.getId()))

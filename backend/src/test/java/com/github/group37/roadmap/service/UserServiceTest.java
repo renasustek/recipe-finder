@@ -81,7 +81,7 @@ public class UserServiceTest {
     @DisplayName("should return user when given ID")
     @Test
     public void whenGivenId_returnUser(){
-        given(userRepositiory.findById(user.getId())).willReturn(Optional.of(user));
+        given(userRepositiory.findByUUID(user.getId())).willReturn(Optional.of(user));
         Optional<User> findUser = userService.findById(user.getId());
 
             assertThat(findUser.get().getId()).isNotNull();
@@ -92,7 +92,7 @@ public class UserServiceTest {
     @DisplayName("should not return user when given ID")
     @Test
     public void whenInvalidGivenId_returnEmptyOptional(){
-        given(userRepositiory.findById(user.getId())).willReturn(Optional.empty());
+        given(userRepositiory.findByUUID(user.getId())).willReturn(Optional.empty());
         Optional<User> findUser = userService.findById(user.getId());
         assertThat(findUser.isPresent()).isFalse();
     }

@@ -29,6 +29,7 @@ dependencies {
 
 	testImplementation("org.junit.jupiter:junit-jupiter:5.4.0")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+//	testImplementation("org.springframework.boot:spring-test")
 	testImplementation("io.projectreactor:reactor-test")
 	testRuntimeOnly("com.h2database:h2")
 

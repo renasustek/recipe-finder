@@ -2,13 +2,13 @@ spring:
     datasource:
         driver-class-name: org.h2.Driver
         password: ''
-        url: jdbc:h2:mem:test;MODE=MySQL;
+        url: jdbc:h2:mem:test
         username: ''
     h2:
         console:
             enabled: true
     jpa:
-        database-platform: org.hibernate.dialect.MySQLDialect
+        database-platform: org.hibernate.dialect.H2Dialect
         defer-datasource-initialization: true
         hibernate:
             ddl-auto: update
