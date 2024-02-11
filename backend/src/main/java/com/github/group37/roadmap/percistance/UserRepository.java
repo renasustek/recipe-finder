@@ -13,5 +13,4 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 
     @Query("SELECT u FROM User u WHERE u.id = ?1")
     Optional<User> findByUUID(UUID uuid);
-
 }

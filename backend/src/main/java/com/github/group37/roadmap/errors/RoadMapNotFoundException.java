@@ -1,10 +1,8 @@
 package com.github.group37.roadmap.errors;
 
-import java.util.UUID;
+public class RoadMapNotFoundException extends RuntimeException {
 
-public class RoadMapNotFoundException extends RuntimeException{
-
-    public RoadMapNotFoundException(){
+    public RoadMapNotFoundException() {
         super("roadmap couldnt be found");
     }
 }

@@ -1,8 +1,13 @@
 package com.github.group37.roadmap.percistance.models;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import org.hibernate.annotations.JdbcType;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
+import org.hibernate.type.descriptor.jdbc.VarcharJdbcType;
 
 import java.util.UUID;
 
@@ -11,16 +16,17 @@ import java.util.UUID;
 public class RoadmapResources {
 
     @Id
-    @Column(name="id",nullable = false,unique = true,length = 36,columnDefinition = "VARBINARY(36)")
+    @Column(name = "id", columnDefinition = "VARCHAR(36)", nullable = false, unique = true, length = 36)
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID id;
 
-
-    @Column(name = "roadmap_id", nullable=false,length = 36)
+    @Column(name = "roadmap_id", columnDefinition = "VARCHAR(36)", nullable = false, length = 36)
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID roadmapId;
 
-    @Column(name = "revision_resource_id", nullable=false,length = 36)
+    @Column(name = "revision_resource_id", columnDefinition = "VARCHAR(36)", nullable = false, length = 36)
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID revisionResourceId;
-
 
     public UUID getId() {
         return id;

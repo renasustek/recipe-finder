@@ -11,9 +11,6 @@ import java.util.UUID;
 @Repository
 public interface RoadmapRepo extends JpaRepository<RoadmapDao, UUID> {
 
-    @Query("SELECT u FROM RoadmapDao u WHERE u.name = ?1")
-    Optional<RoadmapDao> findByUsername(String username);
-
-
-
+    @Query("SELECT u.id FROM RoadmapDao u WHERE u.name = ?1")
+    Optional<UUID> findByUsername(String username);
 }
