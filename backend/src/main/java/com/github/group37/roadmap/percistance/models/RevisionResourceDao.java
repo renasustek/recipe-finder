@@ -36,6 +36,8 @@ public class RevisionResourceDao {
     @Size(min = 10, max = 100)
     private String whereToAccess; // could be a link if a website, could be a book name and a page number, could be
     // whatever you want, as long as it has instructions on how to access a specific revision resource
+
+
     public UUID getId() {
         return id;
     }

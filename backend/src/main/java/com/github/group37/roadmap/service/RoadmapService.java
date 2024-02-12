@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Function;
+import java.util.stream.Stream;
 
 @Service
 public class RoadmapService {
@@ -31,17 +33,18 @@ public class RoadmapService {
 
         ArrayList<Optional<RevisionResourceDao>> revisionRecources = new ArrayList<>();
 
-        UUID roadmapId = roadmapRepo
-                .findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("not stored in db"));
+        Optional<UUID> roadmapId = roadmapRepo
+                .findByUsername(username);
 
-        List<UUID> usersResourcesIds = roadmapResourcesRepo.findAllResourcesUsingRoadmapId(roadmapId);
-        for (UUID eachuuid : usersResourcesIds) {
-            revisionRecources.add(revisionResourcesRepo.findById(eachuuid));
+        if (roadmapId.isPresent()){
+            Optional<List<UUID>> usersResourcesIds = roadmapResourcesRepo.findAllResourcesUsingRoadmapId(roadmapId.get());
+                for (UUID eachuuid : usersResourcesIds.get()) {
+                    revisionRecources.add(revisionResourcesRepo.findById(eachuuid));
+            }
+        } else {
+            return Optional.empty();
         }
-
         Roadmap roadmap = new Roadmap(username, revisionRecources);
-
         return Optional.of(roadmap);
     }
 }

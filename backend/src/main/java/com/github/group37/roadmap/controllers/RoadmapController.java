@@ -1,6 +1,7 @@
 package com.github.group37.roadmap.controllers;
 
 import com.github.group37.roadmap.errors.RoadMapNotFoundException;
+import com.github.group37.roadmap.errors.UserNotFoundException;
 import com.github.group37.roadmap.other.Roadmap;
 import com.github.group37.roadmap.service.RoadmapService;
 import org.springframework.http.MediaType;
@@ -21,6 +22,6 @@ public class RoadmapController {
 
     @GetMapping("/{username}")
     public Roadmap getRoadmap(@PathVariable String username) {
-        return roadmapService.getRoadmap(username).orElseThrow(RoadMapNotFoundException::new);
+        return roadmapService.getRoadmap(username).orElseThrow(() -> new RoadMapNotFoundException());
     }
 }
