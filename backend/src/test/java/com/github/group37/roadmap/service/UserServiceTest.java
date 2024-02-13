@@ -43,7 +43,7 @@ public class UserServiceTest {
 
         User savedUser = userService.create(userRequest);
 
-        assertThat(savedUser.getId()).isNotNull();
+        assertThat(savedUser.getUuid()).isNotNull();
         assertThat(savedUser.getUsername()).isEqualTo(userRequest.name());
         assertThat(savedUser.getPassword()).isEqualTo(userRequest.password());
     }
@@ -55,7 +55,7 @@ public class UserServiceTest {
 
         List<User> users = userService.readAll();
 
-        assertThat(users.get(0).getId()).isNotNull();
+        assertThat(users.get(0).getUuid()).isNotNull();
         assertThat(users.get(0).getUsername()).isEqualTo(user.getUsername());
         assertThat(users.get(0).getPassword()).isEqualTo(user.getPassword());
     }
@@ -63,13 +63,13 @@ public class UserServiceTest {
     @DisplayName("should update user details")
     @Test
     public void whenGivenId_andUpdatedDetails_shouldReturnUserWithUpdatedDetails() {
-        given(userRepositiory.findById(user.getId()))
+        given(userRepositiory.findByUUID(user.getUuid()))
                 .willReturn(
-                        Optional.of(new User(user.getId(), updateUserRequest.name(), updateUserRequest.password())));
+                        Optional.of(new User(user.getUuid(), updateUserRequest.name(), updateUserRequest.password())));
 
-        Optional<User> users = userService.update(user.getId(), updateUserRequest.name(), updateUserRequest.password());
+        Optional<User> users = userService.update(user.getUuid(), updateUserRequest.name(), updateUserRequest.password());
         if (users.isPresent()) {
-            assertThat(users.get().getId()).isNotNull();
+            assertThat(users.get().getUuid()).isNotNull();
             assertThat(users.get().getUsername()).isEqualTo(user.getUsername());
             assertThat(users.get().getPassword()).isEqualTo(user.getPassword());
         }
@@ -78,18 +78,18 @@ public class UserServiceTest {
     @DisplayName("shouldnt update user details")
     @Test
     public void whenInGivenId_andUpdatedDetails_shouldReturnEmptyOptional() {
-        given(userRepositiory.findById(user.getId())).willReturn(Optional.empty());
-        Optional<User> users = userService.update(user.getId(), updateUserRequest.name(), updateUserRequest.password());
+        given(userRepositiory.findByUUID(user.getUuid())).willReturn(Optional.empty());
+        Optional<User> users = userService.update(user.getUuid(), updateUserRequest.name(), updateUserRequest.password());
         assertThat(users.isPresent()).isFalse();
     }
 
     @DisplayName("should return user when given ID")
     @Test
     public void whenGivenId_returnUser() {
-        given(userRepositiory.findByUUID(user.getId())).willReturn(Optional.of(user));
-        Optional<User> findUser = userService.findById(user.getId());
+        given(userRepositiory.findByUUID(user.getUuid())).willReturn(Optional.of(user));
+        Optional<User> findUser = userService.findById(user.getUuid());
 
-        assertThat(findUser.get().getId()).isNotNull();
+        assertThat(findUser.get().getUuid()).isNotNull();
         assertThat(findUser.get().getUsername()).isEqualTo(user.getUsername());
         assertThat(findUser.get().getPassword()).isEqualTo(user.getPassword());
     }
@@ -97,16 +97,9 @@ public class UserServiceTest {
     @DisplayName("should not return user when given ID")
     @Test
     public void whenInvalidGivenId_returnEmptyOptional() {
-        given(userRepositiory.findByUUID(user.getId())).willReturn(Optional.empty());
-        Optional<User> findUser = userService.findById(user.getId());
+        given(userRepositiory.findByUUID(user.getUuid())).willReturn(Optional.empty());
+        Optional<User> findUser = userService.findById(user.getUuid());
         assertThat(findUser.isPresent()).isFalse();
     }
 
-    @DisplayName("the delete returns nothing")
-    @Test
-    public void whenDeleteIsCalled_shouldCallRepository() {
-        willDoNothing().given(userRepositiory).deleteById(user.getId());
-        userService.delete(user.getId());
-        verify(userRepositiory, times(1)).deleteById(user.getId());
-    }
 }

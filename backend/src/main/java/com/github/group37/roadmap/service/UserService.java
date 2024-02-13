@@ -28,7 +28,7 @@ public class UserService {
     }
 
     public Optional<User> update(UUID userID, String updatedName, String updatedPassword) {
-        return userRepository.findById(userID).map(user -> {
+        return userRepository.findByUUID(userID).map(user -> {
             user.setUsername(updatedName);
             user.setPassword(updatedPassword);
             return userRepository.save(user);
@@ -40,6 +40,6 @@ public class UserService {
     }
 
     public void delete(UUID userId) {
-        userRepository.deleteById(userId);
+        userRepository.deleteByUUID(userId);
     }
 }

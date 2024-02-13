@@ -38,7 +38,6 @@ CREATE TABLE IF NOT EXISTS revision_resource
     where_to_access VARCHAR(100)  NOT NULL
 );
 
---Data DML
 INSERT INTO users (uuid, username, password, enabled)
 VALUES ('774c5dee-e6af-4184-aae5-400f94ea9822', 'renas', 'renas', true),
        ('5b918af2-5507-407f-bfb9-1fe0781582d0', 'admin', 'admin', true);

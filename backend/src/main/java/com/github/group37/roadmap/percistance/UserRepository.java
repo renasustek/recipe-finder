@@ -11,6 +11,9 @@ import java.util.UUID;
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID> {
 
-    @Query("SELECT u FROM User u WHERE u.id = ?1")
+    @Query("SELECT u FROM User u WHERE u.uuid = ?1")
     Optional<User> findByUUID(UUID uuid);
+
+    @Query("DELETE u FROM User u WHERE e.uuid = ?1")
+    void deleteByUUID(UUID uuid);
 }

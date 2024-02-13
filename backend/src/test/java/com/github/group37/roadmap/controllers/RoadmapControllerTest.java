@@ -32,7 +32,7 @@ class RoadmapControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private final String username = "if ur in group 37 and ur reading my code message me: I read it;) .";
+    private final String username = "name";
 
     private final Roadmap roadmap = new Roadmap("name", new ArrayList<Optional<RevisionResourceDao>>());
 

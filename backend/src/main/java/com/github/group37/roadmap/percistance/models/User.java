@@ -5,10 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
-import org.hibernate.annotations.JdbcType;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-import org.hibernate.type.descriptor.jdbc.VarcharJdbcType;
 
 import java.util.UUID;
 
@@ -17,7 +15,7 @@ import java.util.UUID;
 public class User {
     @Column(name = "uuid", columnDefinition = "VARCHAR(36)", nullable = false, unique = true, length = 36)
     @JdbcTypeCode(SqlTypes.VARCHAR)
-    private UUID id;
+    private UUID uuid;
 
     @Id
     @Column(name = "username", nullable = false, unique = true, length = 36)
@@ -31,8 +29,8 @@ public class User {
     @Column(name = "enabled", nullable = false, unique = false)
     private boolean enabled;
 
-    public User(UUID id, String username, String password) {
-        this.id = id;
+    public User(UUID uuid, String username, String password) {
+        this.uuid = uuid;
         this.username = username;
         this.password = password;
         this.enabled = true;
@@ -46,15 +44,15 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", name='" + username + '\'' + ", password='" + password + '\'' + '}';
+        return "User{" + "id=" + uuid + ", name='" + username + '\'' + ", password='" + password + '\'' + '}';
     }
 
-    public UUID getId() {
-        return id;
+    public UUID getUuid() {
+        return uuid;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     public String getUsername() {

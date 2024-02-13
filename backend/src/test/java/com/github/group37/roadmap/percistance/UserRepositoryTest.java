@@ -37,17 +37,17 @@ public class UserRepositoryTest {
     public void whenGivenUser_shouldSave() {
         User user = new User(UUID.randomUUID(), "Ross", "Geller");
         userRepository.save(user);
-        User isUserFound = userRepository.findByUUID(user.getId()).get();
-        assertEquals(user.getId(), isUserFound.getId());
+        User isUserFound = userRepository.findByUUID(user.getUuid()).get();
+        assertEquals(user.getUuid(), isUserFound.getUuid());
     }
 
     @DisplayName("should get user by ID")
     @Test
     public void givenEmployeeObject_whenFindById_thenReturnEmployeeObject() {
 
-        User getUser = userRepository.findById(user.getId()).get();
+        User getUser = userRepository.findById(user.getUuid()).get();
 
-        assertEquals(getUser.getId(), UUID.fromString("6598bb36-1de4-4e06-99fa-555c80f12781"));
+        assertEquals(getUser.getUuid(), UUID.fromString("6598bb36-1de4-4e06-99fa-555c80f12781"));
         assertEquals(getUser.getUsername(), "user1");
         assertEquals(getUser.getPassword(), "user1");
     }
@@ -59,7 +59,7 @@ public class UserRepositoryTest {
         userRepository.save(createdUser);
 
         // update like this:
-        Optional<User> userToUpdateOptional = userRepository.findById(createdUser.getId());
+        Optional<User> userToUpdateOptional = userRepository.findById(createdUser.getUuid());
         User userToUpdate = userToUpdateOptional.get();
 
         userToUpdate.setUsername("David");
@@ -68,7 +68,7 @@ public class UserRepositoryTest {
 
         // update complete, now check if update worked properly
 
-        Optional<User> checkUser = userRepository.findById(createdUser.getId());
+        Optional<User> checkUser = userRepository.findById(createdUser.getUuid());
         assertEquals(checkUser.get().getUsername(), "David");
         assertEquals(checkUser.get().getPassword(), "Goggins");
     }
@@ -78,9 +78,9 @@ public class UserRepositoryTest {
     public void whenGivenIdOfUserToDelete_shouldDelete_checkDbIfStillThere() {
         User userToDelete = new User(UUID.randomUUID(), "Mo", "Farah");
         userRepository.save(userToDelete);
-        userRepository.deleteById(userToDelete.getId());
+        userRepository.deleteById(userToDelete.getUuid());
 
-        Optional<User> getUser = userRepository.findById(userToDelete.getId());
+        Optional<User> getUser = userRepository.findById(userToDelete.getUuid());
         Optional<User> emptyOptional = Optional.empty();
         assertEquals(getUser, emptyOptional);
     }
