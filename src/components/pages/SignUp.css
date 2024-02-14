@@ -1,137 +1,135 @@
-body {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'PT Sans', sans-serif;
-    display: flex;
-    flex-direction: column;
-    background: linear-gradient(#2A00B7, #42006C); /* Set the background gradient */
-    
-  
-  }
-  
+/* Specific styling for the SignUp component */
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  max-width: 500px;
+  background: linear-gradient(#2A00B7, #42006C);
+  padding-bottom: 30px;
+  padding: 20px;
+}
 
+/* Header styling */
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  margin-top: 30px;
+}
 
-.container {
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    max-width: 500px;
-    background: #fff;
-    padding-bottom: 30px;
-    padding: 20px;
+.header .main-heading {
+  color: #fff; /* Set the main heading color to white */
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.text {
+  color: #eaeaea;
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.underline {
+  width: 61px;
+  height: 6px;
+  background: #eaeaea;
+  border-radius: 9px;
+}
+
+   /*     Inputs styling       */
+.inputs {
+  margin-top: 55px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  width: 100%;
+  max-width: 480px;
+  height: 80px;
+  background: #eaeaea;
+  border-radius: 6px;
+}
+
+.input img {
+  margin: 0px 30px;
+}
+
+.input input {
+  height: 50px;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #797979;
+  font-size: 19px;
+}
+
+/* Forgot password styling */
+.forgot-password {
+  padding-left: 62px;
+  margin-top: 27px;
+  color: #797979;
+  font-size: 18px;
+  align-self: center;
+  justify-content: center;
+}
+
+.forgot-password span {
+  color: #4c00b4;
+  cursor: pointer;
+}
+
+/* Submit container styling */
+.submit-container {
+  display: flex;
+  gap: 30px;
+  margin: 60px auto;
+}
+
+/* Submit button styling */
+.submit {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  width: 220px;
+  height: 59px;
+  color: #fff;
+  background: #4c00b4;
+  border-radius: 50px;
+  font-size: 19px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.gray {
+  background: #eaeaea;
+  color: #676766;
+}
+
+/* Media query for smaller screens */
+@media only screen and (max-width: 768px) {
+  .signup-container {
+    margin-top: 100px;
   }
-  
+
   .header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 9px;
-    width: 100%;
+    margin-top: 20px;
+  }
+
+  .inputs {
     margin-top: 30px;
   }
-  
-  .text {
-    color: #3c009d;
-    font-size: 48px;
-    font-weight: 700;
-  }
-  
-  .underline {
-    width: 61px;
-    height: 6px;
-    background: #3c009d;
-    border-radius: 9px;
-  }
-  
-  .inputs {
-    margin-top: 55px;
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-  }
-  
+
   .input {
-    display: flex;
-    align-items: center;
-    margin: auto;
-    width: 100%;
-    max-width: 480px; /* Adjust the maximum width as needed */
-    height: 80px;
-    background: #eaeaea;
-    border-radius: 6px;
+    max-width: none;
   }
-  
-  .input img {
-    margin: 0px 30px;
-  }
-  
-  .input input {
-    height: 50px;
-    width: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #797979;
-    font-size: 19px;
-  }
-  
-  .forgot-password{
-    padding-left: 62px;
-    margin-top: 27px;
-    color:#797979;
-    font-size: 18px;
-    align-self: center;
-    justify-content: center;
-  }
-  .forgot-password span {
-    color: #4c00b4;
-    cursor: pointer;
-    
-  }
-  
-  .submit-container {
-    display: flex;
-    gap: 30px;
-    margin: 60px auto;
-  }
-  
-  .submit {
-    display: flex;
-    justify-content: center;
-    align-self: center;
-    width: 220px;
-    height: 59px;
-    color: #fff;
-    background: #4c00b4;
-    border-radius: 50px;
-    font-size: 19px;
-    font-weight: 700;
-    cursor: pointer;
-  }
-  
-  .gray {
-    background: #eaeaea;
-    color: #676766;
-  }
-  
-  /* Media query for screens smaller than 768px (adjust as needed) */
-  @media only screen and (max-width: 768px) {
-    .container {
-      margin-top: 100px; /* Adjust the margin for smaller screens */
-    }
-  
-    .header {
-      margin-top: 20px; /* Adjust the margin for smaller screens */
-    }
-  
-    .inputs {
-      margin-top: 30px; /* Adjust the margin for smaller screens */
-    }
-  
-    .input {
-      max-width: none; /* Remove max-width for smaller screens */
-    }
-  }
+}
