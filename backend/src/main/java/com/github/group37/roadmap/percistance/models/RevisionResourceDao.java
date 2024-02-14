@@ -18,9 +18,9 @@ public class RevisionResourceDao {
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID id;
 
-    @Column(name = "topic", nullable = false, length = 100)
-    @Size(min = 3, max = 20)
-    private String topic;
+    @Column(name = "topic_id", nullable = false, length =  36)
+    @JdbcTypeCode(SqlTypes.VARCHAR)
+    private UUID topic;
 
     @Column(name = "resource_name", nullable = false, length = 100)
     @Size(min = 3, max = 20)
@@ -55,11 +55,11 @@ public class RevisionResourceDao {
         this.id = id;
     }
 
-    public String getTopic() {
+    public UUID getTopic() {
         return topic;
     }
 
-    public void setTopic(String topic) {
+    public void setTopic(UUID topic) {
         this.topic = topic;
     }
 
