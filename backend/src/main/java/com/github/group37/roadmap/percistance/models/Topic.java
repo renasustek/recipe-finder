@@ -4,26 +4,26 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import java.util.UUID;
+
 @Entity
 @Table(name = "roadmap_resources", schema = "roadmap_project")
-public class UserTopics {
+public class Topic {
     @Id
     @Column(name = "id", columnDefinition = "VARCHAR(36)", nullable = false, unique = true, length = 36)
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID id;
 
-    @Column(name = "topic_id", columnDefinition = "VARCHAR(36)", nullable = false, length = 36)
+    @Column(name = "subject", columnDefinition = "VARCHAR(36)", nullable = false, length = 36)
     @JdbcTypeCode(SqlTypes.VARCHAR)
-    private UUID topicId;
+    private UUID subject;
 
-    @Column(name = "confidence_in_topic", columnDefinition = "VARCHAR(36)", nullable = false, length = 36)
+    @Column(name = "topic", columnDefinition = "VARCHAR(36)", nullable = false, length = 36)
     @JdbcTypeCode(SqlTypes.VARCHAR)
-    private String confidenceInTopic;
+    private String topic;
 
     public UUID getId() {
         return id;
@@ -33,19 +33,19 @@ public class UserTopics {
         this.id = id;
     }
 
-    public UUID getTopicId() {
-        return topicId;
+    public UUID getSubject() {
+        return subject;
     }
 
-    public void setTopicId(UUID topicId) {
-        this.topicId = topicId;
+    public void setSubject(UUID subject) {
+        this.subject = subject;
     }
 
-    public String getConfidenceInTopic() {
-        return confidenceInTopic;
+    public String getTopic() {
+        return topic;
     }
 
-    public void setConfidenceInTopic(String confidenceInTopic) {
-        this.confidenceInTopic = confidenceInTopic;
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 }

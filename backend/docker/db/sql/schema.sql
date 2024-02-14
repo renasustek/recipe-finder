@@ -66,11 +66,11 @@ VALUES ('renas', 'ROLE_USER'),
 INSERT INTO roadmap (id, username)
 VALUES ('8894517b-539a-4b89-b0a0-849e84329181', 'renas');
 
-INSERT INTO revision_resource (id, topic, resource_name, description, where_to_access)
+INSERT INTO revision_resource (id, topic, resource_name, description, where_to_access, difficulty_level)
 VALUES ('4c059778-5c0e-40f0-ae0b-85bf0ce8b6cc', 'algebra', 'book',
-        'read this book and become good at algebra :)', 'MathsBook101 page 10'),
+        'read this book and become good at algebra :)', 'MathsBook101 page 10', 'novice'),
        ('2d927d0a-d2a1-46d7-826d-e6783da22169', 'addition', 'website',
-        'complete the tasks on this website and you will be an expert adder', 'https://www.coolmathgames.com/');
+        'complete the tasks on this website and you will be an expert adder', 'https://www.coolmathgames.com/','expert');
 
 INSERT INTO roadmap_resources (id, roadmap_id, revision_resource_id)
 VALUES ('0dbabf29-a60f-459c-8419-3628a56c2e68', '8894517b-539a-4b89-b0a0-849e84329181',
