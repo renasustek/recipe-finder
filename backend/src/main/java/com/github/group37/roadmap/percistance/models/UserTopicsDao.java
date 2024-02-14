@@ -9,7 +9,7 @@ import org.hibernate.type.SqlTypes;
 
 import java.util.UUID;
 @Entity
-@Table(name = "roadmap_resources", schema = "roadmap_project")
+@Table(name = "topics", schema = "roadmap_project")
 public class UserTopicsDao {
     @Id
     @Column(name = "id", columnDefinition = "VARCHAR(36)", nullable = false, unique = true, length = 36)

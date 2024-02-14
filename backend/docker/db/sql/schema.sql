@@ -86,4 +86,17 @@ VALUES ('0dbabf29-a60f-459c-8419-3628a56c2e68', '8894517b-539a-4b89-b0a0-849e843
        ('6033160c-c5f5-4459-96c5-5c21f4d34048','8894517b-539a-4b89-b0a0-849e84329181',
         '2d927d0a-d2a1-46d7-826d-e6783da22169');
 
+INSERT INTO subjects(id, subject_name)
+VALUES ('30d00a6f-9577-418f-9f62-04d940379102', 'Maths'),
+       ('4921cbae-589d-43f6-b069-cbca45a8b40c', 'English'),
+       ('482f9580-e72b-41d8-b1c3-d8e2162fbe20', 'CompSci'),
+       ('7b301086-ead1-45ab-86a3-11eafc4820c7', 'Biology'),
+       ('ae5a154e-2957-489c-b9b3-7f1046cae743', 'sexEd'),
+       ('8830e1d8-47fb-4260-bbcc-1f05a437f5ed', 'howToTrainADragon');
+
+INSERT INTO topics(id, subject_id, topic_name)
+VALUES ('22be771a-7803-445f-b88f-732fd6170f56','30d00a6f-9577-418f-9f62-04d940379102', 'algebra'),
+       ('1915b4be-7f11-48bb-97ff-88f9297104f8','30d00a6f-9577-418f-9f62-04d940379102', 'calculus'),
+       ('24fb37ab-18ed-42c7-9bc3-09b750aca27a','4921cbae-589d-43f6-b069-cbca45a8b40c', 'EnglishLit'),
+       ('c431c80b-31c6-41c2-99e2-ab6690d4da85','4921cbae-589d-43f6-b069-cbca45a8b40c', 'EnglishLanguage');
 

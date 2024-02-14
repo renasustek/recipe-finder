@@ -12,6 +12,6 @@ import java.util.UUID;
 @Repository
 public interface TopicsRepo extends JpaRepository<TopicDao, UUID> {
 
-    @Query("SELECT u.revisionResourceId FROM RoadmapResources u WHERE u.roadmapId = ?1")
-    Optional<List<UUID>> findAllResourcesUsingRoadmapId(UUID roadmapId);
+    @Query("SELECT u FROM TopicDao u WHERE u.subject = ?1")
+    List<TopicDao> findTopicsUsingSubjectId(UUID subjectId);
 }

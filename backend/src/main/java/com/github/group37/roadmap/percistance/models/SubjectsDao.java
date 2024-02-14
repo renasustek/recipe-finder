@@ -10,7 +10,7 @@ import org.hibernate.type.SqlTypes;
 import java.util.UUID;
 
 @Entity
-@Table(name = "roadmap_resources", schema = "roadmap_project")
+@Table(name = "subjects", schema = "roadmap_project")
 public class SubjectsDao {
     @Id
     @Column(name = "id", columnDefinition = "VARCHAR(36)", nullable = false, unique = true, length = 36)
@@ -19,7 +19,7 @@ public class SubjectsDao {
 
     @Column(name = "subject_name", columnDefinition = "VARCHAR(20)", nullable = false, length = 20)
     @JdbcTypeCode(SqlTypes.VARCHAR)
-    private String subject;
+    private String subjectName;
 
     public UUID getId() {
         return id;
@@ -30,10 +30,10 @@ public class SubjectsDao {
     }
 
     public String getSubject() {
-        return subject;
+        return subjectName;
     }
 
     public void setSubject(String subject) {
-        this.subject = subject;
+        this.subjectName = subject;
     }
 }
