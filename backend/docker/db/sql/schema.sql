@@ -35,7 +35,23 @@ CREATE TABLE IF NOT EXISTS revision_resource
     topic           VARCHAR(20)   NOT NULL,
     resource_name   VARCHAR(20)   NOT NULL,
     description     VARCHAR(100)  NOT NULL,
-    where_to_access VARCHAR(100)  NOT NULL
+    where_to_access VARCHAR(100)  NOT NULL,
+    difficulty_level varchar(12)   NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS topics
+(
+    id               VARCHAR(36) NOT NULL PRIMARY KEY,
+    subject          VARCHAR(20),
+    topic            VARCHAR(20) NOT NULL
+
+);
+
+CREATE TABLE IF NOT EXISTS user_topics
+(
+    id                  VARCHAR(36) NOT NULL PRIMARY KEY,
+    topic_id            VARCHAR(36) NOT NULL,
+    confidence_in_topic VARCHAR(12) NOT NULL
 );
 
 INSERT INTO users (uuid, username, password, enabled)

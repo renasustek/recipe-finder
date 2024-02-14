@@ -5,10 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
-import org.hibernate.annotations.JdbcType;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-import org.hibernate.type.descriptor.jdbc.VarcharJdbcType;
 
 import java.util.UUID;
 
@@ -37,6 +35,17 @@ public class RevisionResourceDao {
     private String whereToAccess; // could be a link if a website, could be a book name and a page number, could be
     // whatever you want, as long as it has instructions on how to access a specific revision resource
 
+    @Column(name = "difficulty_level", nullable = false, length = 100)
+    @Size(min = 4, max = 12)
+    private String difficultyLevel;
+
+    public String getDifficultyLevel() {
+        return difficultyLevel;
+    }
+
+    public void setDifficultyLevel(String difficultyLevel) {
+        this.difficultyLevel = difficultyLevel;
+    }
 
     public UUID getId() {
         return id;
