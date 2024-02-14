@@ -12,23 +12,24 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 class CustomExceptionHandler {
 
-  @ResponseBody
-  @ExceptionHandler(UserNotFoundException.class)
-  @ResponseStatus(HttpStatus.NOT_FOUND)
-  String userNotFoundHandler(UserNotFoundException ex) {
-    return ex.getMessage();
-  }
-  @ResponseBody
-  @ExceptionHandler(RoadMapNotFoundException.class)
-  @ResponseStatus(HttpStatus.NOT_FOUND)
-  String roadmapNotFound(RoadMapNotFoundException ex) {
-    return ex.getMessage();
-  }
+    @ResponseBody
+    @ExceptionHandler(UserNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    String userNotFoundHandler(UserNotFoundException ex) {
+        return ex.getMessage();
+    }
 
-  @ResponseBody
-  @ExceptionHandler(TransactionSystemException.class)
-  @ResponseStatus(HttpStatus.BAD_REQUEST)
-  String transactionSystemException(TransactionSystemException ex) {
-    return "Name or password either too long or short.";
-  }
+    @ResponseBody
+    @ExceptionHandler(RoadMapNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    String roadmapNotFound(RoadMapNotFoundException ex) {
+        return ex.getMessage();
+    }
+
+    @ResponseBody
+    @ExceptionHandler(TransactionSystemException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    String transactionSystemException(TransactionSystemException ex) {
+        return "Name or password either too long or short.";
+    }
 }

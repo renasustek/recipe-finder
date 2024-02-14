@@ -1,6 +1,9 @@
 package com.github.group37.roadmap.percistance.models;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -8,50 +11,48 @@ import org.hibernate.type.SqlTypes;
 import java.util.UUID;
 
 @Entity
-@Table(name="users", schema="roadmap_project")
-
+@Table(name = "users", schema = "roadmap_project")
 public class User {
-    @Column(name="uuid",nullable = false,unique = true,length = 36,columnDefinition = "VARCHAR(36)")
+    @Column(name = "uuid", columnDefinition = "VARCHAR(36)", nullable = false, unique = true, length = 36)
     @JdbcTypeCode(SqlTypes.VARCHAR)
-    private UUID id;
+    private UUID uuid;
 
     @Id
-    @Column(name="username", nullable=false, unique=true,length = 36)
+    @Column(name = "username", nullable = false, unique = true, length = 36)
     @Size(min = 3, max = 36)
     private String username;
 
-    @Column(name="password", nullable=false, unique=false,length = 100)
+    @Column(name = "password", nullable = false, unique = false, length = 100)
     @Size(min = 6, max = 100)
     private String password;
 
-    @Column(name = "enabled", nullable = false,unique = false)
+    @Column(name = "enabled", nullable = false, unique = false)
     private boolean enabled;
 
-    public User(UUID id, String username, String password){
-        this.id = id;
+    public User(UUID uuid, String username, String password) {
+        this.uuid = uuid;
         this.username = username;
         this.password = password;
         this.enabled = true;
     }
 
-    public User(){
-     //ignore, created to keep spring auth happy
+    public User() {
+        // ignore, created to keep spring auth happy
     }
+
+    public User(UUID uuid, String abdi, String smith, boolean b) {}
+
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+        return "User{" + "id=" + uuid + ", name='" + username + '\'' + ", password='" + password + '\'' + '}';
     }
 
-    public UUID getId() {
-        return id;
+    public UUID getUuid() {
+        return uuid;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     public String getUsername() {

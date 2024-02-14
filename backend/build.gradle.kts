@@ -1,7 +1,6 @@
 plugins {
 	java
-	id("org.springframework.boot") version "3.1.5"
-	id("io.spring.dependency-management") version "1.1.3"
+	id("org.springframework.boot") version "3.2.2"
 }
 
 group = "com.github.group37"
@@ -16,6 +15,8 @@ repositories {
 }
 
 dependencies {
+	implementation(platform("org.springframework.boot:spring-boot-dependencies:3.2.2"))
+
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
@@ -29,6 +30,7 @@ dependencies {
 
 	testImplementation("org.junit.jupiter:junit-jupiter:5.4.0")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+//	testImplementation("org.springframework.boot:spring-test")
 	testImplementation("io.projectreactor:reactor-test")
 	testRuntimeOnly("com.h2database:h2")
 
