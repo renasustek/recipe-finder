@@ -13,5 +13,5 @@ import java.util.UUID;
 public interface TopicsRepo extends JpaRepository<TopicDao, UUID> {
 
     @Query("SELECT u FROM TopicDao u WHERE u.subject = ?1")
-    List<TopicDao> findTopicsUsingSubjectId(UUID subjectId);
+    List<TopicDao   > findTopicsUsingSubjectId(UUID subjectId);
 }
