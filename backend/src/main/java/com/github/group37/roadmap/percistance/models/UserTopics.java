@@ -18,30 +18,6 @@ public class UserTopics {
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID topicId;
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    public UUID getTopicId() {
-        return topicId;
-    }
-
-    public void setTopicId(UUID topicId) {
-        this.topicId = topicId;
-    }
-
-    public String getConfidenceInTopic() {
-        return confidenceInTopic;
-    }
-
-    public void setConfidenceInTopic(String confidenceInTopic) {
-        this.confidenceInTopic = confidenceInTopic;
-    }
-
     @Column(name = "confidence_in_topic", columnDefinition = "VARCHAR(36)", nullable = false, length = 36)
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private String confidenceInTopic;
