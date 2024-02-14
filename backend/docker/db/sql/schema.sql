@@ -42,8 +42,15 @@ CREATE TABLE IF NOT EXISTS revision_resource
 CREATE TABLE IF NOT EXISTS topics
 (
     id               VARCHAR(36) NOT NULL PRIMARY KEY,
-    subject          VARCHAR(20),
-    topic            VARCHAR(20) NOT NULL
+    subject_id          VARCHAR(36),
+    topic_name            VARCHAR(20) NOT NULL
+
+);
+
+CREATE TABLE IF NOT EXISTS subjects
+(
+    id               VARCHAR(36) NOT NULL PRIMARY KEY,
+    subject_name            VARCHAR(20) NOT NULL
 
 );
 
@@ -51,6 +58,7 @@ CREATE TABLE IF NOT EXISTS user_topics
 (
     id                  VARCHAR(36) NOT NULL PRIMARY KEY,
     topic_id            VARCHAR(36) NOT NULL,
+    username            VARCHAR(50) NOT NULL,
     confidence_in_topic VARCHAR(12) NOT NULL
 );
 

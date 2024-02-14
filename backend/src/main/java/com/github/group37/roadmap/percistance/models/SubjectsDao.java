@@ -11,19 +11,15 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "roadmap_resources", schema = "roadmap_project")
-public class Topic {
+public class SubjectsDao {
     @Id
     @Column(name = "id", columnDefinition = "VARCHAR(36)", nullable = false, unique = true, length = 36)
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID id;
 
-    @Column(name = "subject", columnDefinition = "VARCHAR(36)", nullable = false, length = 36)
+    @Column(name = "subject_name", columnDefinition = "VARCHAR(20)", nullable = false, length = 20)
     @JdbcTypeCode(SqlTypes.VARCHAR)
-    private UUID subject;
-
-    @Column(name = "topic", columnDefinition = "VARCHAR(36)", nullable = false, length = 36)
-    @JdbcTypeCode(SqlTypes.VARCHAR)
-    private String topic;
+    private String subject;
 
     public UUID getId() {
         return id;
@@ -33,19 +29,11 @@ public class Topic {
         this.id = id;
     }
 
-    public UUID getSubject() {
+    public String getSubject() {
         return subject;
     }
 
-    public void setSubject(UUID subject) {
+    public void setSubject(String subject) {
         this.subject = subject;
-    }
-
-    public String getTopic() {
-        return topic;
-    }
-
-    public void setTopic(String topic) {
-        this.topic = topic;
     }
 }

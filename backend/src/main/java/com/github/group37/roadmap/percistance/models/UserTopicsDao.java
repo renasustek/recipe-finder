@@ -4,14 +4,13 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import java.util.UUID;
 @Entity
 @Table(name = "roadmap_resources", schema = "roadmap_project")
-public class UserTopics {
+public class UserTopicsDao {
     @Id
     @Column(name = "id", columnDefinition = "VARCHAR(36)", nullable = false, unique = true, length = 36)
     @JdbcTypeCode(SqlTypes.VARCHAR)
@@ -20,6 +19,10 @@ public class UserTopics {
     @Column(name = "topic_id", columnDefinition = "VARCHAR(36)", nullable = false, length = 36)
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID topicId;
+
+    @Column(name = "username", columnDefinition = "VARCHAR(50)", nullable = false, length = 50)
+    @JdbcTypeCode(SqlTypes.VARCHAR)
+    private String username;
 
     @Column(name = "confidence_in_topic", columnDefinition = "VARCHAR(36)", nullable = false, length = 36)
     @JdbcTypeCode(SqlTypes.VARCHAR)
