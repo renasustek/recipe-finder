@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import './SignUp.css';
-import user_icon from '../Assets/person.png';
-import email_icon from '../Assets/email.png';
-import password_icon from '../Assets/password.png';
+import '../css/SignUp.css';
+import user_icon from '../components/Assets/person.png';
+import email_icon from '../components/Assets/email.png';
+import password_icon from '../components/Assets/password.png';
 
 const SignUp = () => {
   const [action, setAction] = useState("Sign Up");
