@@ -1,9 +1,0 @@
-.course-container {
-    display: flex;
-    flex-wrap: wrap;
-    background-color:white;
-  }
-  
-  .content-block {
-    flex: 0 0 calc(33%);
-  }
