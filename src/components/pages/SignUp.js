@@ -6,7 +6,7 @@ import password_icon from '../Assets/password.png';
 
 const SignUp = () => {
   const [action, setAction] = useState("Sign Up");
-/*    */
+
   return (
     <div className='signup-container'>
       <div className="container">
