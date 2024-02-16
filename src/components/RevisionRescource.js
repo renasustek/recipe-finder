@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import '../css/RevisionResource.css';
+import '../css/DisplayBoxes.css';
 
 function RevisionRescource() {
   const [roadmap, setRoadmap] = React.useState(null);
@@ -8,8 +8,8 @@ function RevisionRescource() {
   useEffect(() => {
     // Replace the URL with the correct API endpoint
     const apiUrl = 'http://localhost:8080/roadmap/renas';
-    const username = 'admin'; // Replace with your actual username
-    const password = 'admin'; // Replace with your actual password
+    const username = 'renas'; // Replace with your actual username
+    const password = 'renas'; // Replace with your actual password
 
     // Encode credentials in Base64
     const credentials = btoa(`${username}:${password}`);
