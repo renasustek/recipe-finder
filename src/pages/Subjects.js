@@ -40,6 +40,10 @@ function Subjects() {
         <div key={eachSubject.id} className='card'>
           <div className='card__header'>Subject Name: {eachSubject.subject}</div>
           <div className='card__title'>Image: NO IMAGES IN DB YET!</div>
+          <Link to={`/topics/${eachSubject.id}`}>
+                      <div className="btn">view topics related to subject</div>
+                   </Link>
+
         </div>
       ))}
       </section>

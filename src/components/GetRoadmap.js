@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import '../css/DisplayBoxes.css';
 
-function RevisionRescource() {
+function GetRoadmap() {
   const [roadmap, setRoadmap] = React.useState(null);
 
   useEffect(() => {
@@ -45,4 +45,4 @@ function RevisionRescource() {
   );
 }
 
-export default RevisionRescource;
+export default GetRoadmap;
