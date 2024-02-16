@@ -61,7 +61,7 @@ class RoadmapServiceTest {
         revisionResourceDao.setId(UUID.randomUUID());
         revisionResourceDao.setResourceName("TEST_NAME");
         revisionResourceDao.setDescription("TEST_DESCRIPTION");
-        revisionResourceDao.setTopic("TEST_TOPIC");
+        revisionResourceDao.setTopic(UUID.randomUUID());
         revisionResourceDao.setWhereToAccess("TEST_WHERE_TO_ACCESS");
 
         given(revisionResourcesRepo.findById(userRecourseId.get().get(0))).willReturn(Optional.ofNullable(revisionResourceDao));
