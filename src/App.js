@@ -6,7 +6,6 @@ import Home from './pages/Home';
 import SignUp from './pages/SignUp'; // Import your SignUp component
 import './App.css';
 
-import ChooseExpertise from './pages/ChooseExpertise';
 import GetRoadmap from './pages/GetRoadmap';
 import Subjects from './pages/Subjects';
 
@@ -22,7 +21,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/sign-up" element={<SignUp />} />
-          <Route path="/choose-expertise" element={<ChooseExpertise />} />
           <Route path="/get-roadmap" element={<GetRoadmap />} />
           <Route path="/subjects" element={<Subjects />} />
           <Route path="/discover-courses" element={<DiscoverCourses />} />
