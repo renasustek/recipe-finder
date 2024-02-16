@@ -43,7 +43,7 @@ class SubjectsControllerTest {
         subjectsDao.setSubject("SUBJECT");
         return subjectsDao;
     }
-    @DisplayName("GET request, valid uuid, returns list")
+    @DisplayName("findall subjects")
     @Test
     void when_given_valid_uuid_return_list() throws Exception{
         when(subjectsService.getSubjects()).thenReturn(subjectsDaoList);

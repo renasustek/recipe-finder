@@ -17,7 +17,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
-
 class TopicsServiceTest {
     @Mock
     public TopicsRepo topicsRepo;
@@ -29,7 +28,7 @@ class TopicsServiceTest {
     private List<TopicDao> topicDaoList = List.of(topicDao());
 
 
-    private TopicDao topicDao(){
+    private TopicDao topicDao() {
         TopicDao topicDao = new TopicDao();
         topicDao.setId(validUuid);
         topicDao.setTopicName("TESTNAME");
@@ -37,18 +36,18 @@ class TopicsServiceTest {
         return topicDao;
     }
 
-    @DisplayName("Get - valid uuid - list of revision revcources")
+    @DisplayName("valid uuid returns list of topics")
     @Test
-    void when_given_valid_uuid_should_return_list_of_revisionRecources(){
+    void when_given_valid_uuid_should_return_list_of_topic() {
         given(topicsRepo.findTopicsUsingSubjectId(validUuid)).willReturn(topicDaoList);
         List<TopicDao> serviceTest = topicsService.getTopicsUsingSubjectId(validUuid);
         assertThat(serviceTest.get(0).getTopicName()).isEqualTo(topicDao().getTopicName());
         assertThat(serviceTest.get(0).getSubject()).isEqualTo(topicDao().getId());
     }
 
-    @DisplayName("Get - uuid isnt in database- empty list")
+    @DisplayName("uuid isnt in database- empty list")
     @Test
-    void when_given_INvalid_uuid_should_return_empty_list(){
+    void when_given_INvalid_uuid_should_return_empty_list() {
         given(topicsRepo.findTopicsUsingSubjectId(validUuid)).willReturn(List.of());
 
         List<TopicDao> serviceTest = topicsService.getTopicsUsingSubjectId(validUuid);

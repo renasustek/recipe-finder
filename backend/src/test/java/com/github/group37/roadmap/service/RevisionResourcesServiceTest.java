@@ -38,7 +38,7 @@ class RevisionResourcesServiceTest {
         return revisionResourceDao;
     }
 
-    @DisplayName("Get - valid uuid - list of revision revcources")
+    @DisplayName("valid uuid returns list")
     @Test
     void when_given_valid_uuid_should_return_list_of_revisionRecources(){
         given(revisionResourcesRepo.getRevisionResourceDaoByTopicId(validUuid)).willReturn(revisionResourceDaos);
@@ -47,7 +47,7 @@ class RevisionResourcesServiceTest {
         assertThat(serviceTest.get(0).getDescription()).isEqualTo(revisionResourceDao().getDescription());
     }
 
-    @DisplayName("Get - uuid isnt in database- empty list")
+    @DisplayName("uuid isnt in database returns empty list")
     @Test
     void when_given_INvalid_uuid_should_return_empty_list(){
         given(revisionResourcesRepo.getRevisionResourceDaoByTopicId(validUuid)).willReturn(List.of());
