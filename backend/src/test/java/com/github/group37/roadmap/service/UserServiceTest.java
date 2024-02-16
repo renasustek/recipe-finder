@@ -3,7 +3,7 @@ package com.github.group37.roadmap.service;
 
 import com.github.group37.roadmap.other.UserRequest;
 import com.github.group37.roadmap.percistance.UserRepository;
-import com.github.group37.roadmap.percistance.models.User;
+import com.github.group37.roadmap.percistance.models.UserDao;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,8 +18,6 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.BDDMockito.willDoNothing;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -31,7 +29,7 @@ public class UserServiceTest {
     @InjectMocks
     private UserService userService;
 
-    private final User user = new User(UUID.randomUUID(), "chandler", "bing");
+    private final UserDao user = new UserDao(UUID.randomUUID(), "chandler", "bing");
     private final UserRequest userRequest = new UserRequest("chandler", "bing");
 
     private final UserRequest updateUserRequest = new UserRequest("Joey", "Tribbiani");
@@ -41,7 +39,7 @@ public class UserServiceTest {
     public void givenUserObject_whenCreatingUser_returnsUser() {
         given(userRepositiory.save(any())).willReturn(user);
 
-        User savedUser = userService.create(userRequest);
+        UserDao savedUser = userService.create(userRequest);
 
         assertThat(savedUser.getUuid()).isNotNull();
         assertThat(savedUser.getUsername()).isEqualTo(userRequest.name());
@@ -53,7 +51,7 @@ public class UserServiceTest {
     public void shouldReturnListOfAllUsers() {
         given(userRepositiory.findAll()).willReturn(List.of(user));
 
-        List<User> users = userService.readAll();
+        List<UserDao> users = userService.readAll();
 
         assertThat(users.get(0).getUuid()).isNotNull();
         assertThat(users.get(0).getUsername()).isEqualTo(user.getUsername());
@@ -65,9 +63,9 @@ public class UserServiceTest {
     public void whenGivenId_andUpdatedDetails_shouldReturnUserWithUpdatedDetails() {
         given(userRepositiory.findByUUID(user.getUuid()))
                 .willReturn(
-                        Optional.of(new User(user.getUuid(), updateUserRequest.name(), updateUserRequest.password())));
+                        Optional.of(new UserDao(user.getUuid(), updateUserRequest.name(), updateUserRequest.password())));
 
-        Optional<User> users = userService.update(user.getUuid(), updateUserRequest.name(), updateUserRequest.password());
+        Optional<UserDao> users = userService.update(user.getUuid(), updateUserRequest.name(), updateUserRequest.password());
         if (users.isPresent()) {
             assertThat(users.get().getUuid()).isNotNull();
             assertThat(users.get().getUsername()).isEqualTo(user.getUsername());
@@ -79,7 +77,7 @@ public class UserServiceTest {
     @Test
     public void whenInGivenId_andUpdatedDetails_shouldReturnEmptyOptional() {
         given(userRepositiory.findByUUID(user.getUuid())).willReturn(Optional.empty());
-        Optional<User> users = userService.update(user.getUuid(), updateUserRequest.name(), updateUserRequest.password());
+        Optional<UserDao> users = userService.update(user.getUuid(), updateUserRequest.name(), updateUserRequest.password());
         assertThat(users.isPresent()).isFalse();
     }
 
@@ -87,7 +85,7 @@ public class UserServiceTest {
     @Test
     public void whenGivenId_returnUser() {
         given(userRepositiory.findByUUID(user.getUuid())).willReturn(Optional.of(user));
-        Optional<User> findUser = userService.findById(user.getUuid());
+        Optional<UserDao> findUser = userService.findById(user.getUuid());
 
         assertThat(findUser.get().getUuid()).isNotNull();
         assertThat(findUser.get().getUsername()).isEqualTo(user.getUsername());
@@ -98,7 +96,7 @@ public class UserServiceTest {
     @Test
     public void whenInvalidGivenId_returnEmptyOptional() {
         given(userRepositiory.findByUUID(user.getUuid())).willReturn(Optional.empty());
-        Optional<User> findUser = userService.findById(user.getUuid());
+        Optional<UserDao> findUser = userService.findById(user.getUuid());
         assertThat(findUser.isPresent()).isFalse();
     }
 

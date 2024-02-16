@@ -28,6 +28,13 @@ public class UserTopicsDao {
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private String confidenceInTopic;
 
+    public UserTopicsDao(UUID id, UUID topicId, String username, String confidenceInTopic) {
+        this.id = id;
+        this.topicId = topicId;
+        this.username = username;
+        this.confidenceInTopic = confidenceInTopic;
+    }
+
     public UUID getId() {
         return id;
     }

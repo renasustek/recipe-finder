@@ -2,7 +2,7 @@ package com.github.group37.roadmap.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.group37.roadmap.other.UserRequest;
-import com.github.group37.roadmap.percistance.models.User;
+import com.github.group37.roadmap.percistance.models.UserDao;
 import com.github.group37.roadmap.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ class UserControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    private final User user1 = new User(UUID.randomUUID(), "abdi", "smith");
+    private final UserDao user1 = new UserDao(UUID.randomUUID(), "abdi", "smith");
     private final UserRequest userRequest1 = new UserRequest("abdi", "smith");
     private final UserRequest userRequestValidUnameAndPw = new UserRequest("changed", "changed");
     private final UserRequest longUserRequest = new UserRequest(
@@ -92,7 +92,7 @@ class UserControllerTest {
 
     @Test
     void shouldUpdateUser() throws Exception {
-        User updatedUser = new User(user1.getUuid(), userRequestValidUnameAndPw.name(), userRequestValidUnameAndPw.password());
+        UserDao updatedUser = new UserDao(user1.getUuid(), userRequestValidUnameAndPw.name(), userRequestValidUnameAndPw.password());
         when(service.update(user1.getUuid(), userRequestValidUnameAndPw.name(), userRequestValidUnameAndPw.password()))
                 .thenReturn(Optional.of(updatedUser));
         this.mockMvc
@@ -120,7 +120,7 @@ class UserControllerTest {
 
     @Test
     void shouldNotUpdateUserWhenChosenNameAndPasswordIsTooLong() throws Exception {
-        User updatedUser = new User(user1.getUuid(), longUserRequest.name(), longUserRequest.password());
+        UserDao updatedUser = new UserDao(user1.getUuid(), longUserRequest.name(), longUserRequest.password());
         when(service.update(user1.getUuid(), longUserRequest.name(), longUserRequest.password()))
                 .thenThrow(new TransactionSystemException("500"));
         this.mockMvc
@@ -133,7 +133,7 @@ class UserControllerTest {
 
     @Test
     void shouldNotUpdateUserWhenNameAndPasswordIsTooShort() throws Exception {
-        User updatedUser = new User(user1.getUuid(), shortUserRequest.name(), shortUserRequest.password());
+        UserDao updatedUser = new UserDao(user1.getUuid(), shortUserRequest.name(), shortUserRequest.password());
         when(service.update(user1.getUuid(), shortUserRequest.name(), shortUserRequest.password()))
                 .thenThrow(new TransactionSystemException("500"));
         this.mockMvc

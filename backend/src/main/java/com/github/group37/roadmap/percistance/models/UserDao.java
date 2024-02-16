@@ -12,10 +12,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "users", schema = "roadmap_project")
-public class User {
-    @Column(name = "uuid", columnDefinition = "VARCHAR(36)", nullable = false, unique = true, length = 36)
-    @JdbcTypeCode(SqlTypes.VARCHAR)
-    private UUID uuid;
+public class UserDao {
 
     @Id
     @Column(name = "username", nullable = false, unique = true, length = 36)
@@ -29,30 +26,21 @@ public class User {
     @Column(name = "enabled", nullable = false, unique = false)
     private boolean enabled;
 
-    public User(UUID uuid, String username, String password) {
-        this.uuid = uuid;
+    public UserDao(String username, String password) {
         this.username = username;
         this.password = password;
         this.enabled = true;
     }
 
-    public User() {
+    public UserDao() {
         // ignore, created to keep spring auth happy
     }
 
-    public User(UUID uuid, String abdi, String smith, boolean b) {}
+    public UserDao(String abdi, String smith, boolean b) {}
 
     @Override
     public String toString() {
-        return "User{" + "id=" + uuid + ", name='" + username + '\'' + ", password='" + password + '\'' + '}';
-    }
-
-    public UUID getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
+        return "User{" + ", name='" + username + '\'' + ", password='" + password + '\'' + '}';
     }
 
     public String getUsername() {

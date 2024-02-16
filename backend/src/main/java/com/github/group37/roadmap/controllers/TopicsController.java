@@ -1,5 +1,6 @@
 package com.github.group37.roadmap.controllers;
 
+import com.github.group37.roadmap.other.UserTopicsRequest;
 import com.github.group37.roadmap.percistance.models.TopicDao;
 import com.github.group37.roadmap.service.TopicsService;
 import org.springframework.http.MediaType;
@@ -23,5 +24,11 @@ public class TopicsController {
     public List<TopicDao> getTopicsRelatedToSubject(@PathVariable UUID subjectId){
         return topicsService.getTopicsUsingSubjectId(subjectId);
     }
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void create(@RequestBody UserTopicsRequest userTopicsRequest) {
+        topicsService.postUserTopics(userTopicsRequest);
+    }
+
 
 }

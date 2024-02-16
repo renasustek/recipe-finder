@@ -5,7 +5,6 @@ USE `roadmap_project`;
 
 CREATE TABLE IF NOT EXISTS users
 (
-    uuid     VARCHAR(36) NOT NULL,
     username VARCHAR(50) NOT NULL PRIMARY KEY,
     password VARCHAR(50) NOT NULL,
     enabled  BOOLEAN     NOT NULL
@@ -62,9 +61,9 @@ CREATE TABLE IF NOT EXISTS user_topics
     confidence_in_topic VARCHAR(12) NOT NULL
 );
 
-INSERT INTO users (uuid, username, password, enabled)
-VALUES ('774c5dee-e6af-4184-aae5-400f94ea9822', 'renas', 'renas', true),
-       ('5b918af2-5507-407f-bfb9-1fe0781582d0', 'admin', 'admin', true);
+INSERT INTO users ( username, password, enabled)
+VALUES ( 'renas', 'renas', true),
+       ( 'admin', 'admin', true);
 
 INSERT INTO authorities (username, authority)
 VALUES ('renas', 'ROLE_USER'),
