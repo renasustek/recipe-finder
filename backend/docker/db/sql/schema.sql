@@ -78,7 +78,20 @@ INSERT INTO revision_resource (id, topic_id, resource_name, description, where_t
 VALUES ('4c059778-5c0e-40f0-ae0b-85bf0ce8b6cc', '22be771a-7803-445f-b88f-732fd6170f56', 'book',
         'read this book and become good at algebra :)', 'MathsBook101 page 10', 'novice'),
        ('2d927d0a-d2a1-46d7-826d-e6783da22169', '22be771a-7803-445f-b88f-732fd6170f56', 'website',
-        'complete the tasks on this website and you will be an expert algebration', 'https://www.coolmathgames.com/','expert');
+        'complete the tasks on this website and you will be an expert algebration', 'https://www.coolmathgames.com/','expert'),
+       ('389f80b5-2c02-4e20-bc16-3b3e7e6aee1f', '22be771a-7803-445f-b88f-732fd6170f56', 'online course',
+        'this is a good course', 'https://www.coolmathgames.com/','intermediate'),
+       ('1fbbbed5-5044-4285-8574-39978c01f916', '22be771a-7803-445f-b88f-732fd6170f56', 'filler',
+        'this is all from backend btw', 'https://www.coolmathgamesss.com/','intermediate'),
+       ('2b922630-2499-4f73-bf7b-6d0d8e99591a', '1915b4be-7f11-48bb-97ff-88f9297104f8', 'filler',
+        'this is all from backend btw', 'https://www.coolmathgamesss.com/','intermediate'),
+       ('0ac85513-8025-40d8-9960-ee52ba76529d', '1915b4be-7f11-48bb-97ff-88f9297104f8', 'filler',
+        'this is all from backend btw', 'https://www.coolmathgamesss.com/','intermediate'),
+       ('45926cd7-18bd-44ec-b2dd-674dff192a23', '1915b4be-7f11-48bb-97ff-88f9297104f8', 'filler',
+        'this is all from backend btw', 'https://www.coolmathgamesss.com/','intermediate'),
+       ('6ba67204-923d-4087-9685-b3d2ee759ab2', '24fb37ab-18ed-42c7-9bc3-09b750aca27a', 'filler',
+        'this is all from backend btw', 'https://www.coolmathgamesss.com/','intermediate');
+
 
 INSERT INTO roadmap_resources (id, roadmap_id, revision_resource_id)
 VALUES ('0dbabf29-a60f-459c-8419-3628a56c2e68', '8894517b-539a-4b89-b0a0-849e84329181',

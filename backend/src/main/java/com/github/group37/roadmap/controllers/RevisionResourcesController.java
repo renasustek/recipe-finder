@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @RestController
 @CrossOrigin
-@RequestMapping(value = "/revision-recources", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/revision-resources", produces = MediaType.APPLICATION_JSON_VALUE)
 public class RevisionResourcesController {
 
     private final RevisionResourcesService revisionResourcesService;
