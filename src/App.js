@@ -8,7 +8,7 @@ import './App.css';
 
 import GetRoadmap from './pages/GetRoadmap';
 import Subjects from './pages/Subjects';
-
+import Topics from './pages/Topics'
 import DiscoverCourses from './pages/DiscoverCourses';
 
 
@@ -23,6 +23,7 @@ function App() {
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/get-roadmap" element={<GetRoadmap />} />
           <Route path="/subjects" element={<Subjects />} />
+          <Route path="/topics" element={<Subjects />} />
           <Route path="/discover-courses" element={<DiscoverCourses />} />
 
           {/* Add other routes/components as needed */}
