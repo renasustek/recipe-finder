@@ -11,6 +11,7 @@ import Subjects from './pages/Subjects';
 import Topics from './pages/Topics'
 import DiscoverCourses from './pages/DiscoverCourses';
 import RevisionRecources from './pages/RevisionResources';
+import UserGoalForm from './pages/UserGoalForm';
 
 
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/subjects" element={<Subjects />} />
           <Route path="/topics/:subjectId" element={<Topics />} />
           <Route path="/revision-resources/:topicId" element={<RevisionRecources />} />
+          <Route path="/user-goal-form" element={<UserGoalForm />} />
 
           <Route path="/discover-courses" element={<DiscoverCourses />} />
 
