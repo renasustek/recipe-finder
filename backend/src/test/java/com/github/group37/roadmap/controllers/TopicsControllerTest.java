@@ -1,7 +1,10 @@
  package com.github.group37.roadmap.controllers;
 
  import com.fasterxml.jackson.databind.ObjectMapper;
+ import com.github.group37.roadmap.other.UserTopic;
+ import com.github.group37.roadmap.other.UserTopicsRequest;
  import com.github.group37.roadmap.percistance.models.TopicDao;
+ import com.github.group37.roadmap.percistance.models.UserTopicsDao;
  import com.github.group37.roadmap.service.TopicsService;
  import org.junit.jupiter.api.DisplayName;
  import org.junit.jupiter.api.Test;
@@ -12,11 +15,14 @@
  import org.springframework.http.MediaType;
  import org.springframework.test.web.servlet.MockMvc;
 
+ import java.util.ArrayList;
+ import java.util.Arrays;
  import java.util.List;
  import java.util.UUID;
 
  import static org.mockito.Mockito.when;
  import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
  import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
  import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -65,5 +71,25 @@ class TopicsControllerTest {
                 .andExpect(jsonPath("$[0].topicName").value(topics().getTopicName()));
     }
 
+    @DisplayName("Post userTopic, valid uuid should return list of userTopicDao with same values as user topics request")
+    @Test
+    void when_given_valid_uuid_should_return_valid_list_of_userTopicDaos() throws Exception {
+        UserTopicsRequest userTopicsRequest = new UserTopicsRequest();
+
+        UserTopic userTopic = new UserTopic(validUuid,"novice");
+        UserTopicsDao userTopicsDao = new UserTopicsDao(validUuid,validUuid,"username","novice");
+
+        userTopicsRequest.setUserTopics(List.of(userTopic));
+        ArrayList<UserTopicsDao> userTopicsDaos = new ArrayList<>(Arrays.asList(userTopicsDao));
+
+        when(topicsService.postUserTopics("username", userTopicsRequest)).thenReturn(userTopicsDaos);
+
+        mockMvc.perform(post("/topics/"+"username").contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(userTopicsRequest)))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(jsonPath("$[0].topicId").value(userTopic.topicId().toString()))
+                .andExpect(jsonPath("$[0].confidenceInTopic").value(userTopic.confidenceInTopic()));
+
+    }
 
 }

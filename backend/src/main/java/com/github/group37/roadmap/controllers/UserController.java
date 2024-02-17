@@ -6,6 +6,7 @@ import com.github.group37.roadmap.percistance.models.UserDao;
 import com.github.group37.roadmap.service.UserService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -27,10 +28,10 @@ public class UserController {
     @PostMapping(value = "/register",consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> create(@RequestBody UserRequest userRequest) {
         userService.create(userRequest);
-//        return ResponseEntity.created(URI.create("/users/" + createdUser.getUuid()))
-//                .body(createdUser);
         return ResponseEntity.ok("User created successfully");
     }
+
+
 //    @DeleteMapping("/{username}")
 //    public ResponseEntity<?> deleteUser(@PathVariable String username) {
 //        userService.create(username);

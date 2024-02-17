@@ -8,6 +8,7 @@ import com.github.group37.roadmap.percistance.models.TopicDao;
 import com.github.group37.roadmap.percistance.models.UserTopicsDao;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -27,10 +28,12 @@ public class TopicsService {
         return topicsRepo.findTopicsUsingSubjectId(subjectId);
     }
 
-    public void postUserTopics(UserTopicsRequest userTopicsRequest){
+    public ArrayList<UserTopicsDao> postUserTopics(String username ,UserTopicsRequest userTopicsRequest){
+        ArrayList<UserTopicsDao> userTopicsDaos = new ArrayList<>();
         for (UserTopic eachUserTopic: userTopicsRequest.getUserTopics()){
-            userTopicsRepo.save(new UserTopicsDao(eachUserTopic.id(),eachUserTopic.topicId(),eachUserTopic.username(),eachUserTopic.confidenceInTopic()));
+            userTopicsDaos.add(userTopicsRepo.save(new UserTopicsDao(UUID.randomUUID() ,eachUserTopic.topicId(), username,eachUserTopic.confidenceInTopic())));
         }
+        return userTopicsDaos;
     }
 
 

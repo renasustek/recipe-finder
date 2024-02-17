@@ -9,10 +9,11 @@ import org.hibernate.type.SqlTypes;
 
 import java.util.UUID;
 @Entity
-@Table(name = "topics", schema = "roadmap_project")
-public class UserTopicsDao {
+@Table(name = "user_topics", schema = "roadmap_project")
+public class  UserTopicsDao {
+
     @Id
-    @Column(name = "id", columnDefinition = "VARCHAR(36)", nullable = false, unique = true, length = 36)
+    @Column(name = "uuid", columnDefinition = "VARCHAR(36)", nullable = false, unique = true, length = 36)
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID id;
 
@@ -33,6 +34,10 @@ public class UserTopicsDao {
         this.topicId = topicId;
         this.username = username;
         this.confidenceInTopic = confidenceInTopic;
+    }
+
+    public UserTopicsDao() {
+
     }
 
     public UUID getId() {
