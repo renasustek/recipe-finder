@@ -1,10 +1,17 @@
 package com.github.group37.roadmap.service;
 
 import com.github.group37.roadmap.other.UserRequest;
-import com.github.group37.roadmap.percistance.UserRepository;
-import com.github.group37.roadmap.percistance.models.User;
+import com.github.group37.roadmap.percistance.models.UserDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -12,34 +19,24 @@ import java.util.UUID;
 @Service
 public class UserService {
 
-    private final UserRepository userRepository;
+    private final JdbcUserDetailsManager jdbcUserDetailsManager;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+
+
+    public UserService(JdbcUserDetailsManager jdbcUserDetailsManager, PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+        this.jdbcUserDetailsManager = jdbcUserDetailsManager;
     }
 
-    public User create(UserRequest userRequest) {
-        User user = new User(UUID.randomUUID(), userRequest.name(), userRequest.password(), true);
-        return userRepository.save(user);
+    public void create(UserRequest userRequest) {
+        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        User user = new User(userRequest.name(), userRequest.password(), authorities);
+        jdbcUserDetailsManager.createUser(user);
+
     }
 
-    public List<User> readAll() {
-        return userRepository.findAll();
-    }
 
-    public Optional<User> update(UUID userID, String updatedName, String updatedPassword) {
-        return userRepository.findByUUID(userID).map(user -> {
-            user.setUsername(updatedName);
-            user.setPassword(updatedPassword);
-            return userRepository.save(user);
-        });
-    }
 
-    public Optional<User> findById(UUID id) {
-        return userRepository.findByUUID(id);
-    }
-
-    public void delete(UUID userId) {
-        userRepository.deleteByUUID(userId);
-    }
 }

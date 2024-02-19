@@ -5,10 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
-import org.hibernate.annotations.JdbcType;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-import org.hibernate.type.descriptor.jdbc.VarcharJdbcType;
 
 import java.util.UUID;
 
@@ -20,9 +18,9 @@ public class RevisionResourceDao {
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID id;
 
-    @Column(name = "topic", nullable = false, length = 100)
-    @Size(min = 3, max = 20)
-    private String topic;
+    @Column(name = "topic_id", nullable = false, length =  36)
+    @JdbcTypeCode(SqlTypes.VARCHAR)
+    private UUID topic;
 
     @Column(name = "resource_name", nullable = false, length = 100)
     @Size(min = 3, max = 20)
@@ -37,6 +35,17 @@ public class RevisionResourceDao {
     private String whereToAccess; // could be a link if a website, could be a book name and a page number, could be
     // whatever you want, as long as it has instructions on how to access a specific revision resource
 
+    @Column(name = "difficulty_level", nullable = false, length = 100)
+    @Size(min = 4, max = 12)
+    private String difficultyLevel;
+
+    public String getDifficultyLevel() {
+        return difficultyLevel;
+    }
+
+    public void setDifficultyLevel(String difficultyLevel) {
+        this.difficultyLevel = difficultyLevel;
+    }
 
     public UUID getId() {
         return id;
@@ -46,11 +55,11 @@ public class RevisionResourceDao {
         this.id = id;
     }
 
-    public String getTopic() {
+    public UUID getTopic() {
         return topic;
     }
 
-    public void setTopic(String topic) {
+    public void setTopic(UUID topic) {
         this.topic = topic;
     }
 
