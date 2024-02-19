@@ -12,7 +12,7 @@ import Topics from './pages/Topics'
 import DiscoverCourses from './pages/DiscoverCourses';
 import RevisionRecources from './pages/RevisionResources';
 import UserGoalForm from './pages/UserGoalForm';
-
+import Feedback from  './pages/Feedback';
 
 
 function App() {
