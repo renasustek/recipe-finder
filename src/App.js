@@ -30,7 +30,7 @@ function App() {
           <Route path="/user-goal-form" element={<UserGoalForm />} />
 
           <Route path="/discover-courses" element={<DiscoverCourses />} />
-
+          <Route path="/feedback" element={<Feedback />} />
           {/* Add other routes/components as needed */}
         </Routes>
       </Router>

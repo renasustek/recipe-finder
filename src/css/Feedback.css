@@ -1,0 +1,77 @@
+body {
+    margin: 0;
+    padding: 0;
+
+    background-color: rgba(56, 125, 255, 0.17);
+}
+
+.rating-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
+    height: 70%;
+    width: 30%;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.feedback-text {
+    color: #555;
+    margin: 30px;
+}
+
+.rated-stars{
+    color: #555;
+}
+
+.stars-container {
+    margin: 30px;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+    
+}
+
+.buttons-container button {
+    font-weight: bold;
+    font-size: 18px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 150px;
+    height: 50px;
+}
+
+.buttons-container button.submit {
+    background-color: white;
+    color: #555;
+    border: 2px solid rgba(56, 125, 255, 0.17);
+    margin: 10px;
+}
+
+.buttons-container button.submit.active {
+    background-color: #1f98f4; 
+    color: white; 
+}
+
+.buttons-container button.cancel {
+    background-color: white;
+    color: #555;
+    border: 2px solid rgba(56, 125, 255, 0.17);
+    margin: 10px;
+}
+
+.buttons-container button.cancel:hover {
+    background-color: rgba(56, 125, 255, 0.17);
+}
