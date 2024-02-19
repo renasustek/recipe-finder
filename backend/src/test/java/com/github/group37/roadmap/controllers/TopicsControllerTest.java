@@ -77,7 +77,7 @@ class TopicsControllerTest {
         UserTopicsRequest userTopicsRequest = new UserTopicsRequest();
 
         UserTopic userTopic = new UserTopic(validUuid,"novice");
-        UserTopicsDao userTopicsDao = new UserTopicsDao(validUuid,validUuid,"username","novice");
+        UserTopicsDao userTopicsDao = new UserTopicsDao("username",validUuid,"novice");
 
         userTopicsRequest.setUserTopics(List.of(userTopic));
         ArrayList<UserTopicsDao> userTopicsDaos = new ArrayList<>(Arrays.asList(userTopicsDao));

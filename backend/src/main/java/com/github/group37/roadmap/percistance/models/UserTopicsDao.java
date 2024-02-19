@@ -13,40 +13,25 @@ import java.util.UUID;
 public class  UserTopicsDao {
 
     @Id
-    @Column(name = "uuid", columnDefinition = "VARCHAR(36)", nullable = false, unique = true, length = 36)
-    @JdbcTypeCode(SqlTypes.VARCHAR)
-    private UUID id;
-
     @Column(name = "topic_id", columnDefinition = "VARCHAR(36)", nullable = false, length = 36)
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID topicId;
-
     @Column(name = "username", columnDefinition = "VARCHAR(50)", nullable = false, length = 50)
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private String username;
+
 
     @Column(name = "confidence_in_topic", columnDefinition = "VARCHAR(36)", nullable = false, length = 36)
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private String confidenceInTopic;
 
-    public UserTopicsDao(UUID id, UUID topicId, String username, String confidenceInTopic) {
-        this.id = id;
+    public UserTopicsDao(String username,UUID topicId , String confidenceInTopic) {
         this.topicId = topicId;
         this.username = username;
         this.confidenceInTopic = confidenceInTopic;
     }
 
-    public UserTopicsDao() {
-
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
-    }
+    public UserTopicsDao() {}
 
     public UUID getTopicId() {
         return topicId;

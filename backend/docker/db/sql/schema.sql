@@ -55,10 +55,11 @@ CREATE TABLE IF NOT EXISTS subjects
 
 CREATE TABLE IF NOT EXISTS user_topics
 (
-    uuid                VARCHAR(36) NOT NULL PRIMARY KEY,
     username            VARCHAR(50) NOT NULL,
     topic_id            VARCHAR(36) NOT NULL,
-    confidence_in_topic VARCHAR(12) NOT NULL
+    confidence_in_topic VARCHAR(12) NOT NULL,
+    PRIMARY KEY (username, topic_id)
+
 );
 
 INSERT INTO users ( username, password, enabled)

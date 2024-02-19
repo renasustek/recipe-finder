@@ -31,7 +31,7 @@ public class TopicsService {
     public ArrayList<UserTopicsDao> postUserTopics(String username ,UserTopicsRequest userTopicsRequest){
         ArrayList<UserTopicsDao> userTopicsDaos = new ArrayList<>();
         for (UserTopic eachUserTopic: userTopicsRequest.getUserTopics()){
-            userTopicsDaos.add(userTopicsRepo.save(new UserTopicsDao(UUID.randomUUID() ,eachUserTopic.topicId(), username,eachUserTopic.confidenceInTopic())));
+            userTopicsDaos.add(userTopicsRepo.save(new UserTopicsDao(username ,eachUserTopic.topicId(),eachUserTopic.confidenceInTopic())));
         }
         return userTopicsDaos;
     }
