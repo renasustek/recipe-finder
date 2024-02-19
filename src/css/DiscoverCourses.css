@@ -5,6 +5,14 @@
     width: 70%;
     margin:auto auto;
   }
+
+  .title-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px; /* Add margin-bottom for spacing */
+  }
   
   .course-container {
     display: grid;
@@ -12,11 +20,9 @@
     width: 250px;
     height: auto;
     margin: 10px;
-    border-style: solid;
-    border-color: rgba(56, 125, 255, 0.17);
-    border-width: 2px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: medium;
+    background-color: white;
   }
   
   .content {
@@ -24,7 +30,7 @@
   }
 
   .image-container {
-    width: 250px -2px; /*minus border width*/
+    width: 250px -2px;
     height: 250px; 
     overflow: hidden; 
     border-radius: 10px; 
@@ -38,7 +44,7 @@
 
   .button-container {
     display: flex;
-    flex-direction: column; /* arrange items vertically */
+    flex-direction: column; 
   }
   
   .expertise-buttons {
@@ -54,17 +60,17 @@
     background-color: rgba(56, 125, 255, 0.17);
     padding: 10px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    box-shadow: none; /* Remove button shadow */
-    border: 2px solid transparent;
+    box-shadow: none; 
+    border: 1px solid transparent;
     transition: background-color 0.3s ease;
   }
 
   .expertise-button:hover {
-    background-color: #1f98f4; /* Change to a different color */
+    background-color: #1f98f4; 
   }
 
   .expertise-button:active {
-    border-color: black; /* Add border color */
+    border-color: black; 
   }
   
   .roadmap-button {
@@ -73,21 +79,21 @@
     border-radius: 10px;
     padding: 10px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    box-shadow: none; /* Remove button shadow */
+    box-shadow: none; 
     border: 2px solid transparent;
     transition: background-color 0.3s ease;
   }
 
   .roadmap-button:hover {
-    background-color: #1f98f4; /* Change to a different color */
+    background-color: #1f98f4; 
   }
   
   .roadmap-button:active {
-    border-color: black; /* Add border color */
+    border-color: black; 
   }
 
   .expertise-button.clicked {
-    background-color: #1f98f4; /* Blue color */
-    border-color: #000; /* Black border */
+    background-color: #1f98f4;
+    border-color: #000;
   }
   

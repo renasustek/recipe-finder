@@ -5,11 +5,10 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import SignUp from './pages/SignUp'; // Import your SignUp component
 import './App.css';
-
 import GetRoadmap from './pages/GetRoadmap';
 import Subjects from './pages/Subjects';
-
 import DiscoverCourses from './pages/DiscoverCourses';
+import Feedback from './pages/Feedback'
 
 
 
@@ -24,7 +23,7 @@ function App() {
           <Route path="/get-roadmap" element={<GetRoadmap />} />
           <Route path="/subjects" element={<Subjects />} />
           <Route path="/discover-courses" element={<DiscoverCourses />} />
-
+          <Route path="/feedback" element={<Feedback />} />
           {/* Add other routes/components as needed */}
         </Routes>
       </Router>
