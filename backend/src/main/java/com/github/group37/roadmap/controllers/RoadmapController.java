@@ -23,4 +23,9 @@ public class RoadmapController {
     public Roadmap getRoadmap(@PathVariable String username) {
         return roadmapService.getRoadmap(username).orElseThrow(() -> new RoadMapNotFoundException());
     }
+
+    @PostMapping("/{username}")
+    public Roadmap createRoadmap(@PathVariable String username){
+        return roadmapService.createRoadmap(username).orElseThrow(() -> new RoadMapNotFoundException());//todo add differnet exceptions
+    }
 }

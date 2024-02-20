@@ -4,7 +4,9 @@ import com.github.group37.roadmap.other.Roadmap;
 import com.github.group37.roadmap.percistance.RevisionResourcesRepo;
 import com.github.group37.roadmap.percistance.RoadmapRepo;
 import com.github.group37.roadmap.percistance.RoadmapResourcesRepo;
+import com.github.group37.roadmap.percistance.UserTopicsRepo;
 import com.github.group37.roadmap.percistance.models.RevisionResourceDao;
+import com.github.group37.roadmap.percistance.models.UserTopicsDao;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,13 +22,15 @@ public class RoadmapService {
     public final RoadmapResourcesRepo roadmapResourcesRepo;
     public final RevisionResourcesRepo revisionResourcesRepo;
 
+    private final UserTopicsRepo userTopicsRepo;
     public RoadmapService(
             RoadmapRepo roadmapRepo,
             RoadmapResourcesRepo roadmapResourcesRepo,
-            RevisionResourcesRepo revisionResourcesRepo) {
+            RevisionResourcesRepo revisionResourcesRepo, UserTopicsRepo userTopicsRepo) {
         this.roadmapRepo = roadmapRepo;
         this.roadmapResourcesRepo = roadmapResourcesRepo;
         this.revisionResourcesRepo = revisionResourcesRepo;
+        this.userTopicsRepo = userTopicsRepo;
     }
 
     public Optional<Roadmap> getRoadmap(String username) {
@@ -46,5 +50,9 @@ public class RoadmapService {
         }
         Roadmap roadmap = new Roadmap(username, revisionRecources);
         return Optional.of(roadmap);
+    }
+
+    public Optional<Roadmap> createRoadmap(String username){
+//        List<UserTopicsDao> userTopicsDaos = userTopicsRepo.findbyUsername(username);
     }
 }
