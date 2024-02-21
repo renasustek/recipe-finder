@@ -1,5 +1,6 @@
 package com.github.group37.roadmap.controllers;
 
+import com.github.group37.roadmap.errors.CouldntCreateRoadmap;
 import com.github.group37.roadmap.errors.RoadMapNotFoundException;
 import com.github.group37.roadmap.other.Roadmap;
 import com.github.group37.roadmap.service.RoadmapService;
@@ -26,6 +27,6 @@ public class RoadmapController {
     public Roadmap createRoadmap(@PathVariable String username) {
         return roadmapService
                 .createRoadmap(username)
-                .orElseThrow(() -> new RoadMapNotFoundException()); // todo add differnet exceptions
+                .orElseThrow(() -> new CouldntCreateRoadmap()); // todo add differnet exceptions
     }
 }

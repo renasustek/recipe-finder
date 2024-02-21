@@ -55,7 +55,9 @@ public class RoadmapService {
 
     public Optional<Roadmap> createRoadmap(String username) {
         ArrayList<Optional<RevisionResourceDao>> revisionResourceDaos = new ArrayList<>();
-
+        if (roadmapRepo.findByUsername(username).isPresent()) {
+            return Optional.empty();
+        }
         UUID roadmapId = UUID.randomUUID();
         roadmapRepo.save(new RoadmapDao(roadmapId, username));
 

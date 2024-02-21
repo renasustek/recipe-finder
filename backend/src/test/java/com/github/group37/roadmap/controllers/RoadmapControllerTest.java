@@ -17,9 +17,8 @@ import java.util.Optional;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(controllers = RoadmapController.class, excludeAutoConfiguration = SecurityAutoConfiguration.class)
 class RoadmapControllerTest {
@@ -61,5 +60,24 @@ class RoadmapControllerTest {
     void when_valid_username_and_no_roadmap_found_roadmap_not_found() throws Exception {
         when(service.getRoadmap(username)).thenReturn(Optional.empty());
         this.mockMvc.perform(get("/roadmap/" + username)).andExpect(status().isNotFound());
+    }
+
+    @DisplayName("POST - given a username that already has a generated roadmap")
+    @Test
+    void when_given_username_that_already_has_a_created_roadmap_throw_exception() throws Exception {
+        when(service.createRoadmap(username)).thenReturn(Optional.empty());
+        this.mockMvc.perform(post("/roadmap/" + username)).andExpect(status().isBadRequest());
+    }
+
+    @DisplayName("POST - when given username should return a generated roadmap")
+    @Test
+    void when_given_username_should_return_roadmap() throws Exception {
+        when(service.createRoadmap(username)).thenReturn(Optional.of(roadmap));
+        this.mockMvc
+                .perform(post("/roadmap/" + username))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(content().contentType("application/json"))
+                .andExpect(jsonPath("$.name").value(roadmap.getName()))
+                .andExpect(jsonPath("$.revisionResourceDaos").value(roadmap.getRevisionResourceDaos()));
     }
 }

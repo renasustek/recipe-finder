@@ -1,5 +1,6 @@
 package com.github.group37.roadmap.advice;
 
+import com.github.group37.roadmap.errors.CouldntCreateRoadmap;
 import com.github.group37.roadmap.errors.RoadMapNotFoundException;
 import com.github.group37.roadmap.errors.UserNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,13 @@ class CustomExceptionHandler {
     @ExceptionHandler(RoadMapNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     String roadmapNotFound(RoadMapNotFoundException ex) {
+        return ex.getMessage();
+    }
+
+    @ResponseBody
+    @ExceptionHandler(CouldntCreateRoadmap.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    String couldntCreateRoadmap(CouldntCreateRoadmap ex) {
         return ex.getMessage();
     }
 
