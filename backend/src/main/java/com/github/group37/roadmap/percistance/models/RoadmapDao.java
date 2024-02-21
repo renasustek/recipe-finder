@@ -5,10 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
-import org.hibernate.annotations.JdbcType;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-import org.hibernate.type.descriptor.jdbc.VarcharJdbcType;
 
 import java.util.UUID;
 
@@ -24,6 +22,21 @@ public class RoadmapDao {
     @Column(name = "username", nullable = false, unique = true, length = 36)
     @Size(min = 3, max = 36)
     private String name;
+
+    public RoadmapDao(UUID id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public RoadmapDao() {}
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public UUID getId() {
         return id;

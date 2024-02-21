@@ -4,10 +4,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import org.hibernate.annotations.JdbcType;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-import org.hibernate.type.descriptor.jdbc.VarcharJdbcType;
 
 import java.util.UUID;
 
@@ -27,6 +25,14 @@ public class RoadmapResources {
     @Column(name = "revision_resource_id", columnDefinition = "VARCHAR(36)", nullable = false, length = 36)
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID revisionResourceId;
+
+    public RoadmapResources(UUID id, UUID roadmapId, UUID revisionResourceId) {
+        this.id = id;
+        this.roadmapId = roadmapId;
+        this.revisionResourceId = revisionResourceId;
+    }
+
+    public RoadmapResources() {}
 
     public UUID getId() {
         return id;

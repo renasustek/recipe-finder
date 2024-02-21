@@ -6,6 +6,8 @@ import com.github.group37.roadmap.percistance.RoadmapRepo;
 import com.github.group37.roadmap.percistance.RoadmapResourcesRepo;
 import com.github.group37.roadmap.percistance.UserTopicsRepo;
 import com.github.group37.roadmap.percistance.models.RevisionResourceDao;
+import com.github.group37.roadmap.percistance.models.RoadmapDao;
+import com.github.group37.roadmap.percistance.models.RoadmapResources;
 import com.github.group37.roadmap.percistance.models.UserTopicsDao;
 import org.springframework.stereotype.Service;
 
@@ -53,6 +55,16 @@ public class RoadmapService {
     }
 
     public Optional<Roadmap> createRoadmap(String username){
-//        List<UserTopicsDao> userTopicsDaos = userTopicsRepo.findbyUsername(username);
+        UUID roadmapId = UUID.randomUUID();
+        roadmapRepo.save(new RoadmapDao(roadmapId, username));
+
+        userTopicsRepo.findbyUsername(username).forEach(eachUserTopic -> {
+            revisionResourcesRepo.getRevisionResourceIdByTopicIdAndConfidenceLevel(eachUserTopic.getTopicId(), eachUserTopic.getConfidenceInTopic()).forEach(eachRevisionResourceID -> {
+                RoadmapResources save = roadmapResourcesRepo.save(new RoadmapResources(UUID.randomUUID(), roadmapId, eachRevisionResourceID));
+            });
+        });
+
+
+        return getRoadmap(username);
     }
 }

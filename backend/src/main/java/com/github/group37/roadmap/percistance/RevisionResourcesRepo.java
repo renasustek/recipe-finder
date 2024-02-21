@@ -12,4 +12,10 @@ import java.util.UUID;
 public interface RevisionResourcesRepo extends JpaRepository<RevisionResourceDao, UUID> {
     @Query("select r FROM RevisionResourceDao r where r.topic = ?1")
     List<RevisionResourceDao> getRevisionResourceDaoByTopicId(UUID topicId);
+
+    @Query("select r.id FROM RevisionResourceDao r where r.topic = ?1 and r.difficultyLevel=?2")
+    List<UUID> getRevisionResourceIdByTopicIdAndConfidenceLevel(UUID topicId, String confidenceInTopic);
+
+
+
 }
