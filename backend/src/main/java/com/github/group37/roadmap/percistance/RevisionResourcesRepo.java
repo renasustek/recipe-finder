@@ -13,9 +13,6 @@ public interface RevisionResourcesRepo extends JpaRepository<RevisionResourceDao
     @Query("select r FROM RevisionResourceDao r where r.topic = ?1")
     List<RevisionResourceDao> getRevisionResourceDaoByTopicId(UUID topicId);
 
-    @Query("select r.id FROM RevisionResourceDao r where r.topic = ?1 and r.difficultyLevel=?2")
-    List<UUID> getRevisionResourceIdByTopicIdAndConfidenceLevel(UUID topicId, String confidenceInTopic);
-
-
-
+    @Query("select r FROM RevisionResourceDao r where r.topic = ?1 and r.difficultyLevel=?2")
+    List<RevisionResourceDao> getRevisionResources(UUID topicId, String confidenceInTopic);
 }

@@ -8,15 +8,12 @@ import com.github.group37.roadmap.percistance.UserTopicsRepo;
 import com.github.group37.roadmap.percistance.models.RevisionResourceDao;
 import com.github.group37.roadmap.percistance.models.RoadmapDao;
 import com.github.group37.roadmap.percistance.models.RoadmapResources;
-import com.github.group37.roadmap.percistance.models.UserTopicsDao;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.function.Function;
-import java.util.stream.Stream;
 
 @Service
 public class RoadmapService {
@@ -25,10 +22,12 @@ public class RoadmapService {
     public final RevisionResourcesRepo revisionResourcesRepo;
 
     private final UserTopicsRepo userTopicsRepo;
+
     public RoadmapService(
             RoadmapRepo roadmapRepo,
             RoadmapResourcesRepo roadmapResourcesRepo,
-            RevisionResourcesRepo revisionResourcesRepo, UserTopicsRepo userTopicsRepo) {
+            RevisionResourcesRepo revisionResourcesRepo,
+            UserTopicsRepo userTopicsRepo) {
         this.roadmapRepo = roadmapRepo;
         this.roadmapResourcesRepo = roadmapResourcesRepo;
         this.revisionResourcesRepo = revisionResourcesRepo;
@@ -39,13 +38,13 @@ public class RoadmapService {
 
         ArrayList<Optional<RevisionResourceDao>> revisionRecources = new ArrayList<>();
 
-        Optional<UUID> roadmapId = roadmapRepo
-                .findByUsername(username);
+        Optional<UUID> roadmapId = roadmapRepo.findByUsername(username);
 
-        if (roadmapId.isPresent()){
-            Optional<List<UUID>> usersResourcesIds = roadmapResourcesRepo.findAllResourcesUsingRoadmapId(roadmapId.get());
-                for (UUID eachuuid : usersResourcesIds.get()) {
-                    revisionRecources.add(revisionResourcesRepo.findById(eachuuid));
+        if (roadmapId.isPresent()) {
+            Optional<List<UUID>> usersResourcesIds =
+                    roadmapResourcesRepo.findAllResourcesUsingRoadmapId(roadmapId.get());
+            for (UUID eachuuid : usersResourcesIds.get()) {
+                revisionRecources.add(revisionResourcesRepo.findById(eachuuid));
             }
         } else {
             return Optional.empty();
@@ -54,17 +53,22 @@ public class RoadmapService {
         return Optional.of(roadmap);
     }
 
-    public Optional<Roadmap> createRoadmap(String username){
+    public Optional<Roadmap> createRoadmap(String username) {
+        ArrayList<Optional<RevisionResourceDao>> revisionResourceDaos = new ArrayList<>();
+
         UUID roadmapId = UUID.randomUUID();
         roadmapRepo.save(new RoadmapDao(roadmapId, username));
 
         userTopicsRepo.findbyUsername(username).forEach(eachUserTopic -> {
-            revisionResourcesRepo.getRevisionResourceIdByTopicIdAndConfidenceLevel(eachUserTopic.getTopicId(), eachUserTopic.getConfidenceInTopic()).forEach(eachRevisionResourceID -> {
-                RoadmapResources save = roadmapResourcesRepo.save(new RoadmapResources(UUID.randomUUID(), roadmapId, eachRevisionResourceID));
-            });
+            revisionResourcesRepo
+                    .getRevisionResources(eachUserTopic.getTopicId(), eachUserTopic.getConfidenceInTopic())
+                    .forEach(eachRevisionResource -> {
+                        RoadmapResources save = roadmapResourcesRepo.save(
+                                new RoadmapResources(UUID.randomUUID(), roadmapId, eachRevisionResource.getId()));
+                        revisionResourceDaos.add(Optional.of(eachRevisionResource));
+                    });
         });
 
-
-        return getRoadmap(username);
+        return Optional.of(new Roadmap(username, revisionResourceDaos));
     }
 }
