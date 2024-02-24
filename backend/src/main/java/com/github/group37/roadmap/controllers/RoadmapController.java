@@ -25,8 +25,6 @@ public class RoadmapController {
 
     @PostMapping("/{username}")
     public Roadmap createRoadmap(@PathVariable String username) {
-        return roadmapService
-                .createRoadmap(username)
-                .orElseThrow(() -> new CouldntCreateRoadmap()); // todo add differnet exceptions
+        return roadmapService.createRoadmap(username).orElseThrow(() -> new CouldntCreateRoadmap());
     }
 }
