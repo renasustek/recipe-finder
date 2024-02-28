@@ -22,7 +22,7 @@ public class UserTopicsDao {
     private String username;
 
     @Convert(converter = LevelOfExpertiseConverter.class)
-    @Column(name = "level_of_expertise", columnDefinition = "VARCHAR(36)", nullable = false, length = 36)
+    @Column(name = "level_of_expertise", columnDefinition = "VARCHAR(12)", nullable = false, length = 12)
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private LevelOfExpertise levelOfExpertise;
 

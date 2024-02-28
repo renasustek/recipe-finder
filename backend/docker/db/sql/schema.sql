@@ -76,6 +76,10 @@ VALUES ('8894517b-539a-4b89-b0a0-849e84329181', 'renas');
 INSERT INTO revision_resource (id, topic_id, resource_name, description, where_to_access, level_of_expertise)
 VALUES ('4c059778-5c0e-40f0-ae0b-85bf0ce8b6cc', '22be771a-7803-445f-b88f-732fd6170f56', 'book',
         'read this book and become good at algebra :)', 'MathsBook101 page 10', 'NOVICE'),
+       ('b6470269-86fc-4fcf-bf14-8d73a5f5c62f', '22be771a-7803-445f-b88f-732fd6170f56', 'book',
+        'read this book and become good at algebra for ok ppl:)', 'MathsBook101 page 10', 'INTERMEDIATE'),
+       ('22af7c72-dad5-4094-981e-4a082c0c2f9a', '22be771a-7803-445f-b88f-732fd6170f56', 'book',
+        'read this book and become good at algebra for the einstiens :)', 'MathsBook101 page 10', 'EXPERT'),
        ('2d927d0a-d2a1-46d7-826d-e6783da22169', '22be771a-7803-445f-b88f-732fd6170f56', 'website',
         'complete the tasks on this website and you will be an expert algebration', 'https://www.coolmathgames.com/',
         'NOVICE'),
