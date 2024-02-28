@@ -63,7 +63,7 @@ public class RoadmapService {
 
         userTopicsRepo.findbyUsername(username).forEach(eachUserTopic -> {
             revisionResourcesRepo
-                    .getRevisionResources(eachUserTopic.getTopicId(), eachUserTopic.getConfidenceInTopic())
+                    .getRevisionResources(eachUserTopic.getTopicId(), eachUserTopic.getLevelOfExpertise())
                     .forEach(eachRevisionResource -> {
                         RoadmapResources save = roadmapResourcesRepo.save(
                                 new RoadmapResources(UUID.randomUUID(), roadmapId, eachRevisionResource.getId()));

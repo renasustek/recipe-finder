@@ -1,6 +1,7 @@
 package com.github.group37.roadmap.service;
 
 import com.github.group37.roadmap.other.Roadmap;
+import com.github.group37.roadmap.other.enums.LevelOfExpertise;
 import com.github.group37.roadmap.percistance.RevisionResourcesRepo;
 import com.github.group37.roadmap.percistance.RoadmapRepo;
 import com.github.group37.roadmap.percistance.RoadmapResourcesRepo;
@@ -42,10 +43,10 @@ class RoadmapServiceTest {
     private String username = "username";
     private Optional<List<UUID>> userRecourseId = Optional.of(List.of(UUID.randomUUID()));
 
-    private UserTopicsDao userTopic1 =
-            new UserTopicsDao(username, UUID.fromString("22be771a-7803-445f-b88f-732fd6170f56"), "novice");
-    private UserTopicsDao userTopic2 =
-            new UserTopicsDao(username, UUID.fromString("1915b4be-7f11-48bb-97ff-88f9297104f8"), "novice");
+    private UserTopicsDao userTopic1 = new UserTopicsDao(
+            username, UUID.fromString("22be771a-7803-445f-b88f-732fd6170f56"), LevelOfExpertise.NOVICE);
+    private UserTopicsDao userTopic2 = new UserTopicsDao(
+            username, UUID.fromString("1915b4be-7f11-48bb-97ff-88f9297104f8"), LevelOfExpertise.NOVICE);
     private List<UserTopicsDao> userTopicsDaos = List.of(userTopic1);
 
     private Optional<List<UUID>> generateIds(int size) {
@@ -141,7 +142,7 @@ class RoadmapServiceTest {
 
         given(revisionResourcesRepo.getRevisionResources(
                         userTopicsDaos.get(0).getTopicId(),
-                        userTopicsDaos.get(0).getConfidenceInTopic()))
+                        userTopicsDaos.get(0).getLevelOfExpertise()))
                 .willReturn(List.of(revisionResourceDao));
 
         Optional<Roadmap> roadmapFromService = roadmapService.createRoadmap(username);

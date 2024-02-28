@@ -1,9 +1,7 @@
 package com.github.group37.roadmap.percistance.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.github.group37.roadmap.other.enums.LevelOfExpertise;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -18,7 +16,7 @@ public class RevisionResourceDao {
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID id;
 
-    @Column(name = "topic_id", nullable = false, length =  36)
+    @Column(name = "topic_id", nullable = false, length = 36)
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID topic;
 
@@ -35,16 +33,17 @@ public class RevisionResourceDao {
     private String whereToAccess; // could be a link if a website, could be a book name and a page number, could be
     // whatever you want, as long as it has instructions on how to access a specific revision resource
 
-    @Column(name = "difficulty_level", nullable = false, length = 100)
+    @Column(name = "level_of_expertise", nullable = false, length = 100)
     @Size(min = 4, max = 12)
-    private String difficultyLevel;
+    @Enumerated(EnumType.STRING)
+    private LevelOfExpertise levelOfExpertise;
 
-    public String getDifficultyLevel() {
-        return difficultyLevel;
+    public LevelOfExpertise getLevelOfExpertise() {
+        return levelOfExpertise;
     }
 
-    public void setDifficultyLevel(String difficultyLevel) {
-        this.difficultyLevel = difficultyLevel;
+    public void setLevelOfExpertise(LevelOfExpertise levelOfExpertise) {
+        this.levelOfExpertise = levelOfExpertise;
     }
 
     public UUID getId() {

@@ -24,17 +24,16 @@ public class TopicsService {
         this.topicsRepo = topicsRepo;
     }
 
-    public List<TopicDao> getTopicsUsingSubjectId(UUID subjectId){
+    public List<TopicDao> getTopicsUsingSubjectId(UUID subjectId) {
         return topicsRepo.findTopicsUsingSubjectId(subjectId);
     }
 
-    public ArrayList<UserTopicsDao> postUserTopics(String username ,UserTopicsRequest userTopicsRequest){
+    public ArrayList<UserTopicsDao> postUserTopics(String username, UserTopicsRequest userTopicsRequest) {
         ArrayList<UserTopicsDao> userTopicsDaos = new ArrayList<>();
-        for (UserTopic eachUserTopic: userTopicsRequest.getUserTopics()){
-            userTopicsDaos.add(userTopicsRepo.save(new UserTopicsDao(username ,eachUserTopic.topicId(),eachUserTopic.confidenceInTopic())));
+        for (UserTopic eachUserTopic : userTopicsRequest.getUserTopics()) {
+            userTopicsDaos.add(userTopicsRepo.save(
+                    new UserTopicsDao(username, eachUserTopic.topicId(), eachUserTopic.levelOfExpertise())));
         }
         return userTopicsDaos;
     }
-
-
 }

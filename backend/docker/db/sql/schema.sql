@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS users
     password VARCHAR(50) NOT NULL,
     enabled  BOOLEAN     NOT NULL
 );
-CREATE TABLE IF NOT EXISTS  authorities
+CREATE TABLE IF NOT EXISTS authorities
 (
     username  VARCHAR(50) NOT NULL,
     authority VARCHAR(50) NOT NULL,
@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS  authorities
 CREATE TABLE IF NOT EXISTS roadmap
 (
     id       VARCHAR(36) NOT NULL PRIMARY KEY,
-    username VARCHAR(50)   NOT NULL
+    username VARCHAR(50) NOT NULL
 );
 CREATE TABLE IF NOT EXISTS roadmap_resources
 (
@@ -30,41 +30,41 @@ CREATE TABLE IF NOT EXISTS roadmap_resources
 );
 CREATE TABLE IF NOT EXISTS revision_resource
 (
-    id              VARCHAR(36) NOT NULL PRIMARY KEY,
-    topic_id        VARCHAR(36)   NOT NULL,
-    resource_name   VARCHAR(20)   NOT NULL,
-    description     VARCHAR(100)  NOT NULL,
-    where_to_access VARCHAR(100)  NOT NULL,
-    difficulty_level varchar(12)   NOT NULL
+    id                 VARCHAR(36)  NOT NULL PRIMARY KEY,
+    topic_id           VARCHAR(36)  NOT NULL,
+    resource_name      VARCHAR(20)  NOT NULL,
+    description        VARCHAR(100) NOT NULL,
+    where_to_access    VARCHAR(100) NOT NULL,
+    level_of_expertise varchar(12)  NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS topics
 (
-    id               VARCHAR(36) NOT NULL PRIMARY KEY,
-    subject_id          VARCHAR(36),
-    topic_name            VARCHAR(20) NOT NULL
+    id         VARCHAR(36) NOT NULL PRIMARY KEY,
+    subject_id VARCHAR(36),
+    topic_name VARCHAR(20) NOT NULL
 
 );
 
 CREATE TABLE IF NOT EXISTS subjects
 (
-    id               VARCHAR(36) NOT NULL PRIMARY KEY,
-    subject_name            VARCHAR(20) NOT NULL
+    id           VARCHAR(36) NOT NULL PRIMARY KEY,
+    subject_name VARCHAR(20) NOT NULL
 
 );
 
 CREATE TABLE IF NOT EXISTS user_topics
 (
-    username            VARCHAR(50) NOT NULL,
-    topic_id            VARCHAR(36) NOT NULL,
-    confidence_in_topic VARCHAR(12) NOT NULL,
+    username           VARCHAR(50) NOT NULL,
+    topic_id           VARCHAR(36) NOT NULL,
+    level_of_expertise VARCHAR(12) NOT NULL,
     PRIMARY KEY (username, topic_id)
 
 );
 
-INSERT INTO users ( username, password, enabled)
-VALUES ( 'renas', 'renas', true),
-       ( 'admin', 'admin', true);
+INSERT INTO users (username, password, enabled)
+VALUES ('renas', 'renas', true),
+       ('admin', 'admin', true);
 
 INSERT INTO authorities (username, authority)
 VALUES ('renas', 'ROLE_USER'),
@@ -74,29 +74,30 @@ VALUES ('renas', 'ROLE_USER'),
 INSERT INTO roadmap (id, username)
 VALUES ('8894517b-539a-4b89-b0a0-849e84329181', 'renas');
 
-INSERT INTO revision_resource (id, topic_id, resource_name, description, where_to_access, difficulty_level)
+INSERT INTO revision_resource (id, topic_id, resource_name, description, where_to_access, level_of_expertise)
 VALUES ('4c059778-5c0e-40f0-ae0b-85bf0ce8b6cc', '22be771a-7803-445f-b88f-732fd6170f56', 'book',
-        'read this book and become good at algebra :)', 'MathsBook101 page 10', 'novice'),
+        'read this book and become good at algebra :)', 'MathsBook101 page 10', 'NOVICE'),
        ('2d927d0a-d2a1-46d7-826d-e6783da22169', '22be771a-7803-445f-b88f-732fd6170f56', 'website',
-        'complete the tasks on this website and you will be an expert algebration', 'https://www.coolmathgames.com/','novice'),
+        'complete the tasks on this website and you will be an expert algebration', 'https://www.coolmathgames.com/',
+        'NOVICE'),
        ('389f80b5-2c02-4e20-bc16-3b3e7e6aee1f', '1915b4be-7f11-48bb-97ff-88f9297104f8', 'online course',
-        'this is a good course', 'https://www.coolmathgames.com/','novice'),
+        'this is a good course', 'https://www.coolmathgames.com/', 'NOVICE'),
        ('1fbbbed5-5044-4285-8574-39978c01f916', '24fb37ab-18ed-42c7-9bc3-09b750aca27a', 'Shakespeare',
-        'to be or not to be', 'https://www.coolmathgamesss.com/','novice'),
+        'to be or not to be', 'https://www.coolmathgamesss.com/', 'NOVICE'),
        ('2b922630-2499-4f73-bf7b-6d0d8e99591a', '24fb37ab-18ed-42c7-9bc3-09b750aca27a', 'filler',
-        'this is all from backend btw', 'https://www.coolmathgamesss.com/','novice'),
+        'this is all from backend btw', 'https://www.coolmathgamesss.com/', 'NOVICE'),
        ('0ac85513-8025-40d8-9960-ee52ba76529d', '1915b4be-7f11-48bb-97ff-88f9297104f8', 'filler',
-        'this is all from backend btw', 'https://www.coolmathgamesss.com/','novice'),
+        'this is all from backend btw', 'https://www.coolmathgamesss.com/', 'NOVICE'),
        ('45926cd7-18bd-44ec-b2dd-674dff192a23', 'c431c80b-31c6-41c2-99e2-ab6690d4da85', 'filler',
-        'this is all from backend btw', 'https://www.coolmathgamesss.com/','novice'),
+        'this is all from backend btw', 'https://www.coolmathgamesss.com/', 'NOVICE'),
        ('6ba67204-923d-4087-9685-b3d2ee759ab2', 'c431c80b-31c6-41c2-99e2-ab6690d4da85', 'filler',
-        'this is all from backend btw', 'https://www.coolmathgamesss.com/','novice');
+        'this is all from backend btw', 'https://www.coolmathgamesss.com/', 'NOVICE');
 
 
 INSERT INTO roadmap_resources (id, roadmap_id, revision_resource_id)
 VALUES ('0dbabf29-a60f-459c-8419-3628a56c2e68', '8894517b-539a-4b89-b0a0-849e84329181',
         '4c059778-5c0e-40f0-ae0b-85bf0ce8b6cc'),
-       ('6033160c-c5f5-4459-96c5-5c21f4d34048','8894517b-539a-4b89-b0a0-849e84329181',
+       ('6033160c-c5f5-4459-96c5-5c21f4d34048', '8894517b-539a-4b89-b0a0-849e84329181',
         '2d927d0a-d2a1-46d7-826d-e6783da22169');
 
 INSERT INTO subjects(id, subject_name)
@@ -108,8 +109,8 @@ VALUES ('30d00a6f-9577-418f-9f62-04d940379102', 'Maths'),
        ('8830e1d8-47fb-4260-bbcc-1f05a437f5ed', 'howToTrainADragon');
 
 INSERT INTO topics(id, subject_id, topic_name)
-VALUES ('22be771a-7803-445f-b88f-732fd6170f56','30d00a6f-9577-418f-9f62-04d940379102', 'algebra'),
-       ('1915b4be-7f11-48bb-97ff-88f9297104f8','30d00a6f-9577-418f-9f62-04d940379102', 'calculus'),
-       ('24fb37ab-18ed-42c7-9bc3-09b750aca27a','4921cbae-589d-43f6-b069-cbca45a8b40c', 'EnglishLit'),
-       ('c431c80b-31c6-41c2-99e2-ab6690d4da85','4921cbae-589d-43f6-b069-cbca45a8b40c', 'EnglishLanguage');
+VALUES ('22be771a-7803-445f-b88f-732fd6170f56', '30d00a6f-9577-418f-9f62-04d940379102', 'algebra'),
+       ('1915b4be-7f11-48bb-97ff-88f9297104f8', '30d00a6f-9577-418f-9f62-04d940379102', 'calculus'),
+       ('24fb37ab-18ed-42c7-9bc3-09b750aca27a', '4921cbae-589d-43f6-b069-cbca45a8b40c', 'EnglishLit'),
+       ('c431c80b-31c6-41c2-99e2-ab6690d4da85', '4921cbae-589d-43f6-b069-cbca45a8b40c', 'EnglishLanguage');
 
