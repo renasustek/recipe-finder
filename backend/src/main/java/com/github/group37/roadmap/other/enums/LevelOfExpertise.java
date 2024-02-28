@@ -1,9 +1,9 @@
 package com.github.group37.roadmap.other.enums;
 
 public enum LevelOfExpertise {
-    NOVICE("Novice"),
-    INTERMEDIATE("Intermediate"),
-    EXPERT("Expert");
+    NOVICE("NOVICE"),
+    INTERMEDIATE("INTERMEDIATE"),
+    EXPERT("EXPERT");
 
     private final String value;
 
@@ -15,10 +15,9 @@ public enum LevelOfExpertise {
         return value;
     }
 
-    // Method to convert a string back to an enum constant
     public static LevelOfExpertise fromValue(String value) {
         for (LevelOfExpertise expertise : values()) {
-            if (expertise.getValue().equals(value)) {
+            if (expertise.getValue().equalsIgnoreCase(value)) {
                 return expertise;
             }
         }

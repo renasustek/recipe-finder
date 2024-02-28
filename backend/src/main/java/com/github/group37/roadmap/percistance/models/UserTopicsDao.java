@@ -1,10 +1,8 @@
 package com.github.group37.roadmap.percistance.models;
 
 import com.github.group37.roadmap.other.enums.LevelOfExpertise;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.github.group37.roadmap.other.enums.LevelOfExpertiseConverter;
+import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -23,6 +21,7 @@ public class UserTopicsDao {
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private String username;
 
+    @Convert(converter = LevelOfExpertiseConverter.class)
     @Column(name = "level_of_expertise", columnDefinition = "VARCHAR(36)", nullable = false, length = 36)
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private LevelOfExpertise levelOfExpertise;

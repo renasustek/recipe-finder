@@ -3,7 +3,7 @@ package com.github.group37.roadmap.other.enums;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
-@Converter(autoApply = true)
+@Converter
 public class LevelOfExpertiseConverter implements AttributeConverter<LevelOfExpertise, String> {
 
     @Override
@@ -19,6 +19,6 @@ public class LevelOfExpertiseConverter implements AttributeConverter<LevelOfExpe
         if (dbData == null) {
             return null;
         }
-        return LevelOfExpertise.valueOf(dbData);
+        return LevelOfExpertise.fromValue(dbData);
     }
 }

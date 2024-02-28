@@ -20,7 +20,7 @@ public class RevisionResourcesController {
     }
 
     @GetMapping("/{topicId}")
-    private List<RevisionResourceDao> getRevisionResourcesUsingTopicId(@PathVariable UUID topicId) {
+    public List<RevisionResourceDao> getRevisionResourcesUsingTopicId(@PathVariable UUID topicId) {
         return revisionResourcesService.getRevisionResourceUsingTopicId(
                 topicId); // todo valid uuid, nothing found should return corresponding error message
     }
