@@ -59,7 +59,6 @@ CREATE TABLE IF NOT EXISTS user_topics
     topic_id           VARCHAR(36) NOT NULL,
     level_of_expertise VARCHAR(12) NOT NULL,
     PRIMARY KEY (username, topic_id)
-
 );
 
 INSERT INTO users (username, password, enabled)
@@ -76,22 +75,22 @@ VALUES ('8894517b-539a-4b89-b0a0-849e84329181', 'renas');
 
 INSERT INTO revision_resource (id, topic_id, resource_name, description, where_to_access, level_of_expertise)
 VALUES ('4c059778-5c0e-40f0-ae0b-85bf0ce8b6cc', '22be771a-7803-445f-b88f-732fd6170f56', 'book',
-        'read this book and become good at algebra :)', 'MathsBook101 page 10', 'NOVICE'),
+        'read this book and become good at algebra :)', 'MathsBook101 page 10', 'Novice'),
        ('2d927d0a-d2a1-46d7-826d-e6783da22169', '22be771a-7803-445f-b88f-732fd6170f56', 'website',
         'complete the tasks on this website and you will be an expert algebration', 'https://www.coolmathgames.com/',
-        'NOVICE'),
+        'Novice'),
        ('389f80b5-2c02-4e20-bc16-3b3e7e6aee1f', '1915b4be-7f11-48bb-97ff-88f9297104f8', 'online course',
-        'this is a good course', 'https://www.coolmathgames.com/', 'NOVICE'),
+        'this is a good course', 'https://www.coolmathgames.com/', 'Novice'),
        ('1fbbbed5-5044-4285-8574-39978c01f916', '24fb37ab-18ed-42c7-9bc3-09b750aca27a', 'Shakespeare',
-        'to be or not to be', 'https://www.coolmathgamesss.com/', 'NOVICE'),
+        'to be or not to be', 'https://www.coolmathgamesss.com/', 'Novice'),
        ('2b922630-2499-4f73-bf7b-6d0d8e99591a', '24fb37ab-18ed-42c7-9bc3-09b750aca27a', 'filler',
-        'this is all from backend btw', 'https://www.coolmathgamesss.com/', 'NOVICE'),
+        'this is all from backend btw', 'https://www.coolmathgamesss.com/', 'Novice'),
        ('0ac85513-8025-40d8-9960-ee52ba76529d', '1915b4be-7f11-48bb-97ff-88f9297104f8', 'filler',
-        'this is all from backend btw', 'https://www.coolmathgamesss.com/', 'NOVICE'),
+        'this is all from backend btw', 'https://www.coolmathgamesss.com/', 'Novice'),
        ('45926cd7-18bd-44ec-b2dd-674dff192a23', 'c431c80b-31c6-41c2-99e2-ab6690d4da85', 'filler',
-        'this is all from backend btw', 'https://www.coolmathgamesss.com/', 'NOVICE'),
+        'this is all from backend btw', 'https://www.coolmathgamesss.com/', 'Novice'),
        ('6ba67204-923d-4087-9685-b3d2ee759ab2', 'c431c80b-31c6-41c2-99e2-ab6690d4da85', 'filler',
-        'this is all from backend btw', 'https://www.coolmathgamesss.com/', 'NOVICE');
+        'this is all from backend btw', 'https://www.coolmathgamesss.com/', 'Novice');
 
 
 INSERT INTO roadmap_resources (id, roadmap_id, revision_resource_id)

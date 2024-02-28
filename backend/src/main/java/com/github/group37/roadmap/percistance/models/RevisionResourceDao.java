@@ -1,7 +1,10 @@
 package com.github.group37.roadmap.percistance.models;
 
 import com.github.group37.roadmap.other.enums.LevelOfExpertise;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.Size;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -35,7 +38,6 @@ public class RevisionResourceDao {
 
     @Column(name = "level_of_expertise", nullable = false, length = 100)
     @Size(min = 4, max = 12)
-    @Enumerated(EnumType.STRING)
     private LevelOfExpertise levelOfExpertise;
 
     public LevelOfExpertise getLevelOfExpertise() {

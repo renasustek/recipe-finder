@@ -19,7 +19,6 @@ public class LevelOfExpertiseConverter implements AttributeConverter<LevelOfExpe
         if (dbData == null) {
             return null;
         }
-        // Implement your conversion logic here. This is a simple example.
         return LevelOfExpertise.valueOf(dbData);
     }
 }

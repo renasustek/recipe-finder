@@ -1,7 +1,10 @@
 package com.github.group37.roadmap.percistance.models;
 
 import com.github.group37.roadmap.other.enums.LevelOfExpertise;
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -21,7 +24,6 @@ public class UserTopicsDao {
     private String username;
 
     @Column(name = "level_of_expertise", columnDefinition = "VARCHAR(36)", nullable = false, length = 36)
-    @Enumerated(EnumType.STRING)
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private LevelOfExpertise levelOfExpertise;
 
