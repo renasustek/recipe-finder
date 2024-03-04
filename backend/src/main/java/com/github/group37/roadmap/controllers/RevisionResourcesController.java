@@ -23,5 +23,5 @@ public class RevisionResourcesController {
     public List<RevisionResourceDao> getRevisionResourcesUsingTopicId(@PathVariable UUID topicId) {
         return revisionResourcesService.getRevisionResourceUsingTopicId(
                 topicId); // todo valid uuid, nothing found should return corresponding error message
-    }
+    } // todo tests failing because of poor error handling
 }

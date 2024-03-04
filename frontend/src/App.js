@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css'; // Import Font Awesome CSS
 import Navbar from './components/Navbar';
@@ -13,9 +13,12 @@ import DiscoverCourses from './pages/DiscoverCourses';
 import RevisionRecources from './pages/RevisionResources';
 import UserGoalForm from './pages/UserGoalForm';
 import Feedback from  './pages/Feedback';
+import RoadmapFactory from './pages/RoadmapFactory';
 
 
 function App() {
+  const [username, setUsername] = useState("renas");
+  const [password, setPassword] = useState("renas");
   return (
     <>
       <Router>
@@ -31,6 +34,8 @@ function App() {
 
           <Route path="/discover-courses" element={<DiscoverCourses />} />
           <Route path="/feedback" element={<Feedback />} />
+          <Route path="/roadmap-factory" element={<RoadmapFactory username={username} password={password} />} />
+
           {/* Add other routes/components as needed */}
         </Routes>
       </Router>

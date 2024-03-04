@@ -68,4 +68,18 @@ class RevisionResourcesControllerTest {
                 .andExpect(jsonPath("$[0].resourceName")
                         .value(revisionResourceDao().getResourceName()));
     }
+
+    @DisplayName("GET request, valid uuid, returns empty list, none found")
+    @Test
+    void when_given_valid_uuid_return_() throws Exception {
+        when(revisionResourcesService.getRevisionResourceUsingTopicId(validUuid))
+                .thenReturn(revisionResourceDaos);
+
+        mockMvc.perform(get("/revision-recources/" + validUuid).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(
+                        jsonPath("$[0].id").value(revisionResourceDao().getId().toString()))
+                .andExpect(jsonPath("$[0].resourceName")
+                        .value(revisionResourceDao().getResourceName()));
+    }
 }
