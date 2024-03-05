@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import "../css/RoadmapFactory.css"
 import GetRoadmap from '../components/GetRoadmap';
+import UserGoalForm from './UserGoalForm';
 
 function RoadmapFactory({username, password}) {
     const [roadmap, setRoadmap] = React.useState(null);
-
+    const [showUserGoalForm, setShowUserGoalForm] = useState(false);
 
     useEffect(() => {
       // Replace the URL with the correct API endpoint
       const apiUrl = `http://localhost:8080/roadmap/${username}`;
-    
       // Encode credentials in Base64
       const credentials = btoa(`${username}:${password}`);
       const basicAuth = `Basic ${credentials}`;
@@ -29,10 +29,9 @@ function RoadmapFactory({username, password}) {
         });
     }, []);
     
-    
-   
-      console.log(roadmap)
-  
+    const userGoalForm = () => {
+      setShowUserGoalForm(!showUserGoalForm);
+  }
     return(
       <div>
         <div className='sideMenu'>
@@ -43,10 +42,14 @@ function RoadmapFactory({username, password}) {
         
         
         <div>
-         {roadmap ? <GetRoadmap roadmap={roadmap}/> : <div>create roadmap</div>}
-          
+         {roadmap ? <GetRoadmap roadmap={roadmap}/> : <button onClick={userGoalForm}>Create Roadmap DOWN ARROW HERE</button>}//add component for create roadmap button
+        
         </div>
-      
+        <div>
+          {/* here you need to implement session, it only shows the data if you pass in an already authenticated user  */}
+          {/* as im creating this page before user login is properly implemented */}
+        {showUserGoalForm ? <UserGoalForm username={"renas"} password={"renas"}/> : <div>fuck off</div>}
+        </div>
       
       </div>
     );

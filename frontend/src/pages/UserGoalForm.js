@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ChooseSubjects from '../components/ChooseSubjects'
 import ChooseTopics from '../components/ChooseTopics';
-function UserGoalForm() {
+function UserGoalForm({username, password}) {
   const [subjectIds, setSubjectIds] = useState([]);
 
   const handleSubjectChange = (newSubjectIds) => {
@@ -14,8 +14,8 @@ function UserGoalForm() {
       <div>
         <div>Form</div>
         <div>
-          <ChooseSubjects onSubjectChange={handleSubjectChange}/>
-          <ChooseTopics subjectIds={subjectIds}/>
+          <ChooseSubjects username={username} password={password} onSubjectChange={handleSubjectChange}/>
+          <ChooseTopics username={username} password={password} subjectIds={subjectIds}/>
  
         </div>
       </div>

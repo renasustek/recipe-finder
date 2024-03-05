@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import '../css/ChooseRelevantSubjects.css';
 
-function ChooseSubjects({onSubjectChange}) {
+function ChooseSubjects({username, password, onSubjectChange}) {
     const [subjects, setSubjects] = React.useState([]);
     const [selectedSubjectIds, setSelectedSubjectIds] = useState([]);
 
@@ -10,9 +10,7 @@ function ChooseSubjects({onSubjectChange}) {
 
   useEffect(() => {
     const apiUrl = 'http://localhost:8080/subjects';
-    const username = 'renas'; // Replace with your actual username *****DO WHEN LOGIN ON FRONT END IS COMPLETED
-    const password = 'renas'; // Replace with your actual password
-
+ 
     // Encode credentials in Base64
     const credentials = btoa(`${username}:${password}`);
     const basicAuth = `Basic ${credentials}`;

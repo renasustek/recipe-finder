@@ -2,14 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import '../css/ChooseRelevantSubjects.css';
 
-function ChooseTopics({subjectIds}) {
+function ChooseTopics({username, password, subjectIds}) {
     const [topics, setTopics] = React.useState([]);
     
 
     
     const postUserTopics = async (topicId, confidenceLevel) => {
-        const username = 'renas'; // Replace with your actual username
-        const password = 'renas'; // Replace with your actual password
+       
         const credentials = btoa(`${username}:${password}`);
         const basicAuth = `Basic ${credentials}`;
         const apiUrl = `http://localhost:8080/topics/${username}`; 
@@ -32,8 +31,6 @@ function ChooseTopics({subjectIds}) {
     }
 
     useEffect(() => {
-        const username = 'renas'; // Replace with your actual username
-        const password = 'renas'; // Replace with your actual password
     
         const credentials = btoa(`${username}:${password}`);
         const basicAuth = `Basic ${credentials}`;
@@ -64,7 +61,7 @@ function ChooseTopics({subjectIds}) {
         <div key={eachTopic.id} className='card'>
           <div className='card__title'>{eachTopic.topicName}</div>
           <div>
-            <button onClick={() => postUserTopics(eachTopic.id, "novice")}>novice</button>
+            <button onClick={() => postUserTopics(eachTopic.id, "novice")}>novice add css here</button>
             <button onClick={() => postUserTopics(eachTopic.id, "intermediate")} >intermediate</button>
             <button onClick={() => postUserTopics(eachTopic.id, "advanced") }>advanced</button>
           </div>
