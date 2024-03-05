@@ -1,5 +1,5 @@
 import React from  'react';
-import GetRoadmap from '../components/GetRoadmap';
+import DisplayRoadmap from '../components/DisplayRoadmap';
 
 function GetRoadmapPage() {
     
@@ -8,7 +8,7 @@ function GetRoadmapPage() {
     return(
         <div>
         <div>get roadmap</div>
-        <GetRoadmap />
+        <DisplayRoadmap />
         </div>
     );
 

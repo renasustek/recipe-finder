@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/DisplayBoxes.css';
 
-function GetRoadmap({roadmap}) {
+function DisplayRoadmap({roadmap}) {
  
  
   return (
@@ -19,4 +19,4 @@ function GetRoadmap({roadmap}) {
   );
 }
 
-export default GetRoadmap;
+export default DisplayRoadmap;
