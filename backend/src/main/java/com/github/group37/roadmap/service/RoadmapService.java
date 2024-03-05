@@ -37,14 +37,14 @@ public class RoadmapService {
             return Collections.emptyList();
         }
         List<Roadmap> AllRoadmaps = new ArrayList<>();
-        ArrayList<Optional<RevisionResourceDao>> revisionResources = new ArrayList<>();
 
         allUserRoadmapIds.forEach(roadmapId -> {
+            ArrayList<Optional<RevisionResourceDao>> revisionResources = new ArrayList<>();
+
             roadmapResourcesRepo.findAllResourcesUsingRoadmapId(roadmapId).forEach(revisionResourceId -> {
                 revisionResources.add(revisionResourcesRepo.findById(revisionResourceId));
             });
             AllRoadmaps.add(new Roadmap(username, revisionResources));
-            revisionResources.clear();
         });
 
         return AllRoadmaps;
