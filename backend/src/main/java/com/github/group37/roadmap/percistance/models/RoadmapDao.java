@@ -23,12 +23,25 @@ public class RoadmapDao {
     @Size(min = 3, max = 36)
     private String name;
 
-    public RoadmapDao(UUID id, String name) {
+    @Column(name = "roadmap_name", nullable = true, unique = false, length = 12)
+    @Size(min = 1, max = 12)
+    private String roadmapName;
+
+    public RoadmapDao(UUID id, String name, String roadmapName) {
         this.id = id;
         this.name = name;
+        this.roadmapName = roadmapName;
     }
 
     public RoadmapDao() {}
+
+    public String getRoadmapName() {
+        return roadmapName;
+    }
+
+    public void setRoadmapName(String roadmap_name) {
+        this.roadmapName = roadmap_name;
+    }
 
     public String getName() {
         return name;

@@ -1,6 +1,7 @@
 package com.github.group37.roadmap.service;
 
 import com.github.group37.roadmap.other.Roadmap;
+import com.github.group37.roadmap.other.RoadmapName;
 import com.github.group37.roadmap.percistance.RevisionResourcesRepo;
 import com.github.group37.roadmap.percistance.RoadmapRepo;
 import com.github.group37.roadmap.percistance.RoadmapResourcesRepo;
@@ -32,29 +33,31 @@ public class RoadmapService {
     }
 
     public List<Roadmap> getRoadmap(String username) {
-        List<UUID> allUserRoadmapIds = roadmapRepo.findByUsername(username);
+        List<RoadmapDao> allUserRoadmapIds = roadmapRepo.findByUsername(username);
         if (allUserRoadmapIds.isEmpty()) {
             return Collections.emptyList();
         }
         List<Roadmap> AllRoadmaps = new ArrayList<>();
 
-        allUserRoadmapIds.forEach(roadmapId -> {
+        allUserRoadmapIds.forEach(roadmapDao -> {
             ArrayList<Optional<RevisionResourceDao>> revisionResources = new ArrayList<>();
 
-            roadmapResourcesRepo.findAllResourcesUsingRoadmapId(roadmapId).forEach(revisionResourceId -> {
-                revisionResources.add(revisionResourcesRepo.findById(revisionResourceId));
-            });
-            AllRoadmaps.add(new Roadmap(username, revisionResources));
+            roadmapResourcesRepo
+                    .findAllResourcesUsingRoadmapId(roadmapDao.getId())
+                    .forEach(revisionResourceId -> {
+                        revisionResources.add(revisionResourcesRepo.findById(revisionResourceId));
+                    });
+            AllRoadmaps.add(new Roadmap(roadmapDao.getRoadmapName(), revisionResources));
         });
 
         return AllRoadmaps;
     }
 
-    public Optional<Roadmap> createRoadmap(String username) {
+    public Optional<Roadmap> createRoadmap(String username, RoadmapName roadmapName) {
         ArrayList<Optional<RevisionResourceDao>> revisionResourceDaos = new ArrayList<>();
 
         UUID roadmapId = UUID.randomUUID();
-        roadmapRepo.save(new RoadmapDao(roadmapId, username));
+        roadmapRepo.save(new RoadmapDao(roadmapId, username, roadmapName.name()));
 
         userTopicsRepo.findbyUsername(username).forEach(eachUserTopic -> {
             revisionResourcesRepo
@@ -66,6 +69,6 @@ public class RoadmapService {
                     });
         });
 
-        return Optional.of(new Roadmap(username, revisionResourceDaos));
+        return Optional.of(new Roadmap(roadmapName.name(), revisionResourceDaos));
     }
 }

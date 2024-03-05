@@ -19,9 +19,9 @@ CREATE TABLE IF NOT EXISTS authorities
 
 CREATE TABLE IF NOT EXISTS roadmap
 (
-    id       VARCHAR(36) NOT NULL PRIMARY KEY,
-    username VARCHAR(50) NOT NULL
-#     roadmap_name VARCHAR(12) NOT NULL
+    id           VARCHAR(36) NOT NULL PRIMARY KEY,
+    username     VARCHAR(50) NOT NULL,
+    roadmap_name VARCHAR(12)
 );
 CREATE TABLE IF NOT EXISTS roadmap_resources
 (
@@ -73,8 +73,8 @@ VALUES ('renas', 'ROLE_USER'),
        ('admin', 'ROLE_ADMIN'),
        ('renasTwo', 'renas');
 
-INSERT INTO roadmap (id, username)
-VALUES ('8894517b-539a-4b89-b0a0-849e84329181', 'renas');
+INSERT INTO roadmap (id, username, roadmap_name)
+VALUES ('8894517b-539a-4b89-b0a0-849e84329181', 'renas', 'name1');
 
 INSERT INTO revision_resource (id, topic_id, resource_name, description, where_to_access, level_of_expertise)
 VALUES ('4c059778-5c0e-40f0-ae0b-85bf0ce8b6cc', '22be771a-7803-445f-b88f-732fd6170f56', 'book',

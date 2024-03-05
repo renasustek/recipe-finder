@@ -144,7 +144,7 @@ class RoadmapServiceTest {
                         userTopicsDaos.get(0).getLevelOfExpertise()))
                 .willReturn(List.of(revisionResourceDao));
 
-        Optional<Roadmap> roadmapFromService = roadmapService.createRoadmap(username);
+        Optional<Roadmap> roadmapFromService = roadmapService.createRoadmap(username, username);
 
         ArrayList<Optional<RevisionResourceDao>> testList;
         testList = new ArrayList<>(Arrays.asList(Optional.of(revisionResourceDao)));
