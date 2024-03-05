@@ -1,11 +1,12 @@
 package com.github.group37.roadmap.controllers;
 
 import com.github.group37.roadmap.errors.CouldntCreateRoadmap;
-import com.github.group37.roadmap.errors.RoadMapNotFoundException;
 import com.github.group37.roadmap.other.Roadmap;
 import com.github.group37.roadmap.service.RoadmapService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -19,8 +20,8 @@ public class RoadmapController {
     }
 
     @GetMapping("/{username}")
-    public Roadmap getRoadmap(@PathVariable String username) {
-        return roadmapService.getRoadmap(username).orElseThrow(() -> new RoadMapNotFoundException());
+    public List<Roadmap> getRoadmap(@PathVariable String username) {
+        return roadmapService.getRoadmap(username);
     }
 
     @PostMapping("/{username}")

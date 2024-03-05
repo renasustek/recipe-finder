@@ -1,7 +1,35 @@
-.sideMenu {
-    width: 10%;
-    height: 100%;
-    background-color: orange;
+.topMenu {
+    background-color: #f0f0f0;
+    padding: 10px 20px;
     text-align: center;
-    line-height: 50px;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 20; /* Adjust this if there's another menu */
+    left: 0;
+    z-index: -1; /* Ensure this is above other content but below any global menu if necessary */
+    transform: translateY(0); /* Adjust based on the height of any other fixed menu */
+}
+
+.content {
+    padding-top: 40px; /* Adjust this value based on the total height of your fixed headers */
+    z-index: 100;
+}
+
+@media (max-width: 768px) {
+    .topMenu {
+        padding: 10px 5px;
+    }
+}
+
+@media (min-width: 769px) {
+    .topMenu {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .topMenu > div {
+        margin: 0 15px;
+    }
 }

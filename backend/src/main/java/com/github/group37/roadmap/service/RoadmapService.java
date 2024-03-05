@@ -10,10 +10,7 @@ import com.github.group37.roadmap.percistance.models.RoadmapDao;
 import com.github.group37.roadmap.percistance.models.RoadmapResources;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class RoadmapService {
@@ -34,30 +31,28 @@ public class RoadmapService {
         this.userTopicsRepo = userTopicsRepo;
     }
 
-    public Optional<Roadmap> getRoadmap(String username) {
-
-        ArrayList<Optional<RevisionResourceDao>> revisionRecources = new ArrayList<>();
-
-        Optional<UUID> roadmapId = roadmapRepo.findByUsername(username);
-
-        if (roadmapId.isPresent()) {
-            Optional<List<UUID>> usersResourcesIds =
-                    roadmapResourcesRepo.findAllResourcesUsingRoadmapId(roadmapId.get());
-            for (UUID eachuuid : usersResourcesIds.get()) {
-                revisionRecources.add(revisionResourcesRepo.findById(eachuuid));
-            }
-        } else {
-            return Optional.empty();
+    public List<Roadmap> getRoadmap(String username) {
+        List<UUID> allUserRoadmapIds = roadmapRepo.findByUsername(username);
+        if (allUserRoadmapIds.isEmpty()) {
+            return Collections.emptyList();
         }
-        Roadmap roadmap = new Roadmap(username, revisionRecources);
-        return Optional.of(roadmap);
+        List<Roadmap> AllRoadmaps = new ArrayList<>();
+        ArrayList<Optional<RevisionResourceDao>> revisionResources = new ArrayList<>();
+
+        allUserRoadmapIds.forEach(roadmapId -> {
+            roadmapResourcesRepo.findAllResourcesUsingRoadmapId(roadmapId).forEach(revisionResourceId -> {
+                revisionResources.add(revisionResourcesRepo.findById(revisionResourceId));
+            });
+            AllRoadmaps.add(new Roadmap(username, revisionResources));
+            revisionResources.clear();
+        });
+
+        return AllRoadmaps;
     }
 
     public Optional<Roadmap> createRoadmap(String username) {
         ArrayList<Optional<RevisionResourceDao>> revisionResourceDaos = new ArrayList<>();
-        if (roadmapRepo.findByUsername(username).isPresent()) {
-            return Optional.empty();
-        }
+
         UUID roadmapId = UUID.randomUUID();
         roadmapRepo.save(new RoadmapDao(roadmapId, username));
 

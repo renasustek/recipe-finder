@@ -29,26 +29,27 @@ function RoadmapFactory({username, password}) {
         });
     }, []);
     
-    const userGoalForm = () => {
+    const userGoalFormButton = () => {
       setShowUserGoalForm(!showUserGoalForm);
   }
     return(
       <div>
-        <div className='sideMenu'>
+        <div className='topMenu'>
           <div>Hi {username}, welcome to your roadmap factory.</div>
-          <div>View all avaliable subjects and topics</div>
-          <div>Generate Roadmap</div>
+          <div>View subjects</div>
+          <div>View roadmaps</div>
         </div>
         
         
-        <div>
-         {roadmap ? <GetRoadmap roadmap={roadmap}/> : <button onClick={userGoalForm}>Create Roadmap DOWN ARROW HERE</button>}//add component for create roadmap button
-        
+        <div className="content">         
+        {roadmap ? <GetRoadmap roadmap={roadmap}/> : <button onClick={userGoalFormButton}>Create new +</button>}
+      
         </div>
         <div>
-          {/* here you need to implement session, it only shows the data if you pass in an already authenticated user  */}
-          {/* as im creating this page before user login is properly implemented */}
-        {showUserGoalForm ? <UserGoalForm username={"renas"} password={"renas"}/> : <div>fuck off</div>}
+
+        {showUserGoalForm ? 
+        <UserGoalForm username={username} password={password}/> 
+        : <div>fuck off</div>}
         </div>
       
       </div>

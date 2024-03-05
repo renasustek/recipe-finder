@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS roadmap
 (
     id       VARCHAR(36) NOT NULL PRIMARY KEY,
     username VARCHAR(50) NOT NULL
+#     roadmap_name VARCHAR(12) NOT NULL
 );
 CREATE TABLE IF NOT EXISTS roadmap_resources
 (
@@ -63,12 +64,14 @@ CREATE TABLE IF NOT EXISTS user_topics
 
 INSERT INTO users (username, password, enabled)
 VALUES ('renas', 'renas', true),
-       ('admin', 'admin', true);
+       ('admin', 'admin', true),
+       ('renasTwo', 'renas', true);
 
 INSERT INTO authorities (username, authority)
 VALUES ('renas', 'ROLE_USER'),
        ('admin', 'ROLE_USER'),
-       ('admin', 'ROLE_ADMIN');
+       ('admin', 'ROLE_ADMIN'),
+       ('renasTwo', 'renas');
 
 INSERT INTO roadmap (id, username)
 VALUES ('8894517b-539a-4b89-b0a0-849e84329181', 'renas');
