@@ -12,9 +12,7 @@ function RoadmapFactory({ username, password }) {
 
 
   useEffect(() => {
-    // Replace the URL with the correct API endpoint
     const apiUrl = `http://localhost:8080/roadmap/${username}`;
-    // Encode credentials in Base64
     const credentials = btoa(`${username}:${password}`);
     const basicAuth = `Basic ${credentials}`;
 
@@ -32,28 +30,24 @@ function RoadmapFactory({ username, password }) {
   }, []);
   console.log(roadmaps);
 
-  
+
 
   const handleRoadmapChange = (e) => {
-    const currentSelectedRoadmap = e.target.value;
-     setSelectedRoadmap(currentSelectedRoadmap);
-     if(currentSelectedRoadmap == "no roadmap selected"){
-      setDisplayRoadmap(null)
-    }
-    else{
-      const flatRoadmapList = roadmaps.flat();
-      const matchedRoadmap = flatRoadmapList.find(r => r.name === currentSelectedRoadmap);
+    const selectedIndex = e.target.value;
+    setSelectedRoadmap(selectedIndex);
+  
+    if (selectedIndex === "no roadmap selected") {
+      setDisplayRoadmap(null);
+    } else {
+      const matchedRoadmap = roadmaps[selectedIndex];
       if (matchedRoadmap) {
         setDisplayRoadmap(matchedRoadmap);
       } else {
-        setDisplayRoadmap(null); // or set to an empty array, depending on your requirements
+        setDisplayRoadmap(null);
       }
     }
-    
-  }
-  useEffect(() => {
-    console.log(displayRoadmap, "hello");
-  }, [displayRoadmap]);
+  };
+ 
   const userGoalFormButton = () => {
     setShowUserGoalForm(!showUserGoalForm);
   }
@@ -70,28 +64,28 @@ function RoadmapFactory({ username, password }) {
           <option value="no roadmap selected">-- Select roadmap --</option>
           {roadmaps && roadmaps.length > 0 ? (
             roadmaps.map((eachRoadmap, index) => (
-              <option key={index} value={eachRoadmap.name}>{eachRoadmap.name}</option>
+              <option key={index} value={index}>{eachRoadmap.name}</option>
             ))
           ) : (
             <option>Loading or no roadmaps...</option>
           )}
         </select>
       </div>
-      
+
       <div>
-          {displayRoadmap == null ? 
+        {displayRoadmap == null ?
           <div>
             <div>
               Do you want to create a new roadmap?
             </div>
             <button onClick={userGoalFormButton}>Create new +</button>
-          </div> 
-          : <DisplayRoadmap roadmap={displayRoadmap}/>}
-       
+          </div>
+          : <DisplayRoadmap roadmap={displayRoadmap} />}
+
 
       </div>
-      
-      
+
+
       <div>
 
         {showUserGoalForm ?

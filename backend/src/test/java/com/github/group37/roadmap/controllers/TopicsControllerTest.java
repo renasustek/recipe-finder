@@ -1,8 +1,8 @@
 package com.github.group37.roadmap.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.group37.roadmap.other.UserCreateRoadmapRequest;
 import com.github.group37.roadmap.other.UserTopic;
-import com.github.group37.roadmap.other.UserTopicsRequest;
 import com.github.group37.roadmap.other.enums.LevelOfExpertise;
 import com.github.group37.roadmap.percistance.models.TopicDao;
 import com.github.group37.roadmap.percistance.models.UserTopicsDao;
@@ -74,19 +74,19 @@ class TopicsControllerTest {
             "Post userTopic, valid uuid should return list of userTopicDao with same values as user topics request")
     @Test
     void when_given_valid_uuid_should_return_valid_list_of_userTopicDaos() throws Exception {
-        UserTopicsRequest userTopicsRequest = new UserTopicsRequest();
+        UserCreateRoadmapRequest userCreateRoadmapRequest = new UserCreateRoadmapRequest();
 
         UserTopic userTopic = new UserTopic(validUuid, LevelOfExpertise.NOVICE);
         UserTopicsDao userTopicsDao = new UserTopicsDao("username", validUuid, LevelOfExpertise.NOVICE);
 
-        userTopicsRequest.setUserTopics(List.of(userTopic));
+        userCreateRoadmapRequest.setUserTopics(List.of(userTopic));
         ArrayList<UserTopicsDao> userTopicsDaos = new ArrayList<>(Arrays.asList(userTopicsDao));
 
-        when(topicsService.postUserTopics("username", userTopicsRequest)).thenReturn(userTopicsDaos);
+        when(topicsService.postUserTopics("username", userCreateRoadmapRequest)).thenReturn(userTopicsDaos);
 
         mockMvc.perform(post("/topics/" + "username")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(userTopicsRequest)))
+                        .content(objectMapper.writeValueAsString(userCreateRoadmapRequest)))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$[0].topicId").value(userTopic.topicId().toString()))
                 .andExpect(jsonPath("$[0].confidenceInTopic").value(userTopic.levelOfExpertise()));

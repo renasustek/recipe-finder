@@ -1,7 +1,8 @@
 package com.github.group37.roadmap.service;
 
 import com.github.group37.roadmap.other.Roadmap;
-import com.github.group37.roadmap.other.RoadmapName;
+import com.github.group37.roadmap.other.UserCreateRoadmapRequest;
+import com.github.group37.roadmap.other.UserTopic;
 import com.github.group37.roadmap.percistance.RevisionResourcesRepo;
 import com.github.group37.roadmap.percistance.RoadmapRepo;
 import com.github.group37.roadmap.percistance.RoadmapResourcesRepo;
@@ -53,15 +54,16 @@ public class RoadmapService {
         return AllRoadmaps;
     }
 
-    public Optional<Roadmap> createRoadmap(String username, RoadmapName roadmapName) {
+    public Optional<Roadmap> createRoadmap(String username, UserCreateRoadmapRequest userCreateRoadmapRequest) {
         ArrayList<Optional<RevisionResourceDao>> revisionResourceDaos = new ArrayList<>();
 
         UUID roadmapId = UUID.randomUUID();
-        roadmapRepo.save(new RoadmapDao(roadmapId, username, roadmapName.name()));
+        roadmapRepo.save(new RoadmapDao(roadmapId, username, userCreateRoadmapRequest.getRoadmapName()));
 
-        userTopicsRepo.findbyUsername(username).forEach(eachUserTopic -> {
+        List<UserTopic> userTopics = userCreateRoadmapRequest.getUserTopics();
+        userTopics.forEach(eachUserTopic -> {
             revisionResourcesRepo
-                    .getRevisionResources(eachUserTopic.getTopicId(), eachUserTopic.getLevelOfExpertise())
+                    .getRevisionResources(eachUserTopic.topicId(), eachUserTopic.levelOfExpertise())
                     .forEach(eachRevisionResource -> {
                         RoadmapResources save = roadmapResourcesRepo.save(
                                 new RoadmapResources(UUID.randomUUID(), roadmapId, eachRevisionResource.getId()));
@@ -69,6 +71,6 @@ public class RoadmapService {
                     });
         });
 
-        return Optional.of(new Roadmap(roadmapName.name(), revisionResourceDaos));
+        return Optional.of(new Roadmap(userCreateRoadmapRequest.getRoadmapName(), revisionResourceDaos));
     }
 }

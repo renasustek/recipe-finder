@@ -1,6 +1,6 @@
 package com.github.group37.roadmap.controllers;
 
-import com.github.group37.roadmap.other.UserTopicsRequest;
+import com.github.group37.roadmap.other.UserCreateRoadmapRequest;
 import com.github.group37.roadmap.percistance.models.TopicDao;
 import com.github.group37.roadmap.percistance.models.UserTopicsDao;
 import com.github.group37.roadmap.service.TopicsService;
@@ -23,14 +23,13 @@ public class TopicsController {
     }
 
     @GetMapping("/{subjectId}")
-    public List<TopicDao> getTopicsRelatedToSubject(@PathVariable UUID subjectId){
+    public List<TopicDao> getTopicsRelatedToSubject(@PathVariable UUID subjectId) {
         return topicsService.getTopicsUsingSubjectId(subjectId);
     }
 
-    @PostMapping(value = "/{username}",consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ArrayList<UserTopicsDao> create(@PathVariable String username , @RequestBody UserTopicsRequest userTopicsRequest) {
-        return topicsService.postUserTopics(username,userTopicsRequest);
+    @PostMapping(value = "/{username}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ArrayList<UserTopicsDao> create(
+            @PathVariable String username, @RequestBody UserCreateRoadmapRequest userCreateRoadmapRequest) {
+        return topicsService.postUserTopics(username, userCreateRoadmapRequest);
     }
-
-
 }
