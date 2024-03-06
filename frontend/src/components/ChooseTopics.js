@@ -14,9 +14,9 @@ function ChooseTopics({username, password, subjectIds}) {
         const apiUrl = `http://localhost:8080/topics/${username}`; 
         try{
             const response = await axios.post(apiUrl, {
-                username, 
+                username : username, 
                 userTopics: [
-                    { "topicId": topicId, "confidenceInTopic": confidenceLevel }
+                    { "topicId": topicId, "levelOfExpertise": confidenceLevel }
                 ]
             }, {
                 headers: {
@@ -61,9 +61,9 @@ function ChooseTopics({username, password, subjectIds}) {
         <div key={eachTopic.id} className='card'>
           <div className='card__title'>{eachTopic.topicName}</div>
           <div>
-            <button onClick={() => postUserTopics(eachTopic.id, "novice")}>novice add css here</button>
-            <button onClick={() => postUserTopics(eachTopic.id, "intermediate")} >intermediate</button>
-            <button onClick={() => postUserTopics(eachTopic.id, "advanced") }>advanced</button>
+            <button onClick={() => postUserTopics(eachTopic.id, "NOVICE")}>novice add css here</button>
+            <button onClick={() => postUserTopics(eachTopic.id, "INTERMEDIATE")} >intermediate</button>
+            <button onClick={() => postUserTopics(eachTopic.id, "EXPERT") }>advanced</button>
           </div>
         </div>
       ))}

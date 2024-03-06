@@ -76,11 +76,17 @@ function RoadmapFactory({ username, password }) {
             <option>Loading or no roadmaps...</option>
           )}
         </select>
-        {/* {roadmap ? <GetRoadmap roadmap={roadmap}/> : <button onClick={userGoalFormButton}>Create new +</button>} */}
       </div>
       
       <div>
-          {displayRoadmap == null ? <div>null</div> : <DisplayRoadmap roadmap={displayRoadmap}/>}
+          {displayRoadmap == null ? 
+          <div>
+            <div>
+              Do you want to create a new roadmap?
+            </div>
+            <button onClick={userGoalFormButton}>Create new +</button>
+          </div> 
+          : <DisplayRoadmap roadmap={displayRoadmap}/>}
        
 
       </div>
