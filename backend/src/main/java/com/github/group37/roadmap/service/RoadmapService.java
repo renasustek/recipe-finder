@@ -20,16 +20,20 @@ public class RoadmapService {
     public final RoadmapResourcesRepo roadmapResourcesRepo;
     public final RevisionResourcesRepo revisionResourcesRepo;
 
+    private final TopicsService topicsService;
+
     private final UserTopicsRepo userTopicsRepo;
 
     public RoadmapService(
             RoadmapRepo roadmapRepo,
             RoadmapResourcesRepo roadmapResourcesRepo,
             RevisionResourcesRepo revisionResourcesRepo,
+            TopicsService topicsService,
             UserTopicsRepo userTopicsRepo) {
         this.roadmapRepo = roadmapRepo;
         this.roadmapResourcesRepo = roadmapResourcesRepo;
         this.revisionResourcesRepo = revisionResourcesRepo;
+        this.topicsService = topicsService;
         this.userTopicsRepo = userTopicsRepo;
     }
 
@@ -70,7 +74,7 @@ public class RoadmapService {
                         revisionResourceDaos.add(Optional.of(eachRevisionResource));
                     });
         });
-
+        topicsService.postUserTopics(username, userTopics, roadmapId);
         return Optional.of(new Roadmap(userCreateRoadmapRequest.getRoadmapName(), revisionResourceDaos));
     }
 }

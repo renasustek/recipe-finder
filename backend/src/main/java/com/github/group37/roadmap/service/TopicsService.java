@@ -1,6 +1,5 @@
 package com.github.group37.roadmap.service;
 
-import com.github.group37.roadmap.other.UserCreateRoadmapRequest;
 import com.github.group37.roadmap.other.UserTopic;
 import com.github.group37.roadmap.percistance.TopicsRepo;
 import com.github.group37.roadmap.percistance.UserTopicsRepo;
@@ -28,11 +27,11 @@ public class TopicsService {
         return topicsRepo.findTopicsUsingSubjectId(subjectId);
     }
 
-    public ArrayList<UserTopicsDao> postUserTopics(String username, UserCreateRoadmapRequest userCreateRoadmapRequest) {
+    public ArrayList<UserTopicsDao> postUserTopics(String username, List<UserTopic> userTopics, UUID roadmapId) {
         ArrayList<UserTopicsDao> userTopicsDaos = new ArrayList<>();
-        for (UserTopic eachUserTopic : userCreateRoadmapRequest.getUserTopics()) {
+        for (UserTopic eachUserTopic : userTopics) {
             userTopicsDaos.add(userTopicsRepo.save(
-                    new UserTopicsDao(username, eachUserTopic.topicId(), eachUserTopic.levelOfExpertise())));
+                    new UserTopicsDao(username, eachUserTopic.topicId(), eachUserTopic.levelOfExpertise(), roadmapId)));
         }
         return userTopicsDaos;
     }

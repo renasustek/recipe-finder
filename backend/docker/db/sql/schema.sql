@@ -57,9 +57,10 @@ CREATE TABLE IF NOT EXISTS subjects
 CREATE TABLE IF NOT EXISTS user_topics
 (
     username           VARCHAR(50) NOT NULL,
+    roadmap_id         VARCHAR(36) not null,
     topic_id           VARCHAR(36) NOT NULL,
     level_of_expertise VARCHAR(12) NOT NULL,
-    PRIMARY KEY (username, topic_id)
+    PRIMARY KEY (username, roadmap_id, topic_id)
 );
 
 INSERT INTO users (username, password, enabled)
@@ -71,7 +72,7 @@ INSERT INTO authorities (username, authority)
 VALUES ('renas', 'ROLE_USER'),
        ('admin', 'ROLE_USER'),
        ('admin', 'ROLE_ADMIN'),
-       ('renasTwo', 'renas');
+       ('renasTwo', 'ROLE_USER');
 
 INSERT INTO roadmap (id, username, roadmap_name)
 VALUES ('8894517b-539a-4b89-b0a0-849e84329181', 'renas', 'name1');

@@ -17,6 +17,10 @@ public class UserTopicsDao {
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID topicId;
 
+    @Column(name = "roadmap_id", columnDefinition = "VARCHAR(36)", nullable = false, length = 36)
+    @JdbcTypeCode(SqlTypes.VARCHAR)
+    private UUID roadmapId;
+
     @Column(name = "username", columnDefinition = "VARCHAR(50)", nullable = false, length = 50)
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private String username;
@@ -26,10 +30,11 @@ public class UserTopicsDao {
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private LevelOfExpertise levelOfExpertise;
 
-    public UserTopicsDao(String username, UUID topicId, LevelOfExpertise levelOfExpertise) {
+    public UserTopicsDao(String username, UUID topicId, LevelOfExpertise levelOfExpertise, UUID roadmapId) {
         this.topicId = topicId;
         this.username = username;
         this.levelOfExpertise = levelOfExpertise;
+        this.roadmapId = roadmapId;
     }
 
     public UserTopicsDao() {}
@@ -48,5 +53,21 @@ public class UserTopicsDao {
 
     public void setLevelOfExpertise(LevelOfExpertise levelOfExpertise) {
         this.levelOfExpertise = levelOfExpertise;
+    }
+
+    public UUID getRoadmapId() {
+        return roadmapId;
+    }
+
+    public void setRoadmapId(UUID roadmap_id) {
+        this.roadmapId = roadmap_id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
