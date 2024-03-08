@@ -28,7 +28,6 @@ function RoadmapFactory({ username, password }) {
         console.error('Error fetching data:', error);
       });
   }, []);
-  console.log(roadmaps);
 
 
 
