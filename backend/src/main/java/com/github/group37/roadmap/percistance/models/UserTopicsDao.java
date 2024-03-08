@@ -1,5 +1,6 @@
 package com.github.group37.roadmap.percistance.models;
 
+import com.github.group37.roadmap.other.UserTopicsId;
 import com.github.group37.roadmap.other.enums.LevelOfExpertise;
 import com.github.group37.roadmap.other.enums.LevelOfExpertiseConverter;
 import jakarta.persistence.*;
@@ -10,6 +11,7 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "user_topics", schema = "roadmap_project")
+@IdClass(UserTopicsId.class)
 public class UserTopicsDao {
 
     @Id
@@ -17,10 +19,12 @@ public class UserTopicsDao {
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID topicId;
 
+    @Id
     @Column(name = "roadmap_id", columnDefinition = "VARCHAR(36)", nullable = false, length = 36)
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID roadmapId;
 
+    @Id
     @Column(name = "username", columnDefinition = "VARCHAR(50)", nullable = false, length = 50)
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private String username;
