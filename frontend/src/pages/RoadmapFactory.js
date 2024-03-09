@@ -4,10 +4,17 @@ import "../css/RoadmapFactory.css"
 import DisplayRoadmap from '../components/DisplayRoadmap';
 import UserGoalForm from './UserGoalForm';
 
+
+
+
+
 function RoadmapFactory({ username, password }) {
   const [roadmaps, setRoadmaps] = React.useState(null);
-  const [showUserGoalForm, setShowUserGoalForm] = useState(false);
-  const [selectedRoadmap, setSelectedRoadmap] = useState("⬇️ Select roadmap ⬇️")
+  const [currentState, setCurrentState] = useState(1);
+
+
+
+
   const [displayRoadmap, setDisplayRoadmap] = useState(null);
 
 
@@ -31,66 +38,56 @@ function RoadmapFactory({ username, password }) {
 
 
 
-  const handleRoadmapChange = (e) => {
-    const selectedIndex = e.target.value;
-    setSelectedRoadmap(selectedIndex);
+  const handleRoadmapChange = (index) => {
+   
+    const matchedRoadmap = roadmaps[index];
+    setDisplayRoadmap(matchedRoadmap);
+    setCurrentState(2);  
+    };
+
   
-    if (selectedIndex === "no roadmap selected") {
-      setDisplayRoadmap(null);
-    } else {
-      const matchedRoadmap = roadmaps[selectedIndex];
-      if (matchedRoadmap) {
-        setDisplayRoadmap(matchedRoadmap);
-      } else {
-        setDisplayRoadmap(null);
-      }
-    }
-  };
- 
-  const userGoalFormButton = () => {
-    setShowUserGoalForm(!showUserGoalForm);
-  }
   return (
     <div>
-      <div className='topMenu'>
-        <div>Hi {username}, welcome to your roadmap factory.</div>
-        <div>View roadmaps</div>
-      </div>
 
-
-      <div className="content">
-        <select onChange={handleRoadmapChange} value={selectedRoadmap}>
-          <option value="no roadmap selected">-- Select roadmap --</option>
+      <section className='topMenu'>
+      <button onClick={() => setCurrentState(1)}>Hi {username}, welcome to your roadmap factory</button>
+        <div>
           {roadmaps && roadmaps.length > 0 ? (
             roadmaps.map((eachRoadmap, index) => (
-              <option key={index} value={index}>{eachRoadmap.name}</option>
+              <button key={index} onClick={() => handleRoadmapChange(index)}>
+                {eachRoadmap.name}
+              </button>
             ))
           ) : (
-            <option>Loading or no roadmaps...</option>
+            <p>Loading or no roadmaps available...</p>
           )}
-        </select>
-      </div>
-
-      <div>
-        {displayRoadmap == null ?
-          <div>
-            <div>
-              Do you want to create a new roadmap?
-            </div>
-            <button onClick={userGoalFormButton}>Create new +</button>
-          </div>
-          : <DisplayRoadmap roadmap={displayRoadmap} />}
+          <button onClick={() => setCurrentState(3)}>Create new +</button>
+        </div>
+            
+        </section>
 
 
-      </div>
+      <section className='content'>
 
+      {currentState === 1 && (
+        <div>
+          <p>How to use the roadmap factory</p>
+        </div>
+      )}
 
-      <div>
+      {currentState === 2 && (
+        <div>
+           <DisplayRoadmap roadmap={displayRoadmap} />
+        </div>
+      )}
 
-        {showUserGoalForm ?
-          <UserGoalForm username={username} password={password} />
-          : <div>fuck off</div>}
-      </div>
+      {currentState === 3 && (
+        <div>
+         <UserGoalForm username={username} password={password} />
+        </div>
+      )}
+
+      </section>
 
     </div>
   );

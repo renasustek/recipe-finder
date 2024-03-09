@@ -14,7 +14,6 @@ function UserGoalForm({username, password}) {
 
     return (
       <div>
-        <div>Form</div>
         <div>
           <ChooseSubjects username={username} password={password} onSubjectChange={handleSubjectChange}/>
           <ChooseTopics username={username} password={password} subjectIds={subjectIds}/>

@@ -7,7 +7,7 @@
     position: fixed;
     top: 20; /* Adjust this if there's another menu */
     left: 0;
-    z-index: -1; /* Ensure this is above other content but below any global menu if necessary */
+    z-index: 10; /* Ensure this is above other content but below any global menu if necessary */
     transform: translateY(0); /* Adjust based on the height of any other fixed menu */
 }
 

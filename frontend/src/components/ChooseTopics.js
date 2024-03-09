@@ -4,7 +4,8 @@ import '../css/ChooseRelevantSubjects.css';
 
 function ChooseTopics({ username, password, subjectIds }) {
   const [topics, setTopics] = React.useState([]);
-
+  const [userTopics, setUserTopics] = useState([]);
+  const [roadmapName, setRoadmapName] = useState("roadmap name");
 
 
   // const postUserTopics = async (topicId, confidenceLevel) => {
@@ -31,7 +32,6 @@ function ChooseTopics({ username, password, subjectIds }) {
   // }
 
 
-  const [userTopics, setUserTopics] = useState([]);
 
   const addUserTopic = (topicId, levelOfExpertise) => {
     const updatedTopics = userTopics.map(topic =>
@@ -94,6 +94,7 @@ function ChooseTopics({ username, password, subjectIds }) {
       console.error(error);
     }
     setUserTopics([]);
+    setRoadmapName("roadmap name");
   }
 
   return (
@@ -110,7 +111,10 @@ function ChooseTopics({ username, password, subjectIds }) {
           </div>
         ))}
       </section>
-      <button onClick={() => createRoadmap("passNameHere", userTopics)}>Create Roadmap</button>
+      <form>
+          <input onChange={(e) => setRoadmapName(e.target.value)}></input>
+      </form>    
+      <button onClick={() => createRoadmap(roadmapName, userTopics)}>Create Roadmap</button>
     </div>
   );
 }
