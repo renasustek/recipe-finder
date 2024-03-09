@@ -5,14 +5,14 @@
     width: 100%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: fixed;
-    top: 20; /* Adjust this if there's another menu */
+    top: 20; 
     left: 0;
-    z-index: 10; /* Ensure this is above other content but below any global menu if necessary */
-    transform: translateY(0); /* Adjust based on the height of any other fixed menu */
+    z-index: 10; 
+    transform: translateY(0); 
 }
 
 .content {
-    padding-top: 40px; /* Adjust this value based on the total height of your fixed headers */
+    padding-top: 80px; 
     z-index: -2;
 }
 

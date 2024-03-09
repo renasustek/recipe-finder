@@ -3,9 +3,11 @@ import axios from "axios";
 import "../css/RoadmapFactory.css"
 import DisplayRoadmap from '../components/DisplayRoadmap';
 import UserGoalForm from './UserGoalForm';
-
-
-
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import CircularProgress from '@mui/material/CircularProgress';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
 
 
 function RoadmapFactory({ username, password }) {
@@ -39,53 +41,55 @@ function RoadmapFactory({ username, password }) {
 
 
   const handleRoadmapChange = (index) => {
-   
+
     const matchedRoadmap = roadmaps[index];
     setDisplayRoadmap(matchedRoadmap);
-    setCurrentState(2);  
-    };
+    setCurrentState(3);
+  };
 
-  
+
   return (
     <div>
 
       <section className='topMenu'>
-      <button onClick={() => setCurrentState(1)}>Hi {username}, welcome to your roadmap factory</button>
+      <ButtonGroup color="primary" variant="filledTonal" aria-label="Basic button group">
+
+        <Button onClick={() => setCurrentState(1)}>How to use</Button>
+        <Button onClick={() => setCurrentState(2)}>Create new +</Button>
         <div>
           {roadmaps && roadmaps.length > 0 ? (
             roadmaps.map((eachRoadmap, index) => (
-              <button key={index} onClick={() => handleRoadmapChange(index)}>
+              <Button key={index} onClick={() => handleRoadmapChange(index)}>
                 {eachRoadmap.name}
-              </button>
+              </Button>
             ))
           ) : (
-            <p>Loading or no roadmaps available...</p>
+            <CircularProgress/>
           )}
-          <button onClick={() => setCurrentState(3)}>Create new +</button>
         </div>
-            
-        </section>
+        </ButtonGroup>
+      </section>
 
 
       <section className='content'>
 
-      {currentState === 1 && (
-        <div>
-          <p>How to use the roadmap factory</p>
-        </div>
-      )}
+        {currentState === 1 && (
+          <div>
+            <p>How to use the roadmap factory</p>
+          </div>
+        )}
 
-      {currentState === 2 && (
-        <div>
-           <DisplayRoadmap roadmap={displayRoadmap} />
-        </div>
-      )}
+        {currentState === 3 && (
+          <div>
+            <DisplayRoadmap roadmap={displayRoadmap} />
+          </div>
+        )}
 
-      {currentState === 3 && (
-        <div>
-         <UserGoalForm username={username} password={password} />
-        </div>
-      )}
+        {currentState === 2 && (
+          <div>
+            <UserGoalForm username={username} password={password} />
+          </div>
+        )}
 
       </section>
 
