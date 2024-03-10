@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import '../css/ChooseRelevantSubjects.css';
 
-function ChooseTopics({ username, password, subjectIds , roadmapName}) {
+function ChooseTopics({ username, password, subjectIds , roadmapName, setUserTopics, userTopics}) {
   const [topics, setTopics] = React.useState([]);
-  const [userTopics, setUserTopics] = useState([]);
   
 
 
@@ -50,26 +49,6 @@ function ChooseTopics({ username, password, subjectIds , roadmapName}) {
     })();
   }, [subjectIds]);
 
-  const createRoadmap = async (roadmapName, userTopics) => {
-    const credentials = btoa(`${username}:${password}`);
-    const basicAuth = `Basic ${credentials}`;
-    const apiUrl = `http://localhost:8080/roadmap/${username}`;
-    try {
-      const response = await axios.post(apiUrl, {
-        roadmapName: roadmapName,
-        userTopics: userTopics
-      }, {
-        headers: {
-          Authorization: basicAuth,
-          'Content-Type': 'application/json'
-        }
-      });
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-    setUserTopics([]);
-  }
 
   return (
     <div>
@@ -86,7 +65,6 @@ function ChooseTopics({ username, password, subjectIds , roadmapName}) {
         ))}
       </section>
        <section>
-       <button onClick={() => createRoadmap(roadmapName, userTopics)}>Create Roadmap</button>
        </section>
       
     </div>

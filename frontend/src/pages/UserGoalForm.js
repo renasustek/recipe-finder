@@ -4,12 +4,14 @@ import ChooseTopics from '../components/ChooseTopics';
 import axios from "axios";
 import Box from '@mui/material/Box';
 import Input from '@mui/material/Input';
+import CreateRoadmap from '../components/CreateRoadmap';
 
 const ariaLabel = { 'aria-label': 'description' };
 
 function UserGoalForm({ username, password }) {
   const [subjectIds, setSubjectIds] = useState([]);
   const [roadmapName, setRoadmapName] = useState("RoadmapName");
+  const [userTopics, setUserTopics] = useState([]);
 
   const handleSubjectChange = (newSubjectIds) => {
     setSubjectIds(newSubjectIds);
@@ -29,10 +31,11 @@ function UserGoalForm({ username, password }) {
     >
      
       <Input  value={roadmapName} onChange={(e) => setRoadmapName(e.target.value)} inputProps={ariaLabel} />
-    </Box>
+      </Box>
         
         <ChooseSubjects username={username} password={password} onSubjectChange={handleSubjectChange} />
-        <ChooseTopics username={username} password={password} subjectIds={subjectIds} roadmapName={roadmapName}/>
+        <ChooseTopics username={username} password={password} subjectIds={subjectIds} setUserTopics={setUserTopics} userTopics={userTopics}/>
+        <CreateRoadmap username={username} password={password} setUserTopics={setUserTopics} userTopics={userTopics} roadmapName={roadmapName}/>
       </div>
     </div>
 
