@@ -9,10 +9,11 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-
 public interface UserTopicsRepo extends JpaRepository<UserTopicsDao, UUID> {
 
     @Query("SELECT u FROM UserTopicsDao u WHERE u.username = ?1")
     List<UserTopicsDao> findbyUsername(String username);
 
+    @Query("DELETE from UserTopicsDao u where u.roadmapId = ?1")
+    void deleteByRoadmapId(UUID roadmapId);
 }

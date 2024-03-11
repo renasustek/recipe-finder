@@ -77,4 +77,12 @@ public class RoadmapService {
         topicsService.postUserTopics(username, userTopics, roadmapId);
         return Optional.of(new Roadmap(userCreateRoadmapRequest.getRoadmapName(), revisionResourceDaos));
     }
+
+    public void deleteRoadmap(UUID roadmapId) {
+        if (roadmapRepo.findById(roadmapId).isPresent()) {
+            userTopicsRepo.deleteByRoadmapId(roadmapId);
+            roadmapResourcesRepo.deleteByRoadmapId(roadmapId);
+            roadmapRepo.deleteById(roadmapId);
+        } // todo response entity return roadmap not found errors and what not
+    }
 }

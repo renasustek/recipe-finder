@@ -13,4 +13,7 @@ public interface RoadmapResourcesRepo extends JpaRepository<RoadmapResources, UU
 
     @Query("SELECT u.revisionResourceId FROM RoadmapResources u WHERE u.roadmapId = ?1")
     List<UUID> findAllResourcesUsingRoadmapId(UUID roadmapId);
+
+    @Query("DELETE from RoadmapResources u where u.roadmapId = ?1")
+    void deleteByRoadmapId(UUID roadmapId);
 }

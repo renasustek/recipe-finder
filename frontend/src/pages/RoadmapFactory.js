@@ -36,7 +36,7 @@ function RoadmapFactory({ username, password }) {
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
-  }, [roadmaps]);
+  }, [currentState]);
 
 
 
@@ -81,7 +81,7 @@ function RoadmapFactory({ username, password }) {
 
         {currentState === 2 && (
           <div>
-            <UserGoalForm username={username} password={password} />
+            <UserGoalForm username={username} password={password} setDisplayRoadmap={setDisplayRoadmap} setCurrentState={setCurrentState}/>
           </div>
         )}
 

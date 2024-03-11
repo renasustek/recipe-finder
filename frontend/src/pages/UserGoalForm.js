@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 import CreateRoadmap from '../components/CreateRoadmap';
 import '../css/UserGoalForm.css';
 
-function UserGoalForm({ username, password }) {
+function UserGoalForm({ username, password , setDisplayRoadmap, setCurrentState}) {
   const [subjectIds, setSubjectIds] = useState([]);
   const [roadmapName, setRoadmapName] = useState("");
   const [userTopics, setUserTopics] = useState([]);
@@ -34,7 +34,7 @@ function UserGoalForm({ username, password }) {
           onChange={(e) => setRoadmapName(e.target.value)}
         />
         {roadmapName.length >= 1 && roadmapName.length <= 12 ? (
-          <CreateRoadmap roadmapName={roadmapName} username={username} password={password} setUserTopics={setUserTopics} userTopics={userTopics} />
+          <CreateRoadmap setCurrentState={setCurrentState} setDisplayRoadmap={setDisplayRoadmap} roadmapName={roadmapName} username={username} password={password} setUserTopics={setUserTopics} userTopics={userTopics} />
         ) : (
           <div className="errorMessage">Name needs to be between 1 and 12 characters</div>
         )}

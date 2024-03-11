@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin
@@ -31,5 +32,10 @@ public class RoadmapController {
         return roadmapService
                 .createRoadmap(username, userCreateRoadmapRequest)
                 .orElseThrow(() -> new CouldntCreateRoadmap()); //
+    }
+
+    @DeleteMapping("/{roadmapId}")
+    public void deleteRoadmap(@PathVariable UUID roadmapId) {
+        roadmapService.deleteRoadmap(roadmapId);
     }
 }

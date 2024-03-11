@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from "axios";
 import Button from '@mui/material/Button';
 
-function CreateRoadmap ({roadmapName, userTopics, username, password, setUserTopics}){
+function CreateRoadmap ({roadmapName, userTopics, username, password, setUserTopics, setDisplayRoadmap, setCurrentState}){
 
     const createRoadmap = async () => {
         const credentials = btoa(`${username}:${password}`);
@@ -18,7 +18,8 @@ function CreateRoadmap ({roadmapName, userTopics, username, password, setUserTop
               'Content-Type': 'application/json'
             }
           });
-          console.log(response.data);
+          setDisplayRoadmap(response.data);
+          setCurrentState(3);
         } catch (error) {
           console.error(error);
         }
