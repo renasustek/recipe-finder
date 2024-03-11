@@ -4,10 +4,12 @@ import com.github.group37.roadmap.percistance.models.RevisionResourceDao;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.UUID;
 
 public class Roadmap {
     private String name;
 
+    private UUID id;
     private ArrayList<Optional<RevisionResourceDao>> revisionResourceDaos;
 
     public Roadmap(String name, ArrayList<Optional<RevisionResourceDao>> revisionResourceDaos) {
@@ -29,5 +31,13 @@ public class Roadmap {
 
     public void setRevisionResourceDaos(ArrayList<Optional<RevisionResourceDao>> revisionResourceDaos) {
         this.revisionResourceDaos = revisionResourceDaos;
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 }
