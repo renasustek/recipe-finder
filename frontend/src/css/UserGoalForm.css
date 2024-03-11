@@ -1,0 +1,12 @@
+.userGoalFormContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+
+  .errorMessage {
+    color: red;
+    padding-left: 10px;
+  }
+  

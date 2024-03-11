@@ -1,26 +1,52 @@
 .grid {
     display: grid;
     grid-template-columns: 1fr;
+    padding: 20px;
+
 }
-.card {
+.topic {
     position: relative;
-    background-color: rgb(103, 217, 227);
+    background-color: rgb(170, 221, 242);
     border-radius: 15px;
-    /* aspect-ratio: 1 / 1; */
     display: flex;
     flex-direction: column;
-    height: 100%;
+    justify-content: center; 
+    align-items: center; 
+    min-height: 50px; 
+    max-height: 150px; 
+    height: auto; 
     width: 100%;
     margin: 0.75rem;
 }
 
-.card__title {
+.topicName {
     background-color: rgb(94, 187, 195);
     border: 1px solid rgb(85, 171, 179);
     margin: 1rem;
     border-radius: 15px;
     padding: 1.25em;
 }
+/* 
+.subjectButton {
+    background-color: rgb(167, 216, 193);
+    border: 0px;
+    border-radius: 15px;
+    padding: 1.25em;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+}
+
+
+.subjectButton:hover {
+    background-color: #72b1b7; 
+    color: white; 
+    transform: scale(1.1); 
+}
+
+.subjectButton.selected {
+    background-color: limegreen;
+}
+ */
 
 
 @media (min-width: 768px) {

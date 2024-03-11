@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
+import Button from '@mui/material/Button';
 
 function CreateRoadmap ({roadmapName, userTopics, username, password, setUserTopics}){
 
@@ -25,7 +26,7 @@ function CreateRoadmap ({roadmapName, userTopics, username, password, setUserTop
       }
 
     return(
-        <button onClick={() => createRoadmap()}>Create Roadmap</button>
+      <Button variant="contained" onClick={() => createRoadmap()}>Create Roadmap</Button>
     );
 
 

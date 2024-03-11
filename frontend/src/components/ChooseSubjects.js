@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import '../css/ChooseRelevantSubjects.css';
+import '../css/SubjectsStyle.css';
 
-function ChooseSubjects({username, password, onSubjectChange}) {
-    const [subjects, setSubjects] = React.useState([]);
-    const [selectedSubjectIds, setSelectedSubjectIds] = useState([]);
-
+function ChooseSubjects({ username, password, onSubjectChange }) {
+  const [subjects, setSubjects] = React.useState([]);
+  const [selectedSubjectIds, setSelectedSubjectIds] = useState([]);
 
 
   useEffect(() => {
     const apiUrl = 'http://localhost:8080/subjects';
- 
+
     // Encode credentials in Base64
     const credentials = btoa(`${username}:${password}`);
     const basicAuth = `Basic ${credentials}`;
@@ -34,22 +33,21 @@ function ChooseSubjects({username, password, onSubjectChange}) {
       const newSelected = isSelected
         ? prevSelected.filter((id) => id !== subjectId)
         : [...prevSelected, subjectId];
-        onSubjectChange(newSelected);
+      onSubjectChange(newSelected);
       return newSelected;
     });
   };
 
-     
 
-    return(
-        <section className='grid'>
-        {subjects.map((eachSubject) => (
+
+  return (
+    <section className='grid'>
+      {subjects.map((eachSubject) => (
         <div key={eachSubject.id} className='card'>
-          <div className='card__title'>{eachSubject.subject}</div>
-          <button onClick={() => toggleSubjectSelection(eachSubject.id)}>chose this subject</button>
+          <button className='subjectButton' onClick={() => toggleSubjectSelection(eachSubject.id)}>{eachSubject.subject}</button>
         </div>
       ))}
-      </section>
-    );
+    </section>
+  );
 }
 export default ChooseSubjects;

@@ -1,44 +1,50 @@
 import React, { useState } from 'react';
-import ChooseSubjects from '../components/ChooseSubjects'
+import ChooseSubjects from '../components/ChooseSubjects';
 import ChooseTopics from '../components/ChooseTopics';
-import axios from "axios";
 import Box from '@mui/material/Box';
-import Input from '@mui/material/Input';
+import TextField from '@mui/material/TextField';
 import CreateRoadmap from '../components/CreateRoadmap';
-
-const ariaLabel = { 'aria-label': 'description' };
+import '../css/UserGoalForm.css';
 
 function UserGoalForm({ username, password }) {
   const [subjectIds, setSubjectIds] = useState([]);
-  const [roadmapName, setRoadmapName] = useState("RoadmapName");
+  const [roadmapName, setRoadmapName] = useState("");
   const [userTopics, setUserTopics] = useState([]);
 
   const handleSubjectChange = (newSubjectIds) => {
     setSubjectIds(newSubjectIds);
   };
-
-
   return (
-    <div>
-      <div>
+    <div className="userGoalFormContainer">
       <Box
-      component="form"
-      sx={{
-        '& > :not(style)': { m: 1 },
-      }}
-      noValidate
-      autoComplete="off"
-    >
-     
-      <Input  value={roadmapName} onChange={(e) => setRoadmapName(e.target.value)} inputProps={ariaLabel} />
+        component="form"
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          '& > :not(style)': { m: 1 },
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <TextField
+          id="outlined-basic"
+          label="Roadmap Name"
+          variant="standard"
+          onChange={(e) => setRoadmapName(e.target.value)}
+        />
+        {roadmapName.length >= 1 && roadmapName.length <= 12 ? (
+          <CreateRoadmap roadmapName={roadmapName} username={username} password={password} setUserTopics={setUserTopics} userTopics={userTopics} />
+        ) : (
+          <div className="errorMessage">Name needs to be between 1 and 12 characters</div>
+        )}
       </Box>
-        
+          
+      <div className="subjectsTopicsContainer">
         <ChooseSubjects username={username} password={password} onSubjectChange={handleSubjectChange} />
-        <ChooseTopics username={username} password={password} subjectIds={subjectIds} setUserTopics={setUserTopics} userTopics={userTopics}/>
-        <CreateRoadmap username={username} password={password} setUserTopics={setUserTopics} userTopics={userTopics} roadmapName={roadmapName}/>
       </div>
+      <ChooseTopics username={username} password={password} subjectIds={subjectIds} setUserTopics={setUserTopics} userTopics={userTopics} />
     </div>
-
   );
 }
 

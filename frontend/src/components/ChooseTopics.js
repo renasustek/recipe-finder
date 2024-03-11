@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
-import '../css/ChooseRelevantSubjects.css';
-
-function ChooseTopics({ username, password, subjectIds , roadmapName, setUserTopics, userTopics}) {
+import '../css/TopicsStyle.css';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+function ChooseTopics({ username, password, subjectIds, setUserTopics, userTopics }) {
   const [topics, setTopics] = React.useState([]);
-  
 
 
   const addUserTopic = (topicId, levelOfExpertise) => {
     const updatedTopics = userTopics.map(topic =>
       topic.topicId === topicId
         ? { ...topic, levelOfExpertise }
-        : topic 
+        : topic
     );
 
     if (!userTopics.some(topic => topic.topicId === topicId)) {
@@ -20,7 +20,6 @@ function ChooseTopics({ username, password, subjectIds , roadmapName, setUserTop
 
     setUserTopics(updatedTopics);
   };
-
 
 
   useEffect(() => {
@@ -54,20 +53,21 @@ function ChooseTopics({ username, password, subjectIds , roadmapName, setUserTop
     <div>
       <section className='grid'>
         {topics.map((eachTopic) => (
-          <div key={eachTopic.id} className='card'>
-            <div className='card__title'>{eachTopic.topicName}</div>
+          <div key={eachTopic.id} className='topic'>
+            <div className='topicName'>{eachTopic.topicName}</div>
             <div>
-              <button onClick={() => addUserTopic(eachTopic.id, "NOVICE")}>novice</button>
-              <button onClick={() => addUserTopic(eachTopic.id, "INTERMEDIATE")} >intermediate</button>
-              <button onClick={() => addUserTopic(eachTopic.id, "EXPERT")}>expert</button>
+              <ButtonGroup  size="small" variant="contained" aria-label="Basic button group">
+                <Button onClick={() => addUserTopic(eachTopic.id, "NOVICE")}>Novice</Button>
+                <Button onClick={() => addUserTopic(eachTopic.id, "INTERMEDIATE")}>Intermediate</Button>
+                <Button onClick={() => addUserTopic(eachTopic.id, "EXPERT")}>Expert</Button>
+              </ButtonGroup>
+
             </div>
           </div>
         ))}
       </section>
-       <section>
-       </section>
-      
     </div>
   );
 }
+
 export default ChooseTopics;

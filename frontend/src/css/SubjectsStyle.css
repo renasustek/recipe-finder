@@ -1,0 +1,62 @@
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 20px;
+
+}
+.card {
+    position: relative;
+    background-color: rgb(191, 244, 219);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+    min-height: 50px; 
+    max-height: 150px; 
+    height: auto; 
+    width: 100%;
+    margin: 0.75rem;
+}
+
+
+.subjectButton {
+    background-color: rgb(167, 216, 193);
+    border: 0px;
+    border-radius: 15px;
+    padding: 1.25em;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+}
+
+
+.subjectButton:hover {
+    background-color: #72b1b7; 
+    color: white; 
+    transform: scale(1.1); 
+}
+
+.subjectButton.selected {
+    background-color: limegreen;
+}
+
+
+
+@media (min-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+    }
+}
+@media (min-width: 1024px) {
+    .grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1rem;
+    }
+}
+@media (min-width: 1280px) {
+    .grid {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 2rem;
+    }
+}

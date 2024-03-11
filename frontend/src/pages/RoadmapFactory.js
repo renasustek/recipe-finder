@@ -36,7 +36,7 @@ function RoadmapFactory({ username, password }) {
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
-  }, []);
+  }, [roadmaps]);
 
 
 
@@ -52,21 +52,21 @@ function RoadmapFactory({ username, password }) {
     <div>
 
       <section className='topMenu'>
-      <ButtonGroup color="primary" variant="filledTonal" aria-label="Basic button group">
+        <ButtonGroup color="primary" variant="filledTonal" aria-label="Basic button group">
 
-        <Button onClick={() => setCurrentState(1)}>How to use</Button>
-        <Button onClick={() => setCurrentState(2)}>Create new +</Button>
-        <div>
-          {roadmaps && roadmaps.length > 0 ? (
-            roadmaps.map((eachRoadmap, index) => (
-              <Button key={index} onClick={() => handleRoadmapChange(index)}>
-                {eachRoadmap.name}
-              </Button>
-            ))
-          ) : (
-            <CircularProgress/>
-          )}
-        </div>
+          <Button onClick={() => setCurrentState(1)}>How to use</Button>
+          <Button onClick={() => setCurrentState(2)}>Create new +</Button>
+          <div>
+            {roadmaps && roadmaps.length > 0 ? (
+              roadmaps.map((eachRoadmap, index) => (
+                <Button key={index} onClick={() => handleRoadmapChange(index)}>
+                  {eachRoadmap.name}
+                </Button>
+              ))
+            ) : (
+              <CircularProgress />
+            )}
+          </div>
         </ButtonGroup>
       </section>
 
@@ -79,17 +79,19 @@ function RoadmapFactory({ username, password }) {
           </div>
         )}
 
+        {currentState === 2 && (
+          <div>
+            <UserGoalForm username={username} password={password} />
+          </div>
+        )}
+
         {currentState === 3 && (
           <div>
             <DisplayRoadmap roadmap={displayRoadmap} />
           </div>
         )}
 
-        {currentState === 2 && (
-          <div>
-            <UserGoalForm username={username} password={password} />
-          </div>
-        )}
+
 
       </section>
 
