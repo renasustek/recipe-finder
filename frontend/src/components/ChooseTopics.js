@@ -48,14 +48,13 @@ function ChooseTopics({ username, password, subjectIds, setUserTopics, userTopic
     })();
   }, [subjectIds]);
 
-
   return (
     <div>
       <section className='grid'>
         {topics.map((eachTopic) => (
           <div key={eachTopic.id} className='topic'>
             <div className='topicName'>{eachTopic.topicName}</div>
-            <div>
+            <div className = 'buttonsContainer'>
               <ButtonGroup  size="small" variant="contained" aria-label="Basic button group">
                 <Button onClick={() => addUserTopic(eachTopic.id, "NOVICE")}>Novice</Button>
                 <Button onClick={() => addUserTopic(eachTopic.id, "INTERMEDIATE")}>Intermediate</Button>

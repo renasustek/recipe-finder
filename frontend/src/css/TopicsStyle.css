@@ -26,28 +26,9 @@
     border-radius: 15px;
     padding: 1.25em;
 }
-/* 
-.subjectButton {
-    background-color: rgb(167, 216, 193);
-    border: 0px;
-    border-radius: 15px;
-    padding: 1.25em;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+.buttonsContainer{
+    padding: 10px;
 }
-
-
-.subjectButton:hover {
-    background-color: #72b1b7; 
-    color: white; 
-    transform: scale(1.1); 
-}
-
-.subjectButton.selected {
-    background-color: limegreen;
-}
- */
-
 
 @media (min-width: 768px) {
     .grid {
@@ -57,13 +38,13 @@
 }
 @media (min-width: 1024px) {
     .grid {
-        grid-template-columns: repeat(6, minmax(0, 1fr));
+        grid-template-columns: repeat(4, minmax(0, 1fr));
         gap: 1rem;
     }
 }
 @media (min-width: 1280px) {
     .grid {
-        grid-template-columns: repeat(8, minmax(0, 1fr));
+        grid-template-columns: repeat(6, minmax(0, 1fr));
         gap: 2rem;
     }
 }
