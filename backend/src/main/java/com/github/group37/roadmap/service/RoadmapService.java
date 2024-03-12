@@ -1,6 +1,7 @@
 package com.github.group37.roadmap.service;
 
 import com.github.group37.roadmap.other.Roadmap;
+import com.github.group37.roadmap.other.UpdatedRoadmapName;
 import com.github.group37.roadmap.other.UserCreateRoadmapRequest;
 import com.github.group37.roadmap.other.UserTopic;
 import com.github.group37.roadmap.percistance.RevisionResourcesRepo;
@@ -52,7 +53,7 @@ public class RoadmapService {
                     .forEach(revisionResourceId -> {
                         revisionResources.add(revisionResourcesRepo.findById(revisionResourceId));
                     });
-            AllRoadmaps.add(new Roadmap(roadmapDao.getRoadmapName(), revisionResources));
+            AllRoadmaps.add(new Roadmap(roadmapDao.getRoadmapName(), roadmapDao.getId(), revisionResources));
         });
 
         return AllRoadmaps;
@@ -75,7 +76,7 @@ public class RoadmapService {
                     });
         });
         topicsService.postUserTopics(username, userTopics, roadmapId);
-        return Optional.of(new Roadmap(userCreateRoadmapRequest.getRoadmapName(), revisionResourceDaos));
+        return Optional.of(new Roadmap(userCreateRoadmapRequest.getRoadmapName(), roadmapId, revisionResourceDaos));
     }
 
     public void deleteRoadmap(UUID roadmapId) {
@@ -85,4 +86,11 @@ public class RoadmapService {
             roadmapRepo.deleteById(roadmapId);
         } // todo response entity return roadmap not found errors and what not
     }
+
+    public Optional<RoadmapDao> editRoadmapName(UUID roadmapId, UpdatedRoadmapName updatedRoadmapName) {
+        return roadmapRepo.findById(roadmapId).map(roadmap -> {
+            roadmap.setRoadmapName(updatedRoadmapName.name());
+            return roadmapRepo.save(roadmap);
+        });
+    } // todo check error handling for everything
 }

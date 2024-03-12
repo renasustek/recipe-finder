@@ -12,8 +12,9 @@ public class Roadmap {
     private UUID id;
     private ArrayList<Optional<RevisionResourceDao>> revisionResourceDaos;
 
-    public Roadmap(String name, ArrayList<Optional<RevisionResourceDao>> revisionResourceDaos) {
+    public Roadmap(String name, UUID roadmapId, ArrayList<Optional<RevisionResourceDao>> revisionResourceDaos) {
         this.name = name;
+        this.id = roadmapId;
         this.revisionResourceDaos = revisionResourceDaos;
     }
 
