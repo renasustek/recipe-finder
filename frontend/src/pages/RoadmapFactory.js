@@ -87,14 +87,10 @@ function RoadmapFactory({ username, password }) {
 
         {currentState === 3 && (
           <div>
-            <DisplayRoadmap roadmap={displayRoadmap} />
+            <DisplayRoadmap setCurrentState={setCurrentState} roadmap={displayRoadmap} username={username} password={password}/>
           </div>
         )}
-
-
-
       </section>
-
     </div>
   );
 
