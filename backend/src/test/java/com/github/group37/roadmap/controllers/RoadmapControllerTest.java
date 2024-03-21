@@ -2,7 +2,12 @@ package com.github.group37.roadmap.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.group37.roadmap.other.Roadmap;
+import com.github.group37.roadmap.other.UpdatedRoadmapName;
+import com.github.group37.roadmap.other.UserCreateRoadmapRequest;
+import com.github.group37.roadmap.other.UserTopic;
+import com.github.group37.roadmap.other.enums.LevelOfExpertise;
 import com.github.group37.roadmap.percistance.models.RevisionResourceDao;
+import com.github.group37.roadmap.percistance.models.RoadmapDao;
 import com.github.group37.roadmap.service.RoadmapService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -10,16 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(controllers = RoadmapController.class, excludeAutoConfiguration = SecurityAutoConfiguration.class)
@@ -35,7 +37,8 @@ class RoadmapControllerTest {
 
     private final String username = "name";
 
-    private final Roadmap roadmap = new Roadmap("name", new ArrayList<Optional<RevisionResourceDao>>());
+    private UUID roadmapId = UUID.randomUUID();
+    private final Roadmap roadmap = new Roadmap("name", roadmapId, new ArrayList<Optional<RevisionResourceDao>>());
 
     @DisplayName("valid username")
     @Test
@@ -79,15 +82,38 @@ class RoadmapControllerTest {
     //        this.mockMvc.perform(post("/roadmap/" + username)).andExpect(status().isBadRequest());
     //    }
 
-    @DisplayName("POST - when given username should return a generated roadmap")
+    @DisplayName("POST - Successfully create a new roadmap")
     @Test
-    void when_given_username_should_return_roadmap() throws Exception {
-        when(service.createRoadmap(username)).thenReturn(Optional.of(roadmap));
+    void when_given_username_and_roadmap_details_should_create_roadmap_successfully() throws Exception {
+        UserCreateRoadmapRequest request = new UserCreateRoadmapRequest();
+        request.setRoadmapName("name");
+        request.setUserTopics(List.of(new UserTopic(UUID.randomUUID(), LevelOfExpertise.EXPERT)));
+
+        when(service.createRoadmap(username, request)).thenReturn(Optional.of(roadmap));
+
         this.mockMvc
-                .perform(post("/roadmap/" + username))
-                .andExpect(status().is2xxSuccessful())
-                .andExpect(content().contentType("application/json"))
+                .perform(post("/roadmap/" + username)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.name").value(roadmap.getName()))
-                .andExpect(jsonPath("$.revisionResourceDaos").value(roadmap.getRevisionResourceDaos()));
+                .andExpect(jsonPath("$.id").value(roadmap.getId()));
+    }
+
+    @DisplayName("PUT - Update existing roadmap's name")
+    @Test
+    void when_given_roadmap_id_and_name_should_update_name() throws Exception {
+        UpdatedRoadmapName updatedName = new UpdatedRoadmapName("Updated Name");
+        RoadmapDao updatedRoadmap = new RoadmapDao(roadmapId, username, updatedName.name());
+
+        when(service.editRoadmapName(roadmapId, updatedName)).thenReturn(Optional.of(updatedRoadmap));
+
+        this.mockMvc
+                .perform(put("/roadmap/" + roadmapId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(updatedName)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.roadmapName").value(updatedName.name()));
     }
 }

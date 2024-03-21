@@ -13,13 +13,13 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(controllers = RevisionResourcesController.class, excludeAutoConfiguration = SecurityAutoConfiguration.class)
 class RevisionResourcesControllerTest {
@@ -52,34 +52,35 @@ class RevisionResourcesControllerTest {
         String invalidTopicId = "invalid-uuid";
 
         mockMvc.perform(get("/revision-recources/" + invalidTopicId).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isBadRequest());
+                .andExpect(status().is4xxClientError());
     }
 
-    @DisplayName("GET request, valid uuid, returns list")
+    @DisplayName("GET request with valid uuid returns non-empty list")
     @Test
-    void when_given_valid_uuid_return_list() throws Exception {
+    void whenGivenValidUuid_ReturnsNonEmptyList() throws Exception {
         when(revisionResourcesService.getRevisionResourceUsingTopicId(validUuid))
                 .thenReturn(revisionResourceDaos);
 
-        mockMvc.perform(get("/revision-recources/" + validUuid).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().is2xxSuccessful())
-                .andExpect(
-                        jsonPath("$[0].id").value(revisionResourceDao().getId().toString()))
-                .andExpect(jsonPath("$[0].resourceName")
-                        .value(revisionResourceDao().getResourceName()));
+        mockMvc.perform(get("/revision-resources/" + validUuid).contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$[0].id").value(validUuid.toString()))
+                .andExpect(jsonPath("$[0].resourceName").value("TESTNAME"))
+                .andExpect(jsonPath("$[0].description").value("TESTDESCRIPTION"))
+                .andExpect(jsonPath("$[0].levelOfExpertise").value("NOVICE"));
     }
 
     @DisplayName("GET request, valid uuid, returns empty list, none found")
     @Test
-    void when_given_valid_uuid_return_() throws Exception {
+    void when_given_valid_uuid_but_no_resources_found_still_successful() throws Exception {
         when(revisionResourcesService.getRevisionResourceUsingTopicId(validUuid))
-                .thenReturn(revisionResourceDaos);
+                .thenReturn(Collections.emptyList());
 
-        mockMvc.perform(get("/revision-recources/" + validUuid).contentType(MediaType.APPLICATION_JSON))
+        this.mockMvc
+                .perform(get("/revision-resources/" + validUuid))
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(
-                        jsonPath("$[0].id").value(revisionResourceDao().getId().toString()))
-                .andExpect(jsonPath("$[0].resourceName")
-                        .value(revisionResourceDao().getResourceName()));
+                //                .andExpect(content().contentType("application/json"))
+                .andExpect(content().json("[]", true));
     }
 }

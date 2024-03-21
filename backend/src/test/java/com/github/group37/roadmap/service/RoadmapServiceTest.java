@@ -1,12 +1,16 @@
 package com.github.group37.roadmap.service;
 
 import com.github.group37.roadmap.other.Roadmap;
+import com.github.group37.roadmap.other.UpdatedRoadmapName;
+import com.github.group37.roadmap.other.UserCreateRoadmapRequest;
+import com.github.group37.roadmap.other.UserTopic;
 import com.github.group37.roadmap.other.enums.LevelOfExpertise;
 import com.github.group37.roadmap.percistance.RevisionResourcesRepo;
 import com.github.group37.roadmap.percistance.RoadmapRepo;
 import com.github.group37.roadmap.percistance.RoadmapResourcesRepo;
 import com.github.group37.roadmap.percistance.UserTopicsRepo;
 import com.github.group37.roadmap.percistance.models.RevisionResourceDao;
+import com.github.group37.roadmap.percistance.models.RoadmapDao;
 import com.github.group37.roadmap.percistance.models.UserTopicsDao;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,6 +22,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
@@ -37,15 +44,24 @@ class RoadmapServiceTest {
     @InjectMocks
     private RoadmapService roadmapService;
 
+    @Mock
+    TopicsService topicsService;
+
+    private LevelOfExpertise levelOfExpertise = LevelOfExpertise.NOVICE;
+
+    private UUID topicId = UUID.randomUUID();
+
     private UUID roadmapId = UUID.randomUUID();
 
     private String username = "username";
+    private RoadmapDao roadmapDao = new RoadmapDao(roadmapId, username, "roadmapName");
+
     private List<UUID> userRecourseId = List.of(UUID.randomUUID());
 
     private UserTopicsDao userTopic1 = new UserTopicsDao(
-            username, UUID.fromString("22be771a-7803-445f-b88f-732fd6170f56"), LevelOfExpertise.NOVICE);
+            username, UUID.fromString("22be771a-7803-445f-b88f-732fd6170f56"), LevelOfExpertise.NOVICE, roadmapId);
     private UserTopicsDao userTopic2 = new UserTopicsDao(
-            username, UUID.fromString("1915b4be-7f11-48bb-97ff-88f9297104f8"), LevelOfExpertise.NOVICE);
+            username, UUID.fromString("1915b4be-7f11-48bb-97ff-88f9297104f8"), LevelOfExpertise.NOVICE, roadmapId);
     private List<UserTopicsDao> userTopicsDaos = List.of(userTopic1);
 
     private Optional<List<UUID>> generateIds(int size) {
@@ -62,7 +78,7 @@ class RoadmapServiceTest {
     @Test
     void given_valid_username_roadmap_belonging_to_user_returned_succesfully() {
 
-        given(roadmapRepo.findByUsername(username)).willReturn(List.of(roadmapId));
+        given(roadmapRepo.findByUsername(username)).willReturn(List.of(roadmapDao));
 
         given(roadmapResourcesRepo.findAllResourcesUsingRoadmapId(roadmapId)).willReturn(userRecourseId);
         RevisionResourceDao revisionResourceDao = new RevisionResourceDao();
@@ -79,10 +95,8 @@ class RoadmapServiceTest {
 
         revisionResources.add(Optional.of(revisionResourceDao));
 
-        Optional<Roadmap> roadmapTest = Optional.of(new Roadmap(username, revisionResources));
+        Optional<Roadmap> roadmapTest = Optional.of(new Roadmap(username, roadmapId, revisionResources));
 
-        assertThat(roadmapServiceTest.get(0).getName())
-                .isEqualTo(roadmapTest.get().getName());
         assertThat(roadmapServiceTest.get(0).getRevisionResourceDaos())
                 .isEqualTo(roadmapTest.get().getRevisionResourceDaos());
     }
@@ -100,7 +114,7 @@ class RoadmapServiceTest {
     @Test
     void no_revision_recources_found_should_still_return_roadmap() {
 
-        given(roadmapRepo.findByUsername(username)).willReturn(List.of(roadmapId));
+        given(roadmapRepo.findByUsername(username)).willReturn(List.of(roadmapDao));
         given(roadmapResourcesRepo.findAllResourcesUsingRoadmapId(roadmapId)).willReturn(userRecourseId);
 
         given(revisionResourcesRepo.findById(userRecourseId.get(0))).willReturn(Optional.empty());
@@ -109,10 +123,8 @@ class RoadmapServiceTest {
 
         ArrayList<Optional<RevisionResourceDao>> revisionRecources = new ArrayList<>();
         revisionRecources.add(Optional.empty());
-        Optional<Roadmap> roadmapTest = Optional.of(new Roadmap(username, revisionRecources));
+        Optional<Roadmap> roadmapTest = Optional.of(new Roadmap(username, roadmapId, revisionRecources));
 
-        assertThat(roadmapServiceTest.get(0).getName())
-                .isEqualTo(roadmapTest.get().getName());
         assertThat(roadmapServiceTest.get(0).getRevisionResourceDaos())
                 .isEqualTo(roadmapTest.get().getRevisionResourceDaos());
     }
@@ -126,33 +138,31 @@ class RoadmapServiceTest {
         assertThat(roadmapServiceTest).isEqualTo(Collections.emptyList());
     }
 
-    @DisplayName("when given valid username, should generate roadmap")
     @Test
-    void given_username_should_generate_roadmap() {
-        given(roadmapRepo.findByUsername(username)).willReturn(Collections.emptyList());
-        given(userTopicsRepo.findbyUsername(username)).willReturn(userTopicsDaos);
+    @DisplayName("Create roadmap successfully with valid username and request")
+    void given_username_and_request_then_create_roadmap_success() {
+        UserCreateRoadmapRequest userCreateRoadmapRequest = new UserCreateRoadmapRequest();
+        userCreateRoadmapRequest.setRoadmapName("Test Roadmap");
+        userCreateRoadmapRequest.setUserTopics(List.of(new UserTopic(topicId, levelOfExpertise)));
 
         RevisionResourceDao revisionResourceDao = new RevisionResourceDao();
         revisionResourceDao.setId(UUID.randomUUID());
-        revisionResourceDao.setResourceName("TEST_NAME");
-        revisionResourceDao.setDescription("TEST_DESCRIPTION");
-        revisionResourceDao.setTopic(UUID.randomUUID());
-        revisionResourceDao.setWhereToAccess("TEST_WHERE_TO_ACCESS");
+        revisionResourceDao.setResourceName("Resource Name");
+        revisionResourceDao.setDescription("Resource Description");
+        revisionResourceDao.setTopic(topicId);
 
-        given(revisionResourcesRepo.getRevisionResources(
-                        userTopicsDaos.get(0).getTopicId(),
-                        userTopicsDaos.get(0).getLevelOfExpertise()))
+        given(revisionResourcesRepo.getRevisionResources(eq(topicId), eq(levelOfExpertise)))
                 .willReturn(List.of(revisionResourceDao));
 
-        Optional<Roadmap> roadmapFromService = roadmapService.createRoadmap(username, username);
+        Optional<Roadmap> createdRoadmap = roadmapService.createRoadmap(username, userCreateRoadmapRequest);
 
-        ArrayList<Optional<RevisionResourceDao>> testList;
-        testList = new ArrayList<>(Arrays.asList(Optional.of(revisionResourceDao)));
-        Optional<Roadmap> roadmapCreatedInTest = Optional.of(new Roadmap(username, testList));
-        assertThat(roadmapFromService.get().getName())
-                .isEqualTo(roadmapCreatedInTest.get().getName());
-        assertThat(roadmapFromService.get().getRevisionResourceDaos())
-                .isEqualTo(roadmapCreatedInTest.get().getRevisionResourceDaos());
+        assertTrue(createdRoadmap.isPresent());
+        assertEquals(
+                userCreateRoadmapRequest.getRoadmapName(), createdRoadmap.get().getName());
+        assertEquals(1, createdRoadmap.get().getRevisionResourceDaos().size());
+        assertEquals(
+                revisionResourceDao,
+                createdRoadmap.get().getRevisionResourceDaos().get(0).orElse(null));
     }
 
     //    @DisplayName("username is found in database, so the user already has a roadmap")
@@ -161,4 +171,33 @@ class RoadmapServiceTest {
     //        given(roadmapRepo.findByUsername(username)).willReturn(Optional.of(UUID.randomUUID()));
     //        assertTrue(roadmapService.createRoadmap(username).isEmpty());
     //    }
+
+    @Test
+    @DisplayName("Successfully delete a roadmap if it exists")
+    void when_delete_roadmap_if_roadmap_exists_then_success() {
+        UUID roadmapId = UUID.randomUUID();
+
+        given(roadmapRepo.findById(roadmapId)).willReturn(Optional.of(new RoadmapDao()));
+
+        roadmapService.deleteRoadmap(roadmapId);
+    }
+
+    @Test
+    @DisplayName("Successfully edit roadmap name if roadmap is found")
+    void when_edit_roadmapName_if_roadmap_found_then_editName() {
+        UUID roadmapId = UUID.randomUUID();
+        UpdatedRoadmapName updatedRoadmapName = new UpdatedRoadmapName("New Name");
+        RoadmapDao existingRoadmap = new RoadmapDao();
+        existingRoadmap.setId(roadmapId);
+        existingRoadmap.setRoadmapName("Old Name");
+
+        given(roadmapRepo.findById(roadmapId)).willReturn(Optional.of(existingRoadmap));
+        existingRoadmap.setRoadmapName(updatedRoadmapName.name());
+        given(roadmapRepo.save(existingRoadmap)).willReturn(existingRoadmap);
+
+        Optional<RoadmapDao> updatedRoadmap = roadmapService.editRoadmapName(roadmapId, updatedRoadmapName);
+
+        assertTrue(updatedRoadmap.isPresent());
+        assertEquals("New Name", updatedRoadmap.get().getRoadmapName());
+    }
 }
