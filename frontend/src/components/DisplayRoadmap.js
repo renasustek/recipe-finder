@@ -72,6 +72,10 @@ function DisplayRoadmap({ setCurrentState, roadmap, username, password }) {
             <div className='revisionRecourceType'>Resource type: {resource.resourceName}</div>
             <div className='revisionRecourceWhereToAccess'>Where to Access: <a href={resource.whereToAccess}>{resource.whereToAccess}</a></div>
             <div className='revisionRecourceDescription'>Description: <div>{resource.description}</div></div>
+            <div className='revisionRecourceDescription'>For: <div>{resource.levelOfExpertise
+    
+            }</div></div>
+
             <div />
           </div>
         ))}

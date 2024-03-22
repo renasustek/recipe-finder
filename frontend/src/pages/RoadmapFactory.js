@@ -64,7 +64,7 @@ function RoadmapFactory({ username, password }) {
                 </Button>
               ))
             ) : (
-              <CircularProgress />
+              <p>loading or no roadmaps...</p>
             )}
           </div>
         </ButtonGroup>

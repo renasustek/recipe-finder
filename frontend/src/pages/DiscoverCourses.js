@@ -36,7 +36,7 @@ import courseData from '../data/courseData';
                     appearance="default"
                     onClick={() => handleClick(courseIndex, 0)}
                   >
-                    Novice
+                    BEGINNER
                   </Button>
                   <Button
                     className={`expertise-button ${clickedButtonIndexes[courseIndex] === 1 ? 'clicked' : ''}`}

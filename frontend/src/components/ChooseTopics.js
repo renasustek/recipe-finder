@@ -56,7 +56,7 @@ function ChooseTopics({ username, password, subjectIds, setUserTopics, userTopic
             <div className='topicName'>{eachTopic.topicName}</div>
             <div className = 'buttonsContainer'>
               <ButtonGroup  size="small" variant="contained" aria-label="Basic button group">
-                <Button onClick={() => addUserTopic(eachTopic.id, "NOVICE")}>Novice</Button>
+                <Button onClick={() => addUserTopic(eachTopic.id, "NOVICE")}>BEGINNER</Button>
                 <Button onClick={() => addUserTopic(eachTopic.id, "INTERMEDIATE")}>Intermediate</Button>
                 <Button onClick={() => addUserTopic(eachTopic.id, "EXPERT")}>Expert</Button>
               </ButtonGroup>
