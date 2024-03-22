@@ -33,7 +33,7 @@ class RevisionResourcesServiceTest {
         revisionResourceDao.setResourceName("TESTNAME");
         revisionResourceDao.setDescription("TESTDESCRIPTION");
         revisionResourceDao.setTopic(validUuid);
-        revisionResourceDao.setLevelOfExpertise(LevelOfExpertise.NOVICE);
+        revisionResourceDao.setLevelOfExpertise(LevelOfExpertise.BEGINNER);
         return revisionResourceDao;
     }
 

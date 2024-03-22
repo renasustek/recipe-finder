@@ -47,7 +47,7 @@ class RoadmapServiceTest {
     @Mock
     TopicsService topicsService;
 
-    private LevelOfExpertise levelOfExpertise = LevelOfExpertise.NOVICE;
+    private LevelOfExpertise levelOfExpertise = LevelOfExpertise.BEGINNER;
 
     private UUID topicId = UUID.randomUUID();
 
@@ -59,9 +59,9 @@ class RoadmapServiceTest {
     private List<UUID> userRecourseId = List.of(UUID.randomUUID());
 
     private UserTopicsDao userTopic1 = new UserTopicsDao(
-            username, UUID.fromString("22be771a-7803-445f-b88f-732fd6170f56"), LevelOfExpertise.NOVICE, roadmapId);
+            username, UUID.fromString("22be771a-7803-445f-b88f-732fd6170f56"), LevelOfExpertise.BEGINNER, roadmapId);
     private UserTopicsDao userTopic2 = new UserTopicsDao(
-            username, UUID.fromString("1915b4be-7f11-48bb-97ff-88f9297104f8"), LevelOfExpertise.NOVICE, roadmapId);
+            username, UUID.fromString("1915b4be-7f11-48bb-97ff-88f9297104f8"), LevelOfExpertise.BEGINNER, roadmapId);
     private List<UserTopicsDao> userTopicsDaos = List.of(userTopic1);
 
     private Optional<List<UUID>> generateIds(int size) {

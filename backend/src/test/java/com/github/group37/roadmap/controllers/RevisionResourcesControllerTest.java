@@ -42,7 +42,7 @@ class RevisionResourcesControllerTest {
         revisionResourceDao.setResourceName("TESTNAME");
         revisionResourceDao.setDescription("TESTDESCRIPTION");
         revisionResourceDao.setTopic(validUuid);
-        revisionResourceDao.setLevelOfExpertise(LevelOfExpertise.NOVICE);
+        revisionResourceDao.setLevelOfExpertise(LevelOfExpertise.BEGINNER);
         return revisionResourceDao;
     }
 
@@ -68,7 +68,7 @@ class RevisionResourcesControllerTest {
                 .andExpect(jsonPath("$[0].id").value(validUuid.toString()))
                 .andExpect(jsonPath("$[0].resourceName").value("TESTNAME"))
                 .andExpect(jsonPath("$[0].description").value("TESTDESCRIPTION"))
-                .andExpect(jsonPath("$[0].levelOfExpertise").value("NOVICE"));
+                .andExpect(jsonPath("$[0].levelOfExpertise").value("BEGINNER"));
     }
 
     @DisplayName("GET request, valid uuid, returns empty list, none found")
