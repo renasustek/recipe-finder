@@ -42,7 +42,7 @@ class RevisionResourcesControllerTest {
         revisionResourceDao.setResourceName("TESTNAME");
         revisionResourceDao.setDescription("TESTDESCRIPTION");
         revisionResourceDao.setTopic(validUuid);
-        revisionResourceDao.setLevelOfExpertise(LevelOfExpertise.BEGINNER);
+        revisionResourceDao.setLevelOfExpertise(LevelOfExpertise.NOVICE);
         return revisionResourceDao;
     }
 

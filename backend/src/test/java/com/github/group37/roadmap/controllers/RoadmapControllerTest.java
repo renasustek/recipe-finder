@@ -66,7 +66,7 @@ class RoadmapControllerTest {
 
     @DisplayName("no roadmap found for existing user")
     @Test
-    void when_valid_username_and_no_roadmap_found_roadmap_not_found() throws Exception {
+    void when_valid_username_and_no_roadmap_found_roadmap_not_found_return_empty_list() throws Exception {
         when(service.getRoadmap(username)).thenReturn(Collections.emptyList());
         this.mockMvc
                 .perform(get("/roadmap/" + username))

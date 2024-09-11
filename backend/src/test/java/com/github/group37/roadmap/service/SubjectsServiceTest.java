@@ -1,9 +1,7 @@
-
 package com.github.group37.roadmap.service;
 
 import com.github.group37.roadmap.percistance.SubjectsRepo;
 import com.github.group37.roadmap.percistance.models.SubjectsDao;
-import com.github.group37.roadmap.percistance.models.TopicDao;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,7 +16,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
-
 class SubjectsServiceTest {
     @Mock
     public SubjectsRepo subjectsRepo;
@@ -29,8 +26,7 @@ class SubjectsServiceTest {
     private UUID validUuid = UUID.randomUUID();
     private List<SubjectsDao> subjectsDaos = List.of(subjectDao());
 
-
-    private SubjectsDao subjectDao(){
+    private SubjectsDao subjectDao() {
         SubjectsDao subjectsDao = new SubjectsDao();
         subjectsDao.setId(validUuid);
         subjectsDao.setSubject("TESTNAME");
@@ -39,12 +35,10 @@ class SubjectsServiceTest {
 
     @DisplayName("findall subjects")
     @Test
-    void when_given_valid_uuid_should_return_list_of_revisionRecources(){
+    void when_given_valid_uuid_should_return_list_of_subjects() {
         given(subjectsRepo.findAll()).willReturn(subjectsDaos);
         List<SubjectsDao> serviceTest = subjectsService.getSubjects();
         assertThat(serviceTest.get(0).getId()).isEqualTo(subjectDao().getId());
         assertThat(serviceTest.get(0).getSubject()).isEqualTo(subjectDao().getSubject());
     }
-
-
 }
